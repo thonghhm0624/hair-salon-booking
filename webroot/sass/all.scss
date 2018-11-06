@@ -1,0 +1,23 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~video.js/dist/video-js.css";
+
+@import 'variables';
+@import 'flex';
+@import "bootstrap/breakpoints";
+
+@import 'font';
+@import 'style';
+@import 'header';
+@import 'footer';
+@import 'popup';
+
+@import 'pages';
+@import 'page/home';
+
+/* responsive */
+@import "responsive";
+
+/* language */
+@import "language/nl";
+
