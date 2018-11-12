@@ -6,24 +6,44 @@ $fontsize-title: 30px;
 /*===================
 COLOR=====================*/
 $yellow: #fbb900;
-$blue: #0090bf;
+$blue: #486d80;
+$white: #ffffff;
+$black: #000000;
+$dark-blue: #063852;
 
 
 /*===================
 FONTS=====================*/
-@mixin FontRegular ( $value, $line:1.4 ) {
-	font-family: arial, helvetica, sans-serif;
+@mixin FontQuickSandLight( $value, $line:1.4 ) {
+	font-family: 'Quicksand', sans-serif;
 	font-size: $value;
 	line-height: $line;
-	font-weight: normal;
+	font-weight: 300;
 }
 
-@mixin FontBold ( $value, $line:1.4 ) {
-	font-family: arial, helvetica, sans-serif;
+@mixin FontQuickSandRegular( $value, $line:1.4 ) {
+	font-family: 'Quicksand', sans-serif;
 	font-size: $value;
 	line-height: $line;
-	font-weight: normal;
+	font-weight: 400;
 }
+
+@mixin FontQuickSandMedium( $value, $line:1.4 ) {
+	font-family: 'Quicksand', sans-serif;
+	font-size: $value;
+	line-height: $line;
+	font-weight: 500;
+}
+
+@mixin FontQuickSandBold( $value, $line:1.4 ) {
+	font-family: 'Quicksand', sans-serif;
+	font-size: $value;
+	line-height: $line;
+	font-weight: 700;
+}
+
+
+
 /*===================
 FUNCTIONS=====================*/
 @function em($size) {
