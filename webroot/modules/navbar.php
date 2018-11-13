@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg ">
+<nav class="navbar navbar-expand-lg container-fluid">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -16,8 +16,8 @@
                 </li>
             </ul>
             <div class="search">
-                <form action="" name="SearchForm" method="get">
-                    <input type="text" name="s" maxlength="64" id="SearchForm" value="Search" />
+                <form action="" name="SearchForm" method="post">
+                    <input type="text" name="searchForContent" maxlength="64" id="SearchForm" placeholder="Tìm kiếm . . ." onblur="this.value=''"/>
                 </form>
                 <div class="srch_btn" onclick="SearchForm.submit()"><img src="images/icon-search.png"></div>
             </div>
