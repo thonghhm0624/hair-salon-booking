@@ -7,7 +7,9 @@
             <div class="time-work">
                 Thời gian làm việc : 10h - 20h
             </div>
+            <div class="login">
+                <a href="#">Đăng Nhập</a>
+            </div>
         </div>
-        <div></div>
     </div>
 </header>
