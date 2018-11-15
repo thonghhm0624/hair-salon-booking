@@ -9,7 +9,7 @@
 include ('modules/header.php');
 include ('modules/navbar.php');
 ?>
-<main role="main" class="container">
+<main role="main" class="container-fluid">
     <?php
     $page = isset($_REQUEST['page']) ? $_REQUEST['page']: 'home';
     include ('modules/'.$page.'.php');
