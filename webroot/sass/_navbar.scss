@@ -77,3 +77,32 @@ nav {
     }
   }
 }
+@include breakpoint(mmd) {
+
+  nav {
+
+    .container {
+
+      #navbarNav {
+
+
+        .navbar-nav {
+
+
+          .nav-link {
+            font-size: 3vw;
+            padding: 0 2vw;
+          }
+        }
+
+        .search {
+          
+        }
+
+        .srch_btn{
+
+        }
+      }
+    }
+  }
+}

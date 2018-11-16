@@ -1,0 +1,22 @@
+.desktop-hide {
+  display: none !important;
+}
+
+
+@include breakpoint(mmd) {
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@include breakpoint(mmd) {
+
+  .mobile-md-show {
+    display: block !important;
+  }
+
+  .mobile-md-hide {
+    display: none !important;
+  }
+}

@@ -13,7 +13,6 @@ header {
 
       .icon-social {
         margin-left: 15px;
-        font-size: 50px;
       }
     }
 
@@ -33,6 +32,34 @@ header {
           color: $blue;
           text-decoration: none;
         }
+      }
+    }
+  }
+}
+@include breakpoint(mmd) {
+
+  header {
+
+    .container {
+
+      .logo {
+
+        img {
+          width: 15vw;
+        }
+
+
+        .icon-social {
+          width: 5vw;
+        }
+      }
+
+      .time-work {
+        font-size: 2vw;
+      }
+
+      .login {
+        font-size: 2vw;
       }
     }
   }
