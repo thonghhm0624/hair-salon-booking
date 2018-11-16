@@ -1,0 +1,15 @@
+footer {
+
+  position: relative;
+  bottom: 0;
+
+
+  .text-footer {
+    background: $dark-blue;
+    text-align: center;
+    color: $white;
+    @include FontQuickSandMedium(24px ,1.4);
+    padding: 10px 0;
+
+  }
+}

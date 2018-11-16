@@ -125,6 +125,79 @@
     }
   }
 
+  .block3 {
+    height: 20vw;
+
+      .container {
+
+        .title {
+
+          @include displayFlex;
+          top: 0;
+          left: 0;
+          width: 365px;
+          font-size: 40px;
+          position: relative;
+
+          span {
+
+            text-decoration: underline;
+            padding-left: 5px;
+          }
+        }
+
+        .information {
+
+
+          .infor {
+            @include FontQuickSandRegular(24px , 1.4);
+            color: $dark-blue;
+            text-align: justify;
+            padding-top: 5px ;
+            padding-right: 5px;
+        }
+      }
+
+
+        .system {
+
+          .title {
+            margin-top: 10px;
+            text-align: left;
+            display: inline-block;
+          }
+
+          .address {
+            @include FontQuickSandRegular(24px , 1.4);
+            color: $dark-blue;
+            text-align: justify;
+            padding-top: 20px ;
+          }
+        }
+
+        .contact {
+
+          .title {
+            margin-top: 10px;
+            text-align: left;
+            display: inline-block;
+          }
+
+          .phone {
+            padding-top: 20px;
+            display: inline-block;
+            text-align: left;
+            padding-left: 10px;
+            @include FontQuickSandRegular(24px , 1.4);
+            color: $dark-blue;
+          }
+
+          .mg2-4 {
+            margin-left: 24px;
+          }
+        }
+    }
+  }
 }
 
 /*responsive*/
