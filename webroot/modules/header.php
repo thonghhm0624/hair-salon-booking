@@ -8,9 +8,8 @@
         <div class="time-work">
             Thời gian làm việc : 10h - 20h
         </div>
-        <?php include ('modules/popuplogin.php');?>
         <div class="login">
-            <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Đăng Nhập</a>
+            <a href="modoles/popuplogin.php" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Đăng Nhập</a>
         </div>
     </div>
 </header>
