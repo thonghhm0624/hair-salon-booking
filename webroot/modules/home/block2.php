@@ -1,6 +1,6 @@
 <div class="block2 container-fluid">
     <div class="container">
-        <div class="title">Khách Hàng</div>
+        <h1 class="section-title">Khách hàng</h1>
         <div class="row">
             <div class="col col-4">
                 <div class="thumbnail hvr-shutter-in-vertical">

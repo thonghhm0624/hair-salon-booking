@@ -1,7 +1,82 @@
-main {
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
 
-  &.container-fluid {
-    margin: 0;
-    padding: 0;
+.container {
+  padding: 20px;
+}
+
+
+h1 {
+  @include FontQuickSandBold(36px, 1.4);
+  text-align: center;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 35px;
+
+  &.section-title {
+
+    &:after {
+      content: "";
+      width: 100px;
+      height: 2px;
+      background: $dark-blue;
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
+
+  &.left-underline {
+
+    &:after {
+      content: "";
+      width: 100px;
+      height: 2px;
+      background: $dark-blue;
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+    }
+  }
+}
+
+
+h2 {
+  @include FontQuickSandBold(30px, 1.4);
+  text-align: center;
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  &.section-title {
+
+    &:after {
+      content: "";
+      width: 75px;
+      height: 2px;
+      background: $dark-blue;
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
+
+  &.left-underline {
+
+    &:after {
+      content: "";
+      width: 100px;
+      height: 2px;
+      background: $dark-blue;
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+    }
   }
 }

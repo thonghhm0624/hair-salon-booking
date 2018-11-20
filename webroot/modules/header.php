@@ -9,7 +9,7 @@
             Thời gian làm việc : 10h - 20h
         </div>
         <div class="login">
-            <a href="modoles/popuplogin.php" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Đăng Nhập</a>
+            <a href="#">Đăng Nhập</a>
         </div>
     </div>
 </header>

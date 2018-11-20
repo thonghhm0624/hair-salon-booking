@@ -6,6 +6,7 @@ header {
     align-items: center;
     height: 128px;
     padding-left: 20px;
+    @include FontQuickSandBold(24px , 1.4);
 
     .logo {
       @include displayFlex;
@@ -23,8 +24,6 @@ header {
     }
 
     .login {
-      @include FontQuickSandBold(24px , 1.4);
-
       a {
         color: $dark-blue;
 

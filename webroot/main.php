@@ -8,6 +8,7 @@
 <?php
 include ('modules/header.php');
 include ('modules/navbar.php');
+include ('modules/home/block1.php');
 
 ?>
 <main role="main" class="container-fluid">

@@ -1,7 +1,49 @@
 footer {
-
   position: relative;
   bottom: 0;
+
+  .container-fluid {
+
+    .container {
+
+      .footer-item {
+        color: $dark-blue;
+
+        &.footer-introduce-col {
+
+          .title {
+            justify-content: space-between;
+          }
+        }
+
+        .title {
+          @include displayFlex;
+          align-items: center;
+          height: 100px;
+          justify-content: flex-start;
+        }
+
+        .content-container {
+          @include FontQuickSandRegular(20px , 1.4);
+        }
+
+        &.footer-phone-col {
+
+          .content-container {
+            position: relative;
+            padding-left: 30px;
+
+            &:before {
+              content: url("images/icon-phone.png");
+              position: absolute;
+              top: 5px;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
 
 
   .text-footer {
@@ -10,6 +52,5 @@ footer {
     color: $white;
     @include FontQuickSandMedium(24px ,1.4);
     padding: 10px 0;
-
   }
 }

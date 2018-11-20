@@ -1,0 +1,41 @@
+.teaser {
+  position: relative;
+
+  .block1 {
+    background: url("images/banner.png") no-repeat ;
+    background-size: contain;
+    width: 100%;
+    height: 44vw;
+    margin: 0;
+    padding: 0;
+
+    .container {
+      position: relative;
+
+      .reservation {
+        @include FontQuickSandBold(28px, 1.5);
+        color: $dark-blue;
+        text-align: center;
+        position: absolute;
+        top: 2vw;
+        left: 20px;
+
+        .cta-start {
+          background-color: $dark-blue;
+          padding: 5px 25px;
+          border-radius: 12px;
+        }
+
+        a {
+          color: $white;
+          text-decoration: none;
+
+          &:hover {
+            color: $white;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

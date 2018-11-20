@@ -3,6 +3,7 @@ nav {
   background-color: $dark-blue;
 
   .container {
+    padding: 0;
 
     #navbarNav {
       justify-content: space-between;
@@ -13,7 +14,7 @@ nav {
         .nav-link {
           padding: 0 20px;
           color: $white;
-          @include FontQuickSandBold(30px ,1.4);
+          @include FontQuickSandBold(24px ,1.4);
           text-decoration: none;
 
         }
@@ -90,8 +91,7 @@ nav {
 
 
           .nav-link {
-            font-size: 3vw;
-            padding: 0 2vw;
+
           }
         }
 

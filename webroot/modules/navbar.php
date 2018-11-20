@@ -9,7 +9,7 @@
                     <a class="nav-link" href="#">Sản Phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Giới Thiệu</a>
+                    <a class="nav-link" href="?page=page/about">Giới Thiệu</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Liên hệ</a>
