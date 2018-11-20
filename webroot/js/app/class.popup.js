@@ -1,4 +1,5 @@
 SE.clsPopup = (function() {
+
   //INIT
   function init(){
     initEvent();

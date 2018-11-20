@@ -1,0 +1,60 @@
+.page.explore {
+
+  .explore-sidebar {
+    position: relative;
+
+    .explore-sidebar-item {
+      margin-bottom: 30px;
+
+      .item {
+        width: 100%;
+        display: block;
+        @include FontQuickSandRegular(24px, 1.4);
+        position: relative;
+        background: $dark-blue;
+        border: $white 1px solid;
+        border-radius: 5px;
+        color: $white;
+
+        &.item-heading {
+          @include FontQuickSandBold(30px, 1.4);
+          padding-left: 15px;
+
+          &:after {
+            display: none;
+          }
+        }
+
+        &:after {
+          content: "";
+          width: 0;
+          height: 2px;
+          background: $white;
+          position: absolute;
+          bottom: 10px;
+          left: 22px;
+          -webkit-transition: ease-in .2s;
+          transition: ease-in .2s;
+        }
+
+        &:hover {
+          text-decoration: none;
+
+          &:after {
+            width: 70px;
+          }
+        }
+
+        &.collapsed {
+          background: $white;
+          color: $dark-blue;
+          border: $dark-blue 1px solid;
+        }
+      }
+    }
+  }
+
+  .explore-content {
+
+  }
+}

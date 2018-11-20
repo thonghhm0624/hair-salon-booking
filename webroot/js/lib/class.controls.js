@@ -164,10 +164,13 @@ SE.clsControls = (function() {
     });
 
   }
-
   //END SELECT
   //////////////////////////////////////////////////
 
+
+  function detect_explore () {
+
+  }
   //RETURN
   return {
     init:init

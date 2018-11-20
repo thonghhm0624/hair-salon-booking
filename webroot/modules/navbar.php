@@ -3,10 +3,10 @@
         <div class="collapse navbar-collapse" id="navbarNav" >
             <ul class="navbar-nav">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Tin Tức </a>
+                    <a class="nav-link" href="?page=explore&explore=news">Tin Tức </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sản Phẩm</a>
+                    <a class="nav-link" href="?page=explore&explore=products">Sản Phẩm</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?page=page/about">Giới Thiệu</a>

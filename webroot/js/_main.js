@@ -14,6 +14,7 @@ var SE = {
   /**
    * Initialize the app
    */
+
   init: function () {
     // Let developers know that this file is loaded properly!
     console.debug("javascript is locked and loaded!");
