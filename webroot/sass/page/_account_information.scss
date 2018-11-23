@@ -1,0 +1,9 @@
+form {
+  text-align: right;
+
+
+  .col-form-label {
+    color: $dark-blue;
+    @include FontQuickSandMedium(20px, 1.4);
+  }
+}
