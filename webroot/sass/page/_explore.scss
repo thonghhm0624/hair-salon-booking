@@ -52,6 +52,8 @@
         }
       }
     }
+
+
   }
 
   .explore-content {
@@ -120,6 +122,9 @@
           background: $dark-blue;
           color: $white;
         }
+
+        //-------css-of-tui----
+
       }
     }
 
@@ -145,5 +150,48 @@
         }
       }
     }
+  }
+
+
+  //-------css-of-tui------
+  .non-articles-explore {
+    color: $dark-blue;
+    text-decoration: none;
+    text-align: left;
+
+    .title-explore {
+      margin: 0 0 10px 0;
+      text-align: left;
+      padding: 0;
+    }
+
+    .article-explore-content {
+      margin: 40px 0;
+
+      .related-article-title {
+        margin-left: 50px;
+        color: $dark-blue;
+      }
+
+      a:hover {
+        text-decoration: none;
+        color: $dark-blue;
+      }
+    }
+
+
+
+  }
+
+  .hairman {
+    text-align: center;
+    margin: 62px auto ;
+    display: block;
+  }
+
+  .bottom-solid {
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: 2px solid $dark-blue;
   }
 }
