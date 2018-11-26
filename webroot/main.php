@@ -22,6 +22,10 @@ include ('modules/footer.php');
 ?>
 
 
+<?php
+    include ('modules/popup/popuplogin.php')
+?>
+
 <script src="assets/js/commons.bundle.js"></script>
 <script src="assets/js/index.bundle.js"></script>
 

@@ -27,7 +27,7 @@
                 Hương thơm lịch lãm, cho chàng vẻ quyến rũ khó cưỡng
             </div>
             <div>&nbsp;</div>
-            <a class="product-read-more">Xem thêm</a>
+            <a class="product-read-more" href="#">Xem thêm</a>
         </div>
     </div>
     <div class="row explore-pagination">

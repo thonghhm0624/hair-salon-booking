@@ -177,19 +177,17 @@
     <div class="services container">
         <h1 class="section-title">Các dịch vụ</h1>
         <div class="row">
-            <div class="col-md-4 col-xs-12 service-item">
-                <div class="service-img">
-                    <img width="auto" height="100%" src="images/services-scissors.png"/>
-                </div>
+            <div class="col-md-4 col-sm-12 service-item">
+                <img class="service-img" width="300" height="300" src="images/services-scissors.png"/>
                 <h2>Cắt</h2>
                 <p>Chỉ 60 phút và tỏa sáng với một phong cách hoàn toàn mới!</p>
             </div>
-            <div class="col-md-4 col-xs-12 service-item">
+            <div class="col-md-4 col-sm-12 service-item">
                 <img class="service-img" width="300" height="300" src="images/hair-dye-kit.png"/>
                 <h2>Nhuộm</h2>
                 <p>Sự kết hợp của sắc tố tự nhiên đang biến đổi với màu nhuộm sẽ tạo ra màu tóc mới.</p>
             </div>
-            <div class="col-md-4 col-xs-12 service-item">
+            <div class="col-md-4 col-sm-12 service-item">
                 <img class="service-img" width="300" height="300" src="images/hairdye_scissors_combo.png"/>
                 <h2>Combo cắt và nhuộm</h2>
                 <p>Chỉ 60 phút và tỏa sáng với một phong cách hoàn toàn mới!</p>

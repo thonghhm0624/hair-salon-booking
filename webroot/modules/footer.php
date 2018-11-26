@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col col-md-4 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="footer-item footer-introduce-col">
                         <div class="title">
                             <img src="images/logo.png">
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-4 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="footer-item footer-system-col">
                         <div class="title"><h1 class="left-underline">Hệ Thống</h1></div>
                         <div class="content-container">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-4 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="footer-item footer-phone-col">
                         <div class="title"><h1 class="left-underline">Liên Hệ</h1></div>
                         <div class="content-container">

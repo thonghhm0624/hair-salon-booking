@@ -58,6 +58,7 @@
 
   .explore-content {
     padding-left: 30px;
+    display: none;
 
     .articles-explore {
       align-items: center;
@@ -123,7 +124,6 @@
           color: $white;
         }
 
-        //-------css-of-tui----
 
       }
     }
@@ -152,46 +152,49 @@
     }
   }
 
+  .article {
 
-  //-------css-of-tui------
-  .non-articles-explore {
-    color: $dark-blue;
-    text-decoration: none;
-    text-align: left;
+    p {
+      color: $dark-blue;
 
-    .title-explore {
-      margin: 0 0 10px 0;
-      text-align: left;
-      padding: 0;
-    }
-
-    .article-explore-content {
-      margin: 40px 0;
-
-      .related-article-title {
-        margin-left: 50px;
-        color: $dark-blue;
+      &.article-subheading {
+        @include FontQuickSandLight(16px, 1.4);
       }
 
-      a:hover {
-        text-decoration: none;
-        color: $dark-blue;
+      &.article-content {
+        @include FontQuickSandRegular(20px, 1.4);
       }
     }
 
+    .image-and-description-container {
 
+      .image-and-description-item {
 
-  }
+        img {
+          width: 80%;
+        }
+      }
+    }
 
-  .hairman {
-    text-align: center;
-    margin: 62px auto ;
-    display: block;
-  }
+    hr {
+      width: 50%;
+      height: 2px;
+      background: $dark-blue;
+    }
 
-  .bottom-solid {
-    width: 50%;
-    margin: 0 auto;
-    border-bottom: 2px solid $dark-blue;
+    .related-articles {
+
+    }
+
+    .related-products {
+
+      .related-products-item {
+        margin: 0 auto;
+        width: 70%;
+        text-align: center;
+        border: 1px solid #000000;
+        padding: 20px 0;
+      }
+    }
   }
 }
