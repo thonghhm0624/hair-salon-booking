@@ -135,7 +135,7 @@
         color: $dark-blue;
         text-decoration: none;
         @include FontQuickSandLight(16px,1.4);
-        
+
         &.previous-results-pagination {
          left: 0;
         }
