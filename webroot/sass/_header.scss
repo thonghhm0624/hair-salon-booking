@@ -33,6 +33,60 @@ header {
         }
       }
     }
+
+    .logged {
+      width: 200px;
+      position: relative;
+      background: #ffffff;
+      z-index: 10;
+      text-align: center;
+      padding: 0 10px;
+
+      a {
+        color: $dark-blue;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .logged-options {
+        position: absolute;
+        background: #ffffff;
+        top: 0;
+        left: 0;
+        z-index: 9;
+        opacity: 0;
+        width: 100%;
+        transition: ease 0.5s;
+        text-align: center;
+        @include FontQuickSandRegular(16px, 1.4);
+
+        a {
+          position: relative;
+          display: inline-block;
+          border: 1px solid $dark-blue;
+          padding: 15px 10px;
+          text-align: center;
+          width: 100%;
+          height: auto;
+
+          &:hover {
+            text-decoration: none;
+            color: $white;
+            background: $dark-blue;
+          }
+        }
+      }
+
+      &:hover {
+
+        .logged-options {
+          opacity: 1;
+          margin-top: 40px;
+        }
+      }
+    }
   }
 }
 @include breakpoint(mmd) {

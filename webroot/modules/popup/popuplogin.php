@@ -1,4 +1,4 @@
-<div class="popup popup-login">
+<div class="popup popup-login" style="display: none">
     <form method="post">
         <div class="form-group row">
             <label class="col-sm-12 col-md-4 col-form-label">Số điện thoại</label>
