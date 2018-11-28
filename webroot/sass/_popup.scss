@@ -21,3 +21,43 @@
     margin-top: 15px;
   }
 }
+
+
+.popup.popup-reservation {
+  width: 80%;
+  background: linear-gradient(to bottom right, #ff9a22,#fda029,#f0bd4d, #eacb5d);
+  height: auto;
+  display: inline-block;
+  @include objAbsoluteMiddle;
+  position: fixed;
+  border-radius: 10px;
+  padding: 40px 10px;
+  z-index: 9999;
+
+  form {
+
+    .row {
+
+      &.container-form {
+        margin-left: 0;
+      }
+    }
+
+    .set-height {
+      height: 60px;
+    }
+
+    select {
+      height: 100%;
+      width: 90%;
+      border-radius: 7px;
+    }
+
+
+    input {
+      height: 100%;
+      width: 90%;
+      border-radius: 7px;
+    }
+  }
+}
