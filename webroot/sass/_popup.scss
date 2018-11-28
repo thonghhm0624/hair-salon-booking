@@ -31,33 +31,86 @@
   @include objAbsoluteMiddle;
   position: fixed;
   border-radius: 10px;
-  padding: 40px 10px;
+  padding: 30px 10px;
   z-index: 9999;
+
+  .cta-cal {
+    width: 100%;
+    text-align: center;
+
+    .cta {
+      @include FontQuickSandBold(20px, 1.4);
+      background: $dark-blue;
+      padding: 15px 25px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      display: inline-block;
+      color: $white;
+      text-decoration: none;
+
+      &:hover {
+        color: $dark-blue;
+        background: $white;
+      }
+    }
+  }
+
 
   form {
 
-    .row {
-
-      &.container-form {
-        margin-left: 0;
-      }
-    }
 
     .set-height {
       height: 60px;
+      position: relative;
     }
 
     select {
       height: 100%;
-      width: 90%;
+      width: 100%;
       border-radius: 7px;
+
+      option {
+        text-align: center;
+      }
     }
 
 
     input {
       height: 100%;
-      width: 90%;
+      width: 100%;
       border-radius: 7px;
+      text-align: center;
     }
+
+    img {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+    }
+  }
+
+
+  .result-success {
+    padding: 30px;
+    @include FontQuickSandMedium(20px, 1.4);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    position: relative;
+    text-align: center;
+  }
+
+  .result-fail {
+    padding: 30px;
+    @include FontQuickSandMedium(20px, 1.4);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    position: relative;
+    text-align: center;
   }
 }
