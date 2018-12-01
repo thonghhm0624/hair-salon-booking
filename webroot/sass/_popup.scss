@@ -1,116 +1,166 @@
 .popup.popup-login {
-  width: 700px;
-  @include objAbsoluteMiddle;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0);
   position: fixed;
-  padding: 80px;
-  border: 2px solid $dark-blue;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  opacity: 0;
 
-  label {
-    @include FontQuickSandBold(24px, 1.4);
-  }
+  .popup-login-ui {
+    width: 700px;
+    @include objAbsoluteMiddle;
+    padding: 80px;
+    border: 2px solid $dark-blue;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
 
-  .btn {
-    width: 100%;
-    padding: 15px 25px;
-    @include FontQuickSandBold(24px, 1.4);
-    background: $dark-blue;
-    color: $white;
-    border-radius: 10px;
-    margin-top: 15px;
+    label {
+      @include FontQuickSandBold(24px, 1.4);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px 25px;
+      @include FontQuickSandBold(24px, 1.4);
+      background: $dark-blue;
+      color: $white;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
   }
 }
 
-
 .popup.popup-reservation {
-  width: 80%;
-  background: linear-gradient(to bottom right, #ff9a22,#fda029,#f0bd4d, #eacb5d);
-  height: auto;
-  display: inline-block;
-  @include objAbsoluteMiddle;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0);
   position: fixed;
-  border-radius: 10px;
-  padding: 30px 10px;
+  top: 0;
+  left: 0;
   z-index: 9999;
+  display: none;
+  opacity: 0;
 
-  .cta-cal {
-    width: 100%;
-    text-align: center;
+  .popup-reservation-ui {
+    width: 85%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 5px solid $dark-blue;
+    height: auto;
+    @include objAbsoluteMiddle;
+    border-radius: 10px;
+    padding: 30px 10px;
+    z-index: 9999;
 
-    .cta {
-      @include FontQuickSandBold(20px, 1.4);
-      background: $dark-blue;
-      padding: 15px 25px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      display: inline-block;
-      color: $white;
-      text-decoration: none;
+    .cta-cal {
+      width: 100%;
+      text-align: center;
+      @include displayFlex;
+      margin-top: 20px;
 
-      &:hover {
-        color: $dark-blue;
-        background: $white;
+      .cta {
+        @include FontQuickSandBold(20px, 1.4);
+        background: $dark-blue;
+        padding: 15px 25px;
+        border-radius: 12px;
+        text-transform: uppercase;
+        display: inline-block;
+        color: $white;
+        text-decoration: none;
+        width: auto !important;
+        cursor: pointer;
+        border: 2px solid $white;
+
+
+        &:hover {
+          color: $dark-blue;
+          background: $white;
+          border: 2px solid $dark-blue;
+        }
+      }
+
+      .exit-reservation {
+        margin-left: 50px;
       }
     }
-  }
 
 
-  form {
+    form {
 
 
-    .set-height {
-      height: 60px;
-      position: relative;
-    }
+      .set-height {
+        height: 60px;
+        position: relative;
+      }
 
-    select {
-      height: 100%;
-      width: 100%;
-      border-radius: 7px;
+      select {
+        height: 100%;
+        width: 100%;
+        border-radius: 7px;
 
-      option {
+        option {
+          text-align: center;
+        }
+      }
+
+
+      input {
+        height: 100%;
+        width: 100%;
+        border-radius: 7px;
+        border: 2px solid $dark-blue;
         text-align: center;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      select {
+        border-radius: 7px;
+        border: 2px solid $dark-blue;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      img {
+        position: absolute;
+        top: 10px;
+        left: 20px;
       }
     }
 
 
-    input {
-      height: 100%;
-      width: 100%;
-      border-radius: 7px;
+    .result-success {
+      padding: 30px;
+      @include FontQuickSandMedium(20px, 1.4);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      -webkit-transform: translate(-50%, 0);
+      position: relative;
       text-align: center;
     }
 
-    img {
-      position: absolute;
-      top: 10px;
-      left: 20px;
+    .result-fail {
+      padding: 30px;
+      @include FontQuickSandMedium(20px, 1.4);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      -webkit-transform: translate(-50%, 0);
+      position: relative;
+      text-align: center;
     }
   }
-
-
-  .result-success {
-    padding: 30px;
-    @include FontQuickSandMedium(20px, 1.4);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -webkit-transform: translate(-50%, 0);
-    position: relative;
-    text-align: center;
-  }
-
-  .result-fail {
-    padding: 30px;
-    @include FontQuickSandMedium(20px, 1.4);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -webkit-transform: translate(-50%, 0);
-    position: relative;
-    text-align: center;
-  }
 }
+
+
+
+

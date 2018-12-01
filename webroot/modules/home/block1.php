@@ -6,7 +6,7 @@
                 thay đổi bản thân <br/>
                 . . .<br/>
                 Hãy đặt lịch ngay<br/><br/>
-                <a href="#" class="cta-start">Bắt đầu</a>
+                <a href="#" class="cta-start" id="show-popup-resevation">Bắt đầu</a>
             </p>
         </div>
     </div>

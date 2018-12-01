@@ -24,14 +24,8 @@ header {
     }
 
     .login {
-      a {
-        color: $dark-blue;
-
-        &:hover {
-          color: $blue;
-          text-decoration: none;
-        }
-      }
+      color: $dark-blue;
+      cursor: pointer;
     }
 
     .logged {

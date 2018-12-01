@@ -6,10 +6,13 @@
             </a>
         </div>
         <div id="collapseArticles" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <a class="card card-body item item-category" href="">
+            <a class="card card-body item item-category" href="page=explore&exploring=news&category=1">
                 Chăm sóc tóc
             </a>
-            <a class="card card-body item item-category" href="">
+            <a class="card card-body item item-category" href="page=explore&exploring=news&category=2">
+                Phục hồi tóc
+            </a>
+            <a class="card card-body item item-category" href="page=explore&exploring=news&category=3">
                 Kiểu tóc
             </a>
         </div>
@@ -21,14 +24,14 @@
             </a>
         </div>
         <div id="collapseProducts" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <a class="card card-body  item item-category" href="">
+            <a class="card card-body item item-category" href="page=explore&exploring=product&category=1">
                 Chăm sóc tóc
             </a>
-            <a class="card card-body  item item-category" href="">
+            <a class="card card-body item item-category" href="page=explore&exploring=product&category=2">
                 Phục hồi tóc
             </a>
-            <a class="card card-body  item item-category" href="">
-                Tạo kiểu tóc
+            <a class="card card-body item item-category" href="page=explore&exploring=product&category=3">
+                Kiểu tóc
             </a>
         </div>
     </div>
