@@ -3,7 +3,6 @@ SE.clsPopup = (function() {
   //INIT
   function init(){
     initEvent();
-    console.log('clsPopup - init');
   }
 
     //PARAMETERS
@@ -12,6 +11,7 @@ SE.clsPopup = (function() {
 
   function initEvent()
   {
+
     $('.popup-close').click(function(){
       closeAll();
     });

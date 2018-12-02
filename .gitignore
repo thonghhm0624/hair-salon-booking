@@ -1,8 +1,11 @@
 /tmp/*
 /logs/*
 /nbproject/*
+/webroot/.sass-cache/*
+/webroot/all*.js
 /.idea/*
 */.idea/*
+
 
 webroot/all.css
 webroot/all.css.map
