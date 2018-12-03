@@ -227,7 +227,7 @@ $domain_name =  !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
 if ($domain_name == '' && !empty($_SERVER['HTTP_HOST'])) $domain_name = stristr($_SERVER['HTTP_HOST'], ':', true);
 Configure::write('domainName', $domain_name);
 
-if ($domain_name == "" || $domain_name == "localhost" || strpos($domain_name, "192.168.1") !== FALSE) {
+if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsalon.local" || strpos($domain_name, "192.168.1") !== FALSE) {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     Configure::write('debug',1);
     if (Configure::read('debug')) {

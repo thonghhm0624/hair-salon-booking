@@ -54,10 +54,15 @@ Router::scope('/', function ($routes) {
 
 	//articles
     $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);
+    $routes->connect('/articles/:page',['controller' => 'Frontend', 'action' => 'articles'],['pass'=>['page']]);
+    $routes->connect('/articles/category/:category/:page',['controller' => 'Frontend', 'action' => 'articles_by_category'],['pass'=>['category','page']]);
+    $routes->connect('/articles/details/:articleID',['controller' => 'Frontend', 'action' => 'article_details'],['pass'=>['articleID']]);
 
     //products
-    $routes->connect('/products/:page',['controller' => 'Frontend', 'action' => 'products'],['pass'=>['page']]);
     $routes->connect('/products',['controller' => 'Frontend', 'action' => 'products']);
+    $routes->connect('/products/:page',['controller' => 'Frontend', 'action' => 'products'],['pass'=>['page']]);
+    $routes->connect('/products/category/:category/:page',['controller' => 'Frontend', 'action' => 'products_by_category'],['pass'=>['category','page']]);
+    $routes->connect('/products/details/:productID',['controller' => 'Frontend', 'action' => 'product_details'],['pass'=>['productID']]);
 
     //introduction
     $routes->connect('/introduction',['controller' => 'Frontend', 'action' => 'introduction']);
