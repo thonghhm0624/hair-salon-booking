@@ -35,4 +35,8 @@ class FrontendController extends AppController {
         $this->set('collapse_articles',false);
         $this->render('explore');
     }
+
+    public function introduction() {
+        $this->render('about');
+    }
 }

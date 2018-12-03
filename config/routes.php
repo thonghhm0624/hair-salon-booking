@@ -50,12 +50,17 @@ Router::scope('/', function ($routes) {
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-	$routes->connect('/',['controller' => 'Frontend', 'action' => 'index']);	 
-        $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);
+	$routes->connect('/',['controller' => 'Frontend', 'action' => 'index']);
 
-	$routes->connect('/contact',['controller' => 'Frontend', 'action' => 'contact']);
-	$routes->connect('/products',['controller' => 'Frontend', 'action' => 'products']);
-	$routes->connect('/products/:product_type',['controller' => 'Frontend', 'action' => 'products']);
+	//articles
+    $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);
+
+    //products
+    $routes->connect('/products',['controller' => 'Frontend', 'action' => 'products']);
+
+    //introduction
+    $routes->connect('/introduction',['controller' => 'Frontend', 'action' => 'introduction']);
+
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

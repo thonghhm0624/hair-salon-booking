@@ -17,7 +17,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/professional.png" />
+                        <img src="<?= $this->request->webroot ?>images/professional.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -32,7 +32,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/high-level.png" />
+                        <img src="<?= $this->request->webroot ?>images/high-level.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -49,7 +49,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/experienced.png" />
+                        <img src="<?= $this->request->webroot ?>images/experienced.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -64,7 +64,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/artists.png" />
+                        <img src="<?= $this->request->webroot ?>images/artists.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -81,7 +81,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/friendly.png" />
+                        <img src="<?= $this->request->webroot ?>images/friendly.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -96,7 +96,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/guarantee.png" />
+                        <img src="<?= $this->request->webroot ?>images/guarantee.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -113,7 +113,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/quality-products.png" />
+                        <img src="<?= $this->request->webroot ?>images/quality-products.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -128,7 +128,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/good-staffs.png" />
+                        <img src="<?= $this->request->webroot ?>images/good-staffs.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -145,7 +145,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/lead-the-trend.png" />
+                        <img src="<?= $this->request->webroot ?>images/lead-the-trend.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -160,7 +160,7 @@
             <div class="col col-xl-6 col-sm-12 reasons-to-choose-us-item">
                 <div class="reason-container">
                     <div class="reason-img">
-                        <img src="images/care-with-heart.png" />
+                        <img src="<?= $this->request->webroot ?>images/care-with-heart.png" />
                     </div>
                     <div class="reason-content">
                         <div class="reason-title">
@@ -178,17 +178,17 @@
         <h1 class="section-title">Các dịch vụ</h1>
         <div class="row">
             <div class="col-md-4 col-sm-12 service-item">
-                <img class="service-img" width="300" height="300" src="images/services-scissors.png"/>
+                <img class="service-img" width="300" height="300" src="<?= $this->request->webroot ?>images/services-scissors.png"/>
                 <h2>Cắt</h2>
                 <p>Chỉ 60 phút và tỏa sáng với một phong cách hoàn toàn mới!</p>
             </div>
             <div class="col-md-4 col-sm-12 service-item">
-                <img class="service-img" width="300" height="300" src="images/hair-dye-kit.png"/>
+                <img class="service-img" width="300" height="300" src="<?= $this->request->webroot ?>images/hair-dye-kit.png"/>
                 <h2>Nhuộm</h2>
                 <p>Sự kết hợp của sắc tố tự nhiên đang biến đổi với màu nhuộm sẽ tạo ra màu tóc mới.</p>
             </div>
             <div class="col-md-4 col-sm-12 service-item">
-                <img class="service-img" width="300" height="300" src="images/hairdye_scissors_combo.png"/>
+                <img class="service-img" width="300" height="300" src="<?= $this->request->webroot ?>images/hairdye_scissors_combo.png"/>
                 <h2>Combo cắt và nhuộm</h2>
                 <p>Chỉ 60 phút và tỏa sáng với một phong cách hoàn toàn mới!</p>
             </div>

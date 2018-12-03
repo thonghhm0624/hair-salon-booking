@@ -35,6 +35,6 @@
         </div>
     </div>
     <div class="container-fluid text-footer">
-        <div>Copyright &copy; 2018 Gent. Thiết kế bởi Gent.</div>
+        <div>Copyright &copy; 2018 Méo Meo. Thiết kế bởi Méo Meo.</div>
     </div>
 </footer>

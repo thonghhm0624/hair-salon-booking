@@ -4,7 +4,7 @@
     </div>
     <a class="row articles-explore article-item" href="#">
         <div class="col col-md-4 col-xs-12 article-explore-img">
-            <img src="images/article/1/explore.png"/>
+            <img src="<?= $this->request->webroot ?>images/article/1/explore.png"/>
         </div>
         <div class="col col-md-8 col-xs-12 article-explore-content">
             <h2>Cách chăm sóc tóc cho nam giới</h2>
@@ -20,7 +20,7 @@
             </div>
             <div>&nbsp;</div>
             <div class="product-img">
-                <img src="images/product/1/product-img.png"/>
+                <img src="<?= $this->request->webroot ?>images/product/1/product-img.png"/>
             </div>
             <div>&nbsp;</div>
             <div class="product-description">
