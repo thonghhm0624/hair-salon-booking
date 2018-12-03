@@ -13,15 +13,15 @@
 
     <div class="row image-and-description-container justify-content-center">
         <div class="col-md-4 col-sm-12 image-and-description-item text-center">
-            <img src="images/hairman.png">
+            <img src="<?= $this->request->webroot ?>images/hairman.png">
             <p>Sed posuere mattis felis venenatis tempus. </p>
         </div>
         <div class="col-md-4 col-sm-12 image-and-description-item text-center">
-            <img src="images/hairman.png">
+            <img src="<?= $this->request->webroot ?>images/hairman.png">
             <p>Sed posuere mattis felis venenatis tempus. </p>
         </div>
         <div class="col-md-4 col-sm-12 image-and-description-item text-center">
-            <img src="images/hairman.png">
+            <img src="<?= $this->request->webroot ?>images/hairman.png">
             <p>Sed posuere mattis felis venenatis tempus. </p>
         </div>
     </div>
@@ -43,7 +43,7 @@
                     </div>
                     <div>&nbsp;</div>
                     <div class="img-quality-products">
-                        <img src="images/quality-products.png"/>
+                        <img src="<?= $this->request->webroot ?>images/quality-products.png"/>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div>&nbsp;</div>
                     <div class="img-quality-products">
-                        <img src="images/quality-products.png"/>
+                        <img src="<?= $this->request->webroot ?>images/quality-products.png"/>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div>&nbsp;</div>
                     <div class="img-quality-products">
-                        <img src="images/quality-products.png"/>
+                        <img src="<?= $this->request->webroot ?>images/quality-products.png"/>
                     </div>
                 </div>
             </div>

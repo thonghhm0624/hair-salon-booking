@@ -3,15 +3,12 @@
         <div class="row" id="body-row">
             <div class="col-md-3 col-sm-12">
                 <?php
-                    include ('modules/explore/explore-sidebar.php');
+                    echo $this->element('modules/components/explore/explore-sidebar');
                 ?>
             </div>
             <div class="col-md-9 col-sm-12">
                 <?php
-                include ('modules/explore/explore-content.php');
-                ?>
-                <?php
-                include ('modules/explore/explore-products-content.php');
+                    echo $this->element('modules/components/products/products-content');
                 ?>
             </div>
         </div>

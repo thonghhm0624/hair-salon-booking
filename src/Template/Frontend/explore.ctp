@@ -8,9 +8,6 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <?php
-                    echo $this->element('modules/components/explore/explore-content');
-                ?>
-                <?php
                     echo $this->element('modules/components/explore/explore-products-content');
                 ?>
             </div>

@@ -2,13 +2,13 @@
     <div class="form-group row">
         <label for="inputEmail3" class="col-sm-5 col-form-label">Tên</label>
         <div class="col-sm-3">
-            <input type="name" class="form-control" id="inputEmail3" placeholder="Tên">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Tên">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword3" class="col-sm-5 col-form-label">Tuổi</label>
         <div class="col-sm-3">
-            <input type="age" class="form-control" id="inputPassword3" placeholder="Tuổi">
+            <input type="text" class="form-control" id="inputPassword3" placeholder="Tuổi">
         </div>
     </div>
     <div class="form-group row">

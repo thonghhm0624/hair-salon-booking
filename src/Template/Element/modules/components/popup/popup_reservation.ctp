@@ -6,7 +6,7 @@
                     <div class="row container-form">
                         <div class="col-sm-2 set-height">
                             <input type="text"  placeholder="Số điện thoại" />
-                            <img src="images/phone.png">
+                            <img src="<?= $this->request->webroot ?>images/phone.png">
                         </div>
                         <div class="col-sm-2 set-height">
                             <select name="" >

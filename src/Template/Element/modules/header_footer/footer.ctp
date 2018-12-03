@@ -5,7 +5,7 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="footer-item footer-introduce-col">
                         <div class="title">
-                            <img src="images/logo.png">
+                            <img src="<?= $this->request->webroot ?>images/logo.png">
                             <h1 class="left-underline">Gent là ai?</h1>
                         </div>
                         <div class="content-container">
@@ -35,6 +35,6 @@
         </div>
     </div>
     <div class="container-fluid text-footer">
-        <div>Copyright &copy; 2018 Gent. Thiết kế bởi Gent.</div>
+        <div>Copyright &copy; 2018 Méo Meo. Thiết kế bởi Méo Meo.</div>
     </div>
 </footer>

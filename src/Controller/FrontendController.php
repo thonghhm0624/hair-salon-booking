@@ -12,10 +12,14 @@ use image_load;
 
 class FrontendController extends AppController {
 	//public $layout = 'frontend';	
-	
+	public $paginate = [
+        'limit' => 6,
+    ];
     public function initialize()
     {
         parent::initialize();
+        $this->loadModel('Products');
+
 		$this->viewBuilder()->layout('frontend');
         $this->response->disableCache();
 		$this->set('webroot_full', Router::url('/', true));
@@ -30,9 +34,32 @@ class FrontendController extends AppController {
         $this->render('explore');
 
     }
-    public function products() {
+    public function products($page = 1) {
+        $products = $this->paginate($this->Products,['page'=>$page]);
+
+        if ($this->request->is('post')) {
+            $search = $this->request->getData()['searchForContent'];
+            $products = $this->Products->find('all')->where(
+                [
+                    'OR'=>[
+                        'product_title LIKE'=> '%'.$search.'%',
+                        'product_content LIKE'=> '%'.$search.'%',
+                        'product_keyword LIKE'=> '%'.$search.'%',
+                    ]
+                ]
+            )->toArray();
+        }
+
+
         $this->set('collapse_products',true);
         $this->set('collapse_articles',false);
-        $this->render('explore');
+
+        $this->set('products',$products);
+
+        $this->render('products');
+    }
+
+    public function introduction() {
+        $this->render('about');
     }
 }
