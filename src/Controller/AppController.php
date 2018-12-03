@@ -103,13 +103,13 @@ class AppController extends Controller
 		//Sharing Data
 		$share_message= array(
 			'site_name' => array(
-					'en' => "Website"
+					'en' => "Gent - Best hair salon for MEN"
 			),
 			'description' => array(
-					'en' => "Website."
+					'en' => "Gent - Best hair salon for MEN"
 			),
 			'title' => array(
-					'en' => "Website"
+					'en' => "Gent - Best hair salon for MEN"
 			),
 			'image' => array(
 

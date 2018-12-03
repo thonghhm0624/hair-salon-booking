@@ -19,7 +19,6 @@
 ?>
 <?php
 	echo $this->Html->meta('icon');
-	//echo $this->Html->css('all');
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
 ?>
