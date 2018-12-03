@@ -20,61 +20,7 @@ nav {
         }
       }
 
-      .search {
-        width: 250px;
-        height: 100%;
-        position: relative;
-        @include displayFlex;
-        align-items: center;
-        justify-content: flex-end;
-
-        form {
-          width: 220px;
-          position: absolute;
-          @include displayFlex;
-          align-items: center;
-
-          input {
-            position: absolute;
-            @include FontQuickSandRegular(16px ,1.4);
-            width: 0;
-            right: 36px;
-            opacity: 0;
-            -webkit-transition: all .5s ease-in-out;
-            -moz-transition: all .5s ease-in-out;
-            -o-transition: all .5s ease-in-out;
-            transition: all .5s ease-in-out;
-            background: #ffffff;
-            height: 30px;
-            padding:0 2px 0 5px;
-            color: $dark-blue;
-            outline: none;
-            -webkit-appearance: none;
-            border-radius: 5px 0 0 5px;
-            border-width: 0;
-
-            &:focus {
-              background: #000000;
-              color: #ffffff;
-              width: 100%;
-              opacity: 1;
-            }
-          }
-        }
-
-        &:hover input {
-          width: 100%;
-          opacity: 1;
-        }
-      }
-
-      .srch_btn{
-        height: 30px;
-        width: 30px;
-        position: relative;
-        right:0;
-        top: 0;
-      }
+      
     }
   }
 }
@@ -105,4 +51,61 @@ nav {
       }
     }
   }
+}
+.search {
+  background-color: $dark-blue;
+  width: 250px;
+  height: 100%;
+  position: relative;
+  float:right;
+  @include displayFlex;
+  align-items: center;
+  justify-content: flex-end;
+
+  form {
+    width: 220px;
+    position: absolute;
+    @include displayFlex;
+    align-items: center;
+
+    input {
+      position: absolute;
+      @include FontQuickSandRegular(16px ,1.4);
+      width: 0;
+      right: 36px;
+      opacity: 0;
+      -webkit-transition: all .5s ease-in-out;
+      -moz-transition: all .5s ease-in-out;
+      -o-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      background: #ffffff;
+      height: 30px;
+      padding:0 2px 0 5px;
+      color: $dark-blue;
+      outline: none;
+      -webkit-appearance: none;
+      border-radius: 5px 0 0 5px;
+      border-width: 0;
+
+      &:focus {
+        background: #000000;
+        color: #ffffff;
+        width: 100%;
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover input {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.srch_btn{
+  height: 30px;
+  width: 30px;
+  position: relative;
+  right:0;
+  top: 0;
 }

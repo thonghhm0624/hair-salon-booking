@@ -1,0 +1,16 @@
+CMD: cd bin
+
+MODELS
+etc: products => Products
+Generate Models: cake bake model [model_name]
+src/Model/Table & src/Model/Entity
+
+------ADMIN------
+
+Generate CONTROLLER: cake bake controller [model_name] --plugin Admin 
+plugins/Admin/src/Controller/...
+
+Generate TEMPLATE: cake bake template [model_name] --plugin Admin --theme Admin
+plugins/Admin/src/Template/.../...
+
+

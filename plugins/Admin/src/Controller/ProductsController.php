@@ -27,38 +27,11 @@ class ProductsController extends AppController
     public function initialize(){
         parent::initialize();
         $this->loadModel('Products');
-        $this->loadModel('ProductTypes');
-        $this->loadModel('Collections');
-        $this->loadModel('ProductDescriptions');
     }
     public function index()
     {
         $products = $this->paginate($this->Products);
-        $product_types = $this->ProductTypes->find('list',['keyField'=>'id','valueField'=>'name'])->toArray();
-        $collections = $this->Collections->find('list',['keyField'=>'id','valueField'=>'name'])->toArray();
-        $color_group = Configure::read('color_group');
-
-
-        $this->set(compact('product_types'));
-        $this->set(compact('collections'));
-        $this->set(compact('color_group'));
         $this->set(compact('products'));
-    }
-
-    public function active_fields(){
-        $this->autoRender = false;
-        $id = $this->request->data['id'];
-        $field = $this->request->data['field'];
-
-        $product = $this->Products->find('all', ['conditions' => array('id' => $id)])->first();
-
-        $live = $product->$field;
-
-        $change = $live == 1 ? "0" : "1";
-        $product->$field = $change;
-
-        $this->Products->save($product);
-        echo $change;
     }
     /**
      * View method
@@ -84,16 +57,17 @@ class ProductsController extends AppController
     public function add()
     {
         $product = $this->Products->newEntity();
-        $product_types = $this->ProductTypes->find('list',['keyField'=>'id','valueField'=>'name'])->toArray();
-        $collections = $this->Collections->find('list',['keyField'=>'id','valueField'=>'name'])->toArray();
-        $color_group = Configure::read('color_group');
+
+
         if ($this->request->is('post')) {
             $product = $this->Products->patchEntity($product, $this->request->getData());
             if ($this->Products->save($product)) {
-                if(file_exists($product->image)){
+                //                Image handler
+                if(file_exists($product->product_image)){
                     $this->imageSavingHandler($product);
                     $this->Products->save($product);
                 }
+                //                Image handler
                 $this->Flash->success(__('The product has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -101,9 +75,6 @@ class ProductsController extends AppController
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
         $this->set(compact('product'));
-        $this->set(compact('product_types'));
-        $this->set(compact('collections'));
-        $this->set(compact('color_group'));
     }
 
     /**
@@ -118,17 +89,17 @@ class ProductsController extends AppController
         $product = $this->Products->get($id, [
             'contain' => []
         ]);
-        $product_types = $this->ProductTypes->find('list',['keyField'=>'id','valueField'=>'name'])->toArray();
-        $collections = $this->Collections->find('list',['keyField'=>'id','valueField'=>'name'])->toArray();
-        $color_group = Configure::read('color_group');
-        $original_image = $product->image;
+      
+        $original_image = $product->product_image;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->getData());
             if ($this->Products->save($product)) {
-                if(file_exists($product->image) && $original_image != $product->image){
+                // Image handler
+                if(file_exists($product->product_image) && $original_image != $product->product_image){
                     $this->imageSavingHandler($product);
                     $this->Products->save($product);
                 }
+                // Image handler
                 $this->Flash->success(__('The product has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -141,9 +112,6 @@ class ProductsController extends AppController
         $this->set(compact('color_group'));
     }
 
-    public function deleteUnamedJar(){
-
-    }
     /**
      * Delete method
      *
@@ -170,9 +138,9 @@ class ProductsController extends AppController
     function imageSavingHandler($product){
         $image_path = 'files/upload/products/' . $product->id;
         $dir_image = new Folder(WWW_ROOT . $image_path, true, 0777);
-        $product->image =  $this->moveResizeImage(
-            $product->image,
-            str_replace('files/upload/temp/', '', $product->image),
+        $product->product_image =  $this->moveResizeImage(
+            $product->product_image,
+            str_replace('files/upload/temp/', '', $product->product_image),
             $image_path);
         $folder = new Folder(WWW_ROOT . 'files/upload/temp');
         $folder->delete();

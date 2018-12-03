@@ -56,6 +56,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);
 
     //products
+    $routes->connect('/products/:page',['controller' => 'Frontend', 'action' => 'products'],['pass'=>['page']]);
     $routes->connect('/products',['controller' => 'Frontend', 'action' => 'products']);
 
     //introduction

@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <?php
-                    echo $this->element('modules/components/explore/explore-products-content');
+                    echo $this->element('modules/components/products/products-content');
                 ?>
             </div>
         </div>

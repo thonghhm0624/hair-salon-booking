@@ -241,7 +241,7 @@ if ($domain_name == "" || $domain_name == "localhost" || strpos($domain_name, "1
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'database' => '2018_innovative_nail_design',
+        'database' => 'gent_hairsalon',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
@@ -286,29 +286,4 @@ if ($domain_name == "" || $domain_name == "localhost" || strpos($domain_name, "1
         'password' => 'Extreme2018'
     ]);
 }
-Configure::write('color_group',[
-    1=>'basic',     2=>'blues',
-    3=>'browns',    4=>'greens',
-    5=>'metal',     6=>'nude',
-    7=>'oranges',   8=>'pinks',
-    9=>'purples',   10=>'reds',
-    11=>'yellows'
-]);
-Configure::write('product_type',[
-    1=> [
-        'slug'=>'color-coat',
-        'text'=>'Color Coat'
-    ],
-    2=> [
-        'slug'=>'base-gel',
-        'text'=>'Base Gel'
-    ],
-    3=> [
-        'slug'=>'prep',
-        'text'=>'Prep'
-    ],
-    4=> [
-        'slug'=>'finish-gel',
-        'text'=>'Finish Gel'
-    ]
-]);
+//admin: admin@mail.com / Admin@1234

@@ -6,17 +6,15 @@ use Cake\ORM\Entity;
 /**
  * Product Entity
  *
- * @property int $id
- * @property string $name
- * @property string $description
- * @property int $type
- * @property string $image
- * @property int $color_group
- * @property int $collection
- * @property bool $is_new
- * @property bool $active
- * @property \Cake\I18n\Time $created
- * @property \Cake\I18n\Time $modified
+ * @property int $product_id
+ * @property int $product_category_id
+ * @property string $product_title
+ * @property string $product_description
+ * @property string $product_image
+ * @property string $product_keyword
+ * @property string $product_content
+ *
+ * @property \App\Model\Entity\Category $category
  */
 class Product extends Entity
 {
@@ -31,15 +29,12 @@ class Product extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'description' => true,
-        'type' => true,
-        'image' => true,
-        'color_group' => true,
-        'collection' => true,
-        'is_new' => true,
-        'active' => true,
-        'created' => true,
-        'modified' => true
+        'product_category_id' => true,
+        'product_title' => true,
+        'product_description' => true,
+        'product_image' => true,
+        'product_keyword' => true,
+        'product_content' => true,
+        'category' => true
     ];
 }

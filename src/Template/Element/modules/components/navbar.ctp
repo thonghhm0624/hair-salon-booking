@@ -16,12 +16,12 @@
                     <a class="nav-link js-goto" goto="contact" href="#contact">Liên hệ</a>
                 </li>
             </ul>
-            <div class="search">
+           <!--  <div class="search">
                 <form action="" name="SearchForm" method="post">
                     <input type="text" name="searchForContent" maxlength="64" id="SearchForm" placeholder="Tìm kiếm . . ." onblur="this.value=''"/>
                 </form>
-                <div class="srch_btn" onclick="SearchForm.submit()"><img src="images/icon-search.png"></div>
-            </div>
+                <div class="srch_btn" onclick="SearchForm.submit()"><img src="<$this->request->webroot ?>images/icon-search.png"></div>
+            </div> -->
         </div>
     </div>
 </nav>

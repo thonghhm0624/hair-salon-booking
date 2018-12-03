@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Products Model
  *
+ * @property \App\Model\Table\CategoriesTable|\Cake\ORM\Association\BelongsTo $Categories
+ *
  * @method \App\Model\Entity\Product get($primaryKey, $options = [])
  * @method \App\Model\Entity\Product newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Product[] newEntities(array $data, array $options = [])
@@ -16,8 +18,6 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Product patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Product[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Product findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class ProductsTable extends Table
 {
@@ -33,10 +33,13 @@ class ProductsTable extends Table
         parent::initialize($config);
 
         $this->setTable('products');
-        $this->setDisplayField('name');
-        $this->setPrimaryKey('id');
+        $this->setDisplayField('product_id');
+        $this->setPrimaryKey('product_id');
 
-        $this->addBehavior('Timestamp');
+//        $this->belongsTo('Categories', [
+//            'foreignKey' => 'product_category_id',
+//            'joinType' => 'INNER'
+//        ]);
     }
 
     /**
@@ -48,44 +51,45 @@ class ProductsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->integer('product_id')
+            ->allowEmpty('product_id', 'create');
 
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->allowEmpty('name');
+            ->scalar('product_title')
+            ->requirePresence('product_title', 'create')
+            ->notEmpty('product_title');
 
         $validator
-            ->scalar('description')
-            ->maxLength('description', 255)
-            ->allowEmpty('description');
+            ->scalar('product_description')
+            ->allowEmpty('product_description');
 
         $validator
-            ->integer('type')
-            ->allowEmpty('type');
+            ->scalar('product_image')
+            ->allowEmpty('product_image');
 
         $validator
-            ->scalar('image')
-            ->maxLength('image', 255)
-            ->allowEmpty('image');
+            ->scalar('product_keyword')
+            ->requirePresence('product_keyword', 'create')
+            ->notEmpty('product_keyword');
 
         $validator
-            ->integer('color_group')
-            ->allowEmpty('color_group');
-
-        $validator
-            ->integer('collection')
-            ->allowEmpty('collection');
-
-        $validator
-            ->boolean('is_new')
-            ->allowEmpty('is_new');
-
-        $validator
-            ->boolean('active')
-            ->allowEmpty('active');
+            ->scalar('product_content')
+            ->allowEmpty('product_content');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+//        $rules->add($rules->existsIn(['product_category_id'], 'Categories'));
+
+        return $rules;
     }
 }

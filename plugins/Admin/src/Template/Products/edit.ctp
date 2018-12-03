@@ -22,7 +22,7 @@
                             <li><?=
                                 $this->Form->postLink(
                                     __('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Delete'),
-                                    ['action' => 'delete', $product->id],['escape' => false,'confirm' => __('Are you sure you want to delete # {0}?', $product->id)]
+                                    ['action' => 'delete', $product->product_id],['escape' => false,'confirm' => __('Are you sure you want to delete # {0}?', $product->product_id)]
                                 )
                                 ?>
                             </li>
@@ -37,31 +37,19 @@
         </div><!-- end col md 3 -->
         <div class="col-md-9">
             <?php echo  $this->Form->create($product); ?>
-            <div class="form-group"><?php echo $this->Form->input('name',['class'=>'form-control','placeholder' => 'Name']); ?></div>
-            <div class="form-group">
-                <label>Description</label>
-
-                <?php echo $this->Form->textarea('description',['class'=>'form-control','placeholder' => 'Description']); ?>
-            </div>
-            <div class="form-group">
-
-                <label>Product Types</label>
-                <?php echo $this->Form->select('type',$product_types,['class'=>'form-control','placeholder' => 'Type']); ?>
-            </div>
-            <div class="form-group">
-                <label>Color Group</label>
-                <?php echo $this->Form->select('color_group',$color_group,['class'=>'form-control','placeholder' => 'Color Group']); ?>
-
-            </div>
+            <div class="form-group"><?php echo $this->Form->input('product_title',['class'=>'form-control','placeholder' => 'Product Title']);  ?></div>
+            <div class="form-group"><?php echo $this->Form->textarea('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
+            <div class="form-group"><?php echo $this->Form->input('product_keyword',['class'=>'form-control','placeholder' => 'Product Keyword']);  ?></div>
+            <div class="form-group"><?php echo $this->Form->textarea('product_content',['id'=>'product_content','class'=>'form-control','placeholder' => 'Product Content']); ?></div>
+            <!--            edit image-->
 
             <div class="form-group">
                 <div class="form-group" id="group-image">
                     <label for="image">Image (600x600)</label>
-                    <?php echo $this->JqueryUpload->upload('image', 'upload',$product->image); ?>
+                    <?php echo $this->JqueryUpload->upload('product_image', 'upload',$product->product_image); ?>
                 </div>
             </div>
-            <div class="form-group"><?php echo $this->Form->input('is_new',['class'=>'form-control','placeholder' => 'Is New']); ?></div>
-            <div class="form-group"><?php echo $this->Form->input('active',['class'=>'form-control','placeholder' => 'Active']); ?></div>
+            <!--            edit image-->
 
             <div class="form-group">
                 <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
@@ -71,3 +59,38 @@
         </div><!-- end col md 12 -->
     </div><!-- end row -->
 </div>
+<script>
+    $(document).ready(function() {
+        tinymce.init({
+            selector: "#product_content",
+            theme: "modern",
+            paste_data_images: true,
+            paste_as_text: true,
+            height : "500",
+            menubar: false,
+            plugins: [
+                "advlist lists link image media ",
+                "paste textcolor colorpicker"
+            ],
+            toolbar1: "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media ",
+            block_formats: 'Header=h4;Paragraph=p;',
+            image_advtab: true,
+//            file_picker_callback: function(callback, value, meta) {
+//                if (meta.filetype == 'image') {
+//
+//                    $('#upload').trigger('click');
+//                    $('#upload').on('change', function() {
+//                        var file = this.files[0];
+//                        var reader = new FileReader();
+//                        reader.onload = function(e) {
+//                            callback(e.target.result, {
+//                                alt: ''
+//                            });
+//                        };
+//                        reader.readAsDataURL(file);
+//                    });
+//                }
+//            }
+        });
+    });
+</script>

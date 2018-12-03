@@ -62,16 +62,7 @@ class AppController extends BaseController
             ],
             'Products' =>  [
                 'text' => 'Products', 'link' => Router::url(['controller' => 'Products','action' => 'index']), 'allow_access' => ['admin']
-            ],
-            'ProductTypes' =>  [
-                'text' => 'ProductTypes', 'link' => Router::url(['controller' => 'ProductTypes','action' => 'index']), 'allow_access' => ['admin']
-            ],
-//            'ProductDescriptions' =>  [
-//                'text' => 'ProductDescriptions', 'link' => Router::url(['controller' => 'ProductDescriptions','action' => 'index']), 'allow_access' => ['admin']
-//            ],
-//            'Collections' =>  [
-//                'text' => 'Collections', 'link' => Router::url(['controller' => 'Collections','action' => 'index']), 'allow_access' => ['admin']
-//            ],
+            ]
         ]);
         $this->set('active_menu_item', $this->request->params['controller']);
         if (in_array($this->request->action, ['active_fields','publish_fields','slug_unique','update_status'])) {
