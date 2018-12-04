@@ -287,3 +287,13 @@ if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsa
     ]);
 }
 //admin: admin@mail.com / Admin@1234
+Configure::write('reservation_status', [
+    0 => 'Unverified',
+    1 => 'Verified',
+    2 => 'Pending',
+    3 => 'Done'
+]);
+Configure::write('service_time', [
+    '10:00' => '10:00',
+    '11:00' => '11:00',
+]);

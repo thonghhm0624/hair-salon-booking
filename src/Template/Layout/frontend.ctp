@@ -35,9 +35,13 @@
     echo $this->Html->scriptBlock('var window_app = ' . json_encode($jsVars) . ';'); 
 	echo $this->element('includes/all_js_css');
 ?>
-<!--    <script src="--?//= $this->request->webroot ?><!--js/lib/recaptcha_api.js" async defer></script>-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <link rel="stylesheet" href="<?= $this->request->webroot ?>css/jquery-ui.css">
+
+    <!--    <script src="--?//= $this->request->webroot ?><!--js/lib/recaptcha_api.js" async defer></script>-->
 </head>
+
 <body class="<?= $action ?> <?php echo $device_info ?> <?php echo $device_info_type ?> <?php echo 'language_'.$language ?>">
 <div class="super_container">
 
@@ -49,7 +53,6 @@
 <?php echo $this->element('modules/header_footer/footer');?>
 <?php echo $this->element('modules/components/popup/popuplogin');?>
 <?php echo $this->element('modules/components/popup/popup_reservation');?>
-
 </div>
 
 <script src="<?php echo $this->request->webroot ?>assets/js/commons.bundle.js"></script>

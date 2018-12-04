@@ -8,8 +8,18 @@
         <div class="time-work">
             Thời gian làm việc : 10h - 20h
         </div>
-        <div class="login" id="show-popup-login">
-            Đăng Nhập
-        </div>
+        <?php $login_user =  $this->request->session()->read('login_user_data'); ?>
+        <?php if(!empty($login_user)):?>
+            <div class="login" >
+                Chào <?= $login_user['name'] ?>
+                <br/>
+                <a href="<?= $this->request->webroot ?>logout">Đăng Xuất</a>
+            </div>
+        <?php else : ?>
+            <div class="login" id="show-popup-login">
+                Đăng Nhập
+            </div>
+        <?php endif;?>
+
     </div>
 </header>

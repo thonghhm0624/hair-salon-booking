@@ -51,8 +51,11 @@ Router::scope('/', function ($routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
 	$routes->connect('/',['controller' => 'Frontend', 'action' => 'index']);
+    $routes->connect('/login',['controller' => 'Frontend', 'action' => 'login']);
+    $routes->connect('/logout',['controller' => 'Frontend', 'action' => 'logout']);
+    $routes->connect('/reserve',['controller' => 'Frontend', 'action' => 'reserve']);
 
-	//articles
+    //articles
     $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);
     $routes->connect('/articles/:page',['controller' => 'Frontend', 'action' => 'articles'],['pass'=>['page']]);
     $routes->connect('/articles/category/:category/:page',['controller' => 'Frontend', 'action' => 'articles_by_category'],['pass'=>['category','page']]);
