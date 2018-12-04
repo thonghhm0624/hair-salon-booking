@@ -13,7 +13,7 @@ use image_load;
 class FrontendController extends AppController {
 	//public $layout = 'frontend';	
 	public $paginate = [
-        'limit' => 3,
+        'limit' => 4,
     ];
     public function initialize()
     {

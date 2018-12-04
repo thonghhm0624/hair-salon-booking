@@ -67,7 +67,6 @@ Router::scope('/', function ($routes) {
     //introduction
     $routes->connect('/introduction',['controller' => 'Frontend', 'action' => 'introduction']);
 
-
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */

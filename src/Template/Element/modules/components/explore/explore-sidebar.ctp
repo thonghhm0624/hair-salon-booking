@@ -45,7 +45,7 @@
         <?php endif; ?>
 
         <?php foreach ($categories as $category) : ?>
-            <a class="card card-body item item-category" href="<?= $this->request->webroot  ?>products/category/<?= $category->category_id ?>/1">
+            <a class="card card-body item item-category" href="<?= $this->request->webroot ?>products/category/<?= $category->category_id ?>/1">
                 <?=  $category->category_name ?>
             </a>
         <?php endforeach; ?>
