@@ -89,7 +89,6 @@ $('#submit-reservation').click(function(event){
     }
     //
 });
-
 $('.reservation-input').keyup(function (e) {
     let _this = this;
     if($(_this).val() != ''){
@@ -103,8 +102,7 @@ $('.reservation-input').keyup(function (e) {
     }else{
         $('#submit-reservation').attr('disabled','disabled');
     }
-});
-
+})
 $('.reservation-input').change(function (e) {
     let _this = this;
     if($(_this).val() != ''){
@@ -120,3 +118,16 @@ $('.reservation-input').change(function (e) {
 function isValidPhonenumber(value) {
     return (/^\d{10,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
 }
+
+// $('.js-goto').click(function(event){
+//     event.preventDefault();
+//     var goto = '#' + $(this).attr('goto');
+
+//     $('body').animate(
+//         {
+//         	scrollTop: $(goto).offset().top
+//         },
+//         1000
+//     );
+//     console.log(goto);
+// });

@@ -201,7 +201,6 @@ class FrontendController extends AppController {
 
     public function reserve(){
         $this->autoRender = false;
-
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $phone = $data['phonenumber'];
@@ -222,7 +221,7 @@ class FrontendController extends AppController {
                 'status'=>0,
                 'message'=>'Fail',
             ];
-            if($this->Reservations->save($reservation)){
+            if ($this->Reservations->save($reservation)){
                 $response = [
                     'status'=>1,
                     'message'=>'Success',
