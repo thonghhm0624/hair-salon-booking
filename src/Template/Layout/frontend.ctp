@@ -54,6 +54,9 @@
 
 <script src="<?php echo $this->request->webroot ?>assets/js/commons.bundle.js"></script>
 <script src="<?php echo $this->request->webroot ?>assets/js/index.bundle.js"></script>
+
+
+
 <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>-->
 
 </html>
