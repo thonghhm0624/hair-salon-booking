@@ -158,8 +158,59 @@
       position: relative;
       text-align: center;
     }
+
+    .thoigian .text-h4 {
+      font-weight: 700;
+    }
+
+    .thoigiantrongngay {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .thoigian {
+      margin-bottom: 10px;
+      width: 75px;
+      margin-left: 4px;
+    }
+    .thoigian .time{
+      padding: 10px 10px 0;
+      background: #eee;
+      border-bottom: 7px solid green;
+      color: $dark-blue;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .activethoigian {
+      background-color: #fbae48 !important;
+      color: white !important;
+    }
+
+    .thoigian .time:hover {
+      background: $blue;
+      color: $white;
+      -webkit-transition: ease-in .2s;
+      transition: ease-in .2s;
+    }
+
+    #thoigianhidden {
+      width: 370px;
+      position: absolute;
+      right: 20px;
+      top: 100px;
+      z-index: 9999;
+      padding: 20px;
+      border: 3px solid;
+      border-radius: 20px;
+      background-color: #ccccff;
+    }
   }
 }
+
+
 
 
 
