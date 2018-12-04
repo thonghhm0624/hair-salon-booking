@@ -17,6 +17,7 @@ class ReservationsController extends AppController
     public function initialize(){
         parent::initialize();
         $this->loadModel('Reservations');
+        $this->loadModel('Customers');
         $this->loadModel('Stylists');
         $this->loadModel('Services');
         $this->reservation_status = Configure::read('reservation_status');
@@ -95,6 +96,13 @@ class ReservationsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $reservation = $this->Reservations->patchEntity($reservation, $this->request->getData());
             if ($this->Reservations->save($reservation)) {
+                if($reservation->reservation_status == 3){
+                    $customer = $this->Customers->where(['customer_id'=>$reservation->customer_id])->first();
+                    if(!empty($customer)){
+                        $customer->customer_status = 1;
+                        $this->Customers->save($customer);
+                    }
+                }
                 $this->Flash->success(__('The reservation has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
