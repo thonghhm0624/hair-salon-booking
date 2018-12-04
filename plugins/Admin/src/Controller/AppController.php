@@ -62,6 +62,9 @@ class AppController extends BaseController
             ],
             'Products' =>  [
                 'text' => 'Products', 'link' => Router::url(['controller' => 'Products','action' => 'index']), 'allow_access' => ['admin']
+            ],
+            'Reservations' =>  [
+                'text' => 'Reservations', 'link' => Router::url(['controller' => 'Reservations','action' => 'index']), 'allow_access' => ['admin']
             ]
         ]);
         $this->set('active_menu_item', $this->request->params['controller']);

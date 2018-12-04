@@ -227,7 +227,7 @@ $domain_name =  !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
 if ($domain_name == '' && !empty($_SERVER['HTTP_HOST'])) $domain_name = stristr($_SERVER['HTTP_HOST'], ':', true);
 Configure::write('domainName', $domain_name);
 
-if ($domain_name == "" || $domain_name == "localhost" || strpos($domain_name, "192.168.1") !== FALSE) {
+if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsalon.local" || strpos($domain_name, "192.168.1") !== FALSE) {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     Configure::write('debug',1);
     if (Configure::read('debug')) {
@@ -287,3 +287,13 @@ if ($domain_name == "" || $domain_name == "localhost" || strpos($domain_name, "1
     ]);
 }
 //admin: admin@mail.com / Admin@1234
+Configure::write('reservation_status', [
+    0 => 'Unverified',
+    1 => 'Verified',
+    2 => 'Pending',
+    3 => 'Done'
+]);
+Configure::write('service_time', [
+    '10:00' => '10:00',
+    '11:00' => '11:00',
+]);

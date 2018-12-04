@@ -1,3 +1,4 @@
+
 <div class="explore-sidebar" id="accordionExample">
     <div class="explore-sidebar-item">
         <div id="headingOne">
@@ -16,15 +17,12 @@
         <?php else: ?>
              <div id="collapseArticles" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
         <?php endif; ?>
-            <a class="card card-body item item-category" href="page=explore&exploring=news&category=1">
-                Chăm sóc tóc
+
+        <?php foreach ($categories as $category) : ?>
+            <a class="card card-body item item-category" href="<?= $this->request->webroot ?>articles/category/<?= $category->category_id ?>/1">
+                <?=  $category->category_name ?>
             </a>
-            <a class="card card-body item item-category" href="page=explore&exploring=news&category=2">
-                Phục hồi tóc
-            </a>
-            <a class="card card-body item item-category" href="page=explore&exploring=news&category=3">
-                Kiểu tóc
-            </a>
+        <?php endforeach; ?>
         </div>
     </div>
     <div class="explore-sidebar-item">
@@ -45,16 +43,12 @@
         <?php else: ?>
             <div id="collapseProducts" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
         <?php endif; ?>
-        
-            <a class="card card-body item item-category" href="page=explore&exploring=product&category=1">
-                Chăm sóc tóc
+
+        <?php foreach ($categories as $category) : ?>
+            <a class="card card-body item item-category" href="<?= $this->request->webroot  ?>products/category/<?= $category->category_id ?>/1">
+                <?=  $category->category_name ?>
             </a>
-            <a class="card card-body item item-category" href="page=explore&exploring=product&category=2">
-                Phục hồi tóc
-            </a>
-            <a class="card card-body item item-category" href="page=explore&exploring=product&category=3">
-                Kiểu tóc
-            </a>
+        <?php endforeach; ?>
         </div>
     </div>
 </div>

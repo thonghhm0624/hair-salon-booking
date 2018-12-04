@@ -54,16 +54,17 @@ nav {
 }
 .search {
   background-color: $dark-blue;
-  width: 250px;
-  height: 100%;
+  width: 300px;
+  height: 50px;
+  padding: 10px;
   position: relative;
-  float:right;
+  border-radius: 10px;
   @include displayFlex;
   align-items: center;
   justify-content: flex-end;
 
   form {
-    width: 220px;
+    width: 245px;
     position: absolute;
     @include displayFlex;
     align-items: center;
@@ -84,7 +85,7 @@ nav {
       color: $dark-blue;
       outline: none;
       -webkit-appearance: none;
-      border-radius: 5px 0 0 5px;
+      border-radius: 8px;
       border-width: 0;
 
       &:focus {
