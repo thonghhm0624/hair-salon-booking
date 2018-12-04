@@ -15,10 +15,12 @@ class FrontendController extends AppController {
 	public $paginate = [
         'limit' => 4,
     ];
+
     public function initialize()
     {
         parent::initialize();
         $this->loadModel('Categories');
+        $this->loadModel('Reservations');
         $categories = $this->Categories->find('all')->toArray();
         $this->set('categories',$categories);
 		$this->viewBuilder()->layout('frontend');
@@ -187,5 +189,124 @@ class FrontendController extends AppController {
 
     public function introduction() {
         $this->render('about');
+    }
+    public function logout(){
+        $session = $this->request->getSession();
+        $session->delete('login_type');
+        $session->delete('login_user');
+        return $this->redirect(['action' => 'index']);
+    }
+    public function reserve(){
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $phone = $data['phonenumber'];
+            $store = $data['store'];
+            $stylist = $data['stylist'];
+            $service = $data['service'];
+            $date = $data['date'];
+            $time = $data['time'];
+            $reservation = $this->Reservations->newEntity();
+            $reservation->reservation_status = 0;
+            $reservation->reservation_date = $date;
+            $reservation->reservation_time = $time;
+            $reservation->service_id = $service;
+            $reservation->branch_id = $store;
+            $reservation->customer_id = $phone;
+            $reservation->stylist_id = $stylist;
+            $response = [
+                'status'=>0,
+                'message'=>'Fail',
+            ];
+            if($this->Reservations->save($reservation)){
+                $response = [
+                    'status'=>1,
+                    'message'=>'Success',
+                ];
+            }
+
+
+
+            $this->response->withType('json');
+            $this->response->body(json_encode($response));
+            return  $this->response;
+
+        }
+    }
+    public function login(){
+        $this->autoRender = false;
+        $this->loadModel('Customers');
+        $this->loadModel('Stylists');
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $phone = $data['phonenumber'];
+            $password = $data['password'];
+            $login_type = $data['login_type'];
+            $response = [
+                'status'=>0,
+                'message'=>'Dang nhap that bai!',
+            ];
+            if($login_type == 'customer'){
+                $customer = $this->Customers->find('all')->where([
+                    'customer_id' => $phone,
+                    'customer_password'=> $password
+                ])->select(['customer_id','customer_name','customer_status'])->first();
+                if(!empty($customer)){
+                    $session = $this->request->getSession();
+                    $session->write('login_type',$login_type);
+                    $session->write('login_user',$customer);
+                    $response = [
+                        'status'=>1,
+                        'message'=>'Dang nhap thanh cong!',
+                        'data' =>[
+                            'login_user' =>[
+                                'name'=>$session->read('login_user')['customer_name'],
+                                'id' => $session->read('login_user')['customer_id'],
+                                'image'=> '',
+                            ],
+                            'login_type' =>$session->read('login_type')
+                        ]
+                    ];
+                }else{
+                    $response = [
+                        'status'=>0,
+                        'message'=>'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
+                    ];
+                }
+            } else if($login_type == 'stylist'){
+                $stylist = $this->Stylists->find('all')->where([
+                    'stylist_phone' => $phone,
+                    'stylist_password'=> $password
+                ])->select(['stylist_id','stylist_branch_id','stylist_name','stylist_image','stylist_status','stylist_phone'])->first();
+                if(!empty($stylist)){
+                    $session = $this->request->getSession();
+                    $session->write('login_type',$login_type);
+                    $session->write('login_user',$stylist);
+
+                    $response = [
+                        'status'=>1,
+                        'message'=>'Dang nhap thanh cong!',
+                        'data' =>[
+                            'login_user' =>[
+                                'name'=>$session->read('login_user')['stylist_name'],
+                                'id' => $session->read('login_user')['stylist_phone'],
+                                'image'=> $session->read('login_user')['stylist_image'],
+                            ],
+                            'login_type' =>$session->read('login_type')
+                        ]
+                    ];
+                }else{
+                    $response = [
+                        'status'=>0,
+                        'message'=>'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
+                    ];
+                }
+            }
+            $this->response->withType('json');
+            $this->response->body(json_encode($response));
+            return  $this->response;
+
+        }
     }
 }

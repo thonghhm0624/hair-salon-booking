@@ -44,7 +44,11 @@ class AppController extends Controller
     {
         parent::initialize();
         $this->loadComponent('Flash');
-		$this->response->header(
+        $this->loadModel('Stylists');
+        $this->loadModel('Branches');
+        $this->loadModel('Services');
+
+        $this->response->header(
 			array(
 				'X-Frame-Options' => 'DENY',
 				'X-XSS-Protection'=> 1,
@@ -139,7 +143,14 @@ class AppController extends Controller
 			//'httpOnly' => true
 		]);
 		$this->Cookie->config('path', '/');
-		$this->Cookie->configKey('Name'); */      
+		$this->Cookie->configKey('Name'); */
+		$stylists_select = $this->Stylists->find('all')->select(['stylist_id','stylist_name'])->toArray();
+        $branches_select = $this->Branches->find('all')->select(['branch_id','branch_address'])->toArray();
+        $services_select = $this->Services->find('all')->select(['service_id','service_name'])->toArray();
+        $this->set(compact('services_select'));
+        $this->set(compact('branches_select'));
+        $this->set(compact('stylists_select'));
+
     }
     protected function url($options, $full = true) {
         if (!Configure::check('isLanguageByDomain')) {
