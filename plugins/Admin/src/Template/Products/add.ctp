@@ -30,6 +30,10 @@
         </div><!-- end col md 3 -->
         <div class="col-md-9">
             <?php echo  $this->Form->create($product); ?>
+            <div class="form-group">
+                <label for="categories">Categories</label>
+                <?php echo $this->Form->select('product_category_id',$categories,['class'=>'form-control','placeholder' => 'Product Category Id']);  ?>
+            </div>
             <div class="form-group"><?php echo $this->Form->input('product_title',['class'=>'form-control','placeholder' => 'Product Title']);  ?></div>
             <div class="form-group"><?php echo $this->Form->textarea('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
             <div class="form-group"><?php echo $this->Form->input('product_keyword',['class'=>'form-control','placeholder' => 'Product Keyword']);  ?></div>

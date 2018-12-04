@@ -24,12 +24,8 @@ class ArticlesFixture extends TestFixture
         'article_image' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
         'article_keyword' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
         'article_content' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
-        '_indexes' => [
-            'fk_article_category_id' => ['type' => 'index', 'columns' => ['article_category_id'], 'length' => []],
-        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['article_id'], 'length' => []],
-            'fk_article_category_id' => ['type' => 'foreign', 'columns' => ['article_category_id'], 'references' => ['categories', 'category_id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',

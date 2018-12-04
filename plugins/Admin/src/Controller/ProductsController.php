@@ -27,6 +27,10 @@ class ProductsController extends AppController
     public function initialize(){
         parent::initialize();
         $this->loadModel('Products');
+        $this->loadModel('Categories');
+
+        $categories =  $this->Categories->find('list',['keyField'=>'category_id','valueField'=>'category_name'])->toArray();
+        $this->set(compact('categories'));
     }
     public function index()
     {

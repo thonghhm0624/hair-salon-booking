@@ -13,8 +13,6 @@ use Cake\ORM\Entity;
  * @property string $article_image
  * @property string $article_keyword
  * @property string $article_content
- *
- * @property \App\Model\Entity\Category $category
  */
 class Article extends Entity
 {
@@ -34,7 +32,6 @@ class Article extends Entity
         'article_description' => true,
         'article_image' => true,
         'article_keyword' => true,
-        'article_content' => true,
-        'category' => true
+        'article_content' => true
     ];
 }

@@ -270,7 +270,7 @@ if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsa
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'database' => '2018_innovative_nail_design',
+        'database' => 'gent_hairsalon',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
@@ -293,7 +293,17 @@ Configure::write('reservation_status', [
     2 => 'Pending',
     3 => 'Done'
 ]);
+
 Configure::write('service_time', [
     '10:00' => '10:00',
     '11:00' => '11:00',
+    '12:00' => '12:00',
+    '13:00' => '13:00',
+    '14:00' => '14:00',
+    '15:00' => '15:00',
+    '16:00' => '16:00',
+    '17:00' => '17:00',
+    '18:00' => '18:00',
+    '19:00' => '19:00',
+    '20:00' => '20:00',
 ]);

@@ -20,11 +20,12 @@ class ReservationsController extends AppController
         $this->loadModel('Customers');
         $this->loadModel('Stylists');
         $this->loadModel('Services');
+
         $this->reservation_status = Configure::read('reservation_status');
         $this->service_time = Configure::read('service_time');
-
         $stylists =  $this->Stylists->find('list',['keyField'=>'stylist_id','valueField'=>'stylist_name'])->toArray();
         $services =  $this->Services->find('list',['keyField'=>'service_id','valueField'=>'service_name'])->toArray();
+
         $this->set('reservation_status',$this->reservation_status);
         $this->set('service_time',$this->service_time);
         $this->set(compact('stylists'));
@@ -38,7 +39,6 @@ class ReservationsController extends AppController
     public function index()
     {
         $reservations = $this->paginate($this->Reservations);
-
         $this->set(compact('reservations'));
     }
 

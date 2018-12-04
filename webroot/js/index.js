@@ -13,13 +13,14 @@ datepickerFactory($);
 $('#reservation-date').datepicker();
 
 SE.clsPopup.init();
+
 $('#login-submit-btn').click(function(event){
     event.preventDefault();
     let phonenumber = $('#login-phonenumber').val();
     let password = $('#login-password').val();
     if(isValidPhonenumber(phonenumber)){
         if(password == null || password == ''){
-            alert('Xin nhap mat khau');
+            alert('Hãy nhập mật khẩu!');
         } else {
             //Ajax login
             $.ajax({
@@ -39,13 +40,13 @@ $('#login-submit-btn').click(function(event){
                     }
                 }
             });
-            // $('#loginForm').submit();
         }
     } else {
-        alert('Xin nhap so dt');
+        alert('Hãy nhập số điện thoại!');
     }
     //
 });
+
 $('#submit-reservation').click(function(event){
     event.preventDefault();
 
@@ -55,8 +56,9 @@ $('#submit-reservation').click(function(event){
     let service = $('#reservation-service').val();
     let date = $('#reservation-date').val();
     let time = $('#reservation-time').val();
+
     if(isValidPhonenumber(phonenumber)){
-        //Ajax login
+        //Ajax reservation
         $.ajax({
             url: window_app.webroot + 'reserve',
             type: 'post',
@@ -87,6 +89,7 @@ $('#submit-reservation').click(function(event){
     }
     //
 });
+
 $('.reservation-input').keyup(function (e) {
     let _this = this;
     if($(_this).val() != ''){
@@ -100,7 +103,8 @@ $('.reservation-input').keyup(function (e) {
     }else{
         $('#submit-reservation').attr('disabled','disabled');
     }
-})
+});
+
 $('.reservation-input').change(function (e) {
     let _this = this;
     if($(_this).val() != ''){
@@ -116,16 +120,3 @@ $('.reservation-input').change(function (e) {
 function isValidPhonenumber(value) {
     return (/^\d{10,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
 }
-
-// $('.js-goto').click(function(event){
-//     event.preventDefault();
-//     var goto = '#' + $(this).attr('goto');
-
-//     $('body').animate(
-//         {
-//         	scrollTop: $(goto).offset().top
-//         }, 
-//         1000
-//     );
-//     console.log(goto);
-// });

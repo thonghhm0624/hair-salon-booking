@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Stylists Model
  *
- * @property \App\Model\Table\BranchTable|\Cake\ORM\Association\BelongsTo $Branch
+ * @property |\Cake\ORM\Association\BelongsTo $StylistBranches
  *
  * @method \App\Model\Entity\Stylist get($primaryKey, $options = [])
  * @method \App\Model\Entity\Stylist newEntity($data = null, array $options = [])
@@ -35,7 +35,6 @@ class StylistsTable extends Table
         $this->setTable('stylists');
         $this->setDisplayField('stylist_id');
         $this->setPrimaryKey('stylist_id');
-
     }
 
     /**
@@ -72,8 +71,10 @@ class StylistsTable extends Table
             ->notEmpty('stylist_status');
 
         $validator
-            ->integer('stylist_phone')
-            ->allowEmpty('stylist_phone');
+            ->scalar('stylist_phone')
+            ->maxLength('stylist_phone', 15)
+            ->requirePresence('stylist_phone', 'create')
+            ->notEmpty('stylist_phone');
 
         return $validator;
     }
@@ -87,7 +88,6 @@ class StylistsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-
         return $rules;
     }
 }

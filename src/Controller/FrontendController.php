@@ -13,7 +13,7 @@ use image_load;
 class FrontendController extends AppController {
 	//public $layout = 'frontend';	
 	public $paginate = [
-        'limit' => 4,
+        'limit' => 3,
     ];
 
     public function initialize()
@@ -190,12 +190,15 @@ class FrontendController extends AppController {
     public function introduction() {
         $this->render('about');
     }
+
     public function logout(){
         $session = $this->request->getSession();
         $session->delete('login_type');
         $session->delete('login_user');
+        $session->delete('response');
         return $this->redirect(['action' => 'index']);
     }
+
     public function reserve(){
         $this->autoRender = false;
 
@@ -226,14 +229,13 @@ class FrontendController extends AppController {
                 ];
             }
 
-
-
             $this->response->withType('json');
             $this->response->body(json_encode($response));
             return  $this->response;
 
         }
     }
+
     public function login(){
         $this->autoRender = false;
         $this->loadModel('Customers');
@@ -257,7 +259,7 @@ class FrontendController extends AppController {
                     $session->write('login_type',$login_type);
                     $session->write('login_user',$customer);
                     $response = [
-                        'status'=>1,
+                        'status'=> 1,
                         'message'=>'Dang nhap thanh cong!',
                         'data' =>[
                             'login_user' =>[
@@ -268,6 +270,7 @@ class FrontendController extends AppController {
                             'login_type' =>$session->read('login_type')
                         ]
                     ];
+                    $session->write('response',$response);
                 }else{
                     $response = [
                         'status'=>0,
@@ -283,12 +286,11 @@ class FrontendController extends AppController {
                     $session = $this->request->getSession();
                     $session->write('login_type',$login_type);
                     $session->write('login_user',$stylist);
-
                     $response = [
-                        'status'=>1,
+                        'status'=> 1,
                         'message'=>'Dang nhap thanh cong!',
                         'data' =>[
-                            'login_user' =>[
+                            'login_user' => [
                                 'name'=>$session->read('login_user')['stylist_name'],
                                 'id' => $session->read('login_user')['stylist_phone'],
                                 'image'=> $session->read('login_user')['stylist_image'],
@@ -296,6 +298,10 @@ class FrontendController extends AppController {
                             'login_type' =>$session->read('login_type')
                         ]
                     ];
+
+                    $session->write('response',$response);
+
+
                 }else{
                     $response = [
                         'status'=>0,
@@ -306,7 +312,6 @@ class FrontendController extends AppController {
             $this->response->withType('json');
             $this->response->body(json_encode($response));
             return  $this->response;
-
         }
     }
 }

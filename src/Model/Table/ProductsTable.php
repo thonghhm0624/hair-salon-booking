@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Products Model
  *
- * @property \App\Model\Table\CategoriesTable|\Cake\ORM\Association\BelongsTo $Categories
+ * @property |\Cake\ORM\Association\BelongsTo $ProductCategories
  *
  * @method \App\Model\Entity\Product get($primaryKey, $options = [])
  * @method \App\Model\Entity\Product newEntity($data = null, array $options = [])
@@ -35,11 +35,6 @@ class ProductsTable extends Table
         $this->setTable('products');
         $this->setDisplayField('product_id');
         $this->setPrimaryKey('product_id');
-
-//        $this->belongsTo('Categories', [
-//            'foreignKey' => 'product_category_id',
-//            'joinType' => 'INNER'
-//        ]);
     }
 
     /**
@@ -88,8 +83,6 @@ class ProductsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-//        $rules->add($rules->existsIn(['product_category_id'], 'Categories'));
-
         return $rules;
     }
 }

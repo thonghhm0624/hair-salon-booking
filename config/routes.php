@@ -51,8 +51,12 @@ Router::scope('/', function ($routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
 	$routes->connect('/',['controller' => 'Frontend', 'action' => 'index']);
+
+	//LOGIN & LOGOUT
     $routes->connect('/login',['controller' => 'Frontend', 'action' => 'login']);
     $routes->connect('/logout',['controller' => 'Frontend', 'action' => 'logout']);
+
+    //RESERVATION
     $routes->connect('/reserve',['controller' => 'Frontend', 'action' => 'reserve']);
 
     //articles
