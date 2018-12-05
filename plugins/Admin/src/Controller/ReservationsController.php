@@ -12,24 +12,21 @@ use Cake\Core\Configure;
  */
 class ReservationsController extends AppController
 {
+
     public $reservation_status = [];
     public $service_time = [];
     public function initialize(){
         parent::initialize();
         $this->loadModel('Reservations');
-        $this->loadModel('Customers');
         $this->loadModel('Stylists');
-        $this->loadModel('Services');
-
+        $this->loadModel('Customers');
         $this->reservation_status = Configure::read('reservation_status');
-        $this->service_time = Configure::read('service_time');
-        $stylists =  $this->Stylists->find('list',['keyField'=>'stylist_id','valueField'=>'stylist_name'])->toArray();
-        $services =  $this->Services->find('list',['keyField'=>'service_id','valueField'=>'service_name'])->toArray();
 
-        $this->set('reservation_status',$this->reservation_status);
-        $this->set('service_time',$this->service_time);
+        $stylists =  $this->Stylists->find('list',['keyField'=>'stylist_id','valueField'=>'stylist_name'])->toArray();
+        $this->set('reservation_status', $this->reservation_status);
+
         $this->set(compact('stylists'));
-        $this->set(compact('services'));
+        $this->set(compact('reservation_status'));
     }
     /**
      * Index method
@@ -39,6 +36,7 @@ class ReservationsController extends AppController
     public function index()
     {
         $reservations = $this->paginate($this->Reservations);
+
         $this->set(compact('reservations'));
     }
 
@@ -90,14 +88,11 @@ class ReservationsController extends AppController
         $reservation = $this->Reservations->get($id, [
             'contain' => []
         ]);
-        if($reservation->reservation_status == 3){
-            return $this->redirect(['action' => 'index']);
-        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $reservation = $this->Reservations->patchEntity($reservation, $this->request->getData());
             if ($this->Reservations->save($reservation)) {
                 if($reservation->reservation_status == 3){
-                    $customer = $this->Customers->where(['customer_id'=>$reservation->customer_id])->first();
+                    $customer = $this->Customers->find('all')->where(['customer_id'=>$reservation->customer_id])->first();
                     if(!empty($customer)){
                         $customer->customer_status = 1;
                         $this->Customers->save($customer);

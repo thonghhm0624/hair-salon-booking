@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-03 22:23:55
+Date: 2018-12-05 09:56:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,8 +28,7 @@ CREATE TABLE `articles` (
   `article_keyword` text,
   `article_content` text,
   PRIMARY KEY (`article_id`) USING BTREE,
-  KEY `fk_article_category_id` (`article_category_id`) USING BTREE,
-  CONSTRAINT `fk_article_category_id` FOREIGN KEY (`article_category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_article_category_id` (`article_category_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -43,10 +42,10 @@ INSERT INTO `articles` VALUES ('5', '3', 'Article 5 Title', 'Article 5 Descripti
 INSERT INTO `articles` VALUES ('6', '3', 'Article 6 Title', 'Article 6 Description', null, 'article 6 , articles', '<h1>Article 6 content</h1>');
 
 -- ----------------------------
--- Table structure for branch
+-- Table structure for branches
 -- ----------------------------
-DROP TABLE IF EXISTS `branch`;
-CREATE TABLE `branch` (
+DROP TABLE IF EXISTS `branches`;
+CREATE TABLE `branches` (
   `branch_id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_address` text NOT NULL,
   `branch_phonenumber` text NOT NULL,
@@ -54,10 +53,10 @@ CREATE TABLE `branch` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Records of branch
+-- Records of branches
 -- ----------------------------
-INSERT INTO `branch` VALUES ('1', '123 Trần Hưng Đạo, Phường Phạm Ngũ Lão, Quận 1, Hồ Chí Minh', '0909090909');
-INSERT INTO `branch` VALUES ('2', '321 Hồng Bàng, Phường 11, Quận 5, Hồ Chí Minh', '0606060606');
+INSERT INTO `branches` VALUES ('1', '123 Trần Hưng Đạo, Phường Phạm Ngũ Lão, Quận 1, Hồ Chí Minh', '0909090909');
+INSERT INTO `branches` VALUES ('2', '321 Hồng Bàng, Phường 11, Quận 5, Hồ Chí Minh', '0606060606');
 
 -- ----------------------------
 -- Table structure for categories
@@ -155,37 +154,42 @@ DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `reservation_id` int(11) NOT NULL AUTO_INCREMENT,
   `reservation_status` int(11) NOT NULL,
-  `reservation_date` date NOT NULL,
-  `reservation_time` int(11) NOT NULL,
+  `reservation_date` varchar(11) NOT NULL,
+  `reservation_time` varchar(11) NOT NULL,
   `reservation_marks` int(11) NOT NULL,
   `reservation_remark` text,
   `customer_id` varchar(12) NOT NULL,
   `stylist_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
   PRIMARY KEY (`reservation_id`) USING BTREE,
   KEY `fk_reserve_customer_id` (`customer_id`) USING BTREE,
   KEY `fk_reserve_stylist_id` (`stylist_id`) USING BTREE,
-  KEY `fk_reserve_branch_id` (`branch_id`) USING BTREE,
-  CONSTRAINT `fk_reserve_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branch_id`),
-  CONSTRAINT `fk_reserve_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
-  CONSTRAINT `fk_reserve_stylist_id` FOREIGN KEY (`stylist_id`) REFERENCES `stylist` (`stylist_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `fk_reserve_branch_id` (`branch_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of reservations
 -- ----------------------------
+INSERT INTO `reservations` VALUES ('1', '3', '12/06/2018', '10:00', '0', '', '0123456789', '2', '1', '3');
+INSERT INTO `reservations` VALUES ('2', '0', '12/06/2018', '13:00', '0', null, '0123456789', '5', '1', '3');
+INSERT INTO `reservations` VALUES ('3', '0', '12/06/2018', '15:00', '0', null, '0123123123', '5', '1', '4');
+INSERT INTO `reservations` VALUES ('4', '0', '12/06/2018', '15:00', '0', null, '0123123123', '2', '2', '3');
+INSERT INTO `reservations` VALUES ('5', '0', '12/06/2018', '14:00', '0', null, '0123123123', '5', '2', '3');
+INSERT INTO `reservations` VALUES ('6', '0', '12/12/2018', '14:00', '0', null, '0123123123', '2', '1', '3');
+INSERT INTO `reservations` VALUES ('7', '0', '12/06/2018', '12:00', '0', null, '0123123123', '2', '2', '3');
 
 -- ----------------------------
 -- Table structure for services
 -- ----------------------------
 DROP TABLE IF EXISTS `services`;
 CREATE TABLE `services` (
-  `services_id` int(11) NOT NULL AUTO_INCREMENT,
-  `services_name` varchar(50) NOT NULL DEFAULT 'Service',
-  `services_duration` int(11) NOT NULL DEFAULT '1',
-  `services_price` int(11) NOT NULL DEFAULT '100000',
+  `service_id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_name` varchar(50) NOT NULL DEFAULT 'Service',
+  `service_duration` int(11) NOT NULL DEFAULT '1',
+  `service_price` int(11) NOT NULL DEFAULT '100000',
   `service_image` text,
-  PRIMARY KEY (`services_id`) USING BTREE
+  PRIMARY KEY (`service_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -199,30 +203,30 @@ INSERT INTO `services` VALUES ('5', 'Combo Cắt, Nhuộm, Uốn tóc', '3', '35
 INSERT INTO `services` VALUES ('6', 'Dưỡng tóc', '2', '150000', null);
 
 -- ----------------------------
--- Table structure for stylist
+-- Table structure for stylists
 -- ----------------------------
-DROP TABLE IF EXISTS `stylist`;
-CREATE TABLE `stylist` (
+DROP TABLE IF EXISTS `stylists`;
+CREATE TABLE `stylists` (
   `stylist_id` int(11) NOT NULL AUTO_INCREMENT,
   `stylist_branch_id` int(11) NOT NULL,
   `stylist_name` varchar(30) NOT NULL DEFAULT 'Stylist',
   `stylist_password` varchar(10) NOT NULL DEFAULT '123',
   `stylist_image` text,
   `stylist_status` int(11) NOT NULL DEFAULT '1',
+  `stylist_phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`stylist_id`) USING BTREE,
-  KEY `fk_stylist_branch_id` (`stylist_branch_id`) USING BTREE,
-  CONSTRAINT `fk_stylist_branch_id` FOREIGN KEY (`stylist_branch_id`) REFERENCES `branch` (`branch_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_stylist_branch_id` (`stylist_branch_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Records of stylist
+-- Records of stylists
 -- ----------------------------
-INSERT INTO `stylist` VALUES ('1', '1', 'David Beckham', '123', null, '1');
-INSERT INTO `stylist` VALUES ('2', '1', 'Taylor Swift', '123', null, '1');
-INSERT INTO `stylist` VALUES ('5', '1', 'Selena Gomez', '123', null, '1');
-INSERT INTO `stylist` VALUES ('6', '2', 'Chris Pratt', '123', null, '1');
-INSERT INTO `stylist` VALUES ('7', '2', 'Irelia', '123', null, '1');
-INSERT INTO `stylist` VALUES ('8', '1', 'Dr. Mundo', '123', null, '1');
+INSERT INTO `stylists` VALUES ('1', '1', 'David Beckham', '123', null, '1', '0123456789');
+INSERT INTO `stylists` VALUES ('2', '1', 'Taylor Swift', '123', null, '1', '0123456788');
+INSERT INTO `stylists` VALUES ('5', '1', 'Selena Gomez', '123', null, '1', '0123456787');
+INSERT INTO `stylists` VALUES ('6', '2', 'Chris Pratt', '123', null, '1', '0123456786');
+INSERT INTO `stylists` VALUES ('7', '2', 'Irelia', '123', null, '1', '0123456785');
+INSERT INTO `stylists` VALUES ('8', '1', 'Dr. Mundo', '123', null, '1', '0123456784');
 
 -- ----------------------------
 -- Table structure for users

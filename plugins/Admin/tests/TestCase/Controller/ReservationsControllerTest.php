@@ -19,7 +19,6 @@ class ReservationsControllerTest extends IntegrationTestCase
         'plugin.admin.reservations',
         'plugin.admin.customers',
         'plugin.admin.stylists',
-        'plugin.admin.branch',
         'plugin.admin.branches',
         'plugin.admin.services'
     ];

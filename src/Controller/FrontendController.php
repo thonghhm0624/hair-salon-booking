@@ -201,6 +201,7 @@ class FrontendController extends AppController {
 
     public function reserve(){
         $this->autoRender = false;
+        $this->loadModel('Customers');
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $phone = $data['phonenumber'];
@@ -209,23 +210,44 @@ class FrontendController extends AppController {
             $service = $data['service'];
             $date = $data['date'];
             $time = $data['time'];
-            $reservation = $this->Reservations->newEntity();
-            $reservation->reservation_status = 0;
-            $reservation->reservation_date = $date;
-            $reservation->reservation_time = $time;
-            $reservation->service_id = $service;
-            $reservation->branch_id = $store;
-            $reservation->customer_id = $phone;
-            $reservation->stylist_id = $stylist;
+
+            $can_be_added = 0;
             $response = [
                 'status'=>0,
                 'message'=>'Fail',
             ];
-            if ($this->Reservations->save($reservation)){
-                $response = [
-                    'status'=>1,
-                    'message'=>'Success',
-                ];
+            $customer = $this->Customers->find('all')->where([
+                    'customer_id' => $phone
+                ])->select('customer_id')->first();
+            if (!empty($customer)) {
+                $can_be_added = 1;
+            }
+            else if (empty($customer)) {
+                $new_customer = $this->Customers->newEntity();
+                $new_customer->customer_id = $phone;
+                if ($this->Customers->save($new_customer)) {
+                    $can_be_added = 1;
+                }
+            }
+            else {
+
+            }
+
+            if ($can_be_added != 0) {
+                $reservation = $this->Reservations->newEntity();
+                $reservation->reservation_status = 0;
+                $reservation->reservation_date = $date;
+                $reservation->reservation_time = $time;
+                $reservation->service_id = $service;
+                $reservation->branch_id = $store;
+                $reservation->customer_id = $phone;
+                $reservation->stylist_id = $stylist;
+                if ($this->Reservations->save($reservation)){
+                    $response = [
+                        'status'=>1,
+                        'message'=>'Success',
+                    ];
+                }
             }
 
             $this->response->withType('json');

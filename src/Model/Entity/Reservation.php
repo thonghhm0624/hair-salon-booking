@@ -16,6 +16,11 @@ use Cake\ORM\Entity;
  * @property int $stylist_id
  * @property int $branch_id
  * @property int $service_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Stylist $stylist
+ * @property \App\Model\Entity\Branch $branch
+ * @property \App\Model\Entity\Service $service
  */
 class Reservation extends Entity
 {
@@ -38,6 +43,10 @@ class Reservation extends Entity
         'customer_id' => true,
         'stylist_id' => true,
         'branch_id' => true,
-        'service_id' => true
+        'service_id' => true,
+        'customer' => true,
+        'stylist' => true,
+        'branch' => true,
+        'service' => true
     ];
 }

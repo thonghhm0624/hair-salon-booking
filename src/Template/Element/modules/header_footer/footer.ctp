@@ -17,8 +17,9 @@
                     <div class="footer-item footer-system-col">
                         <div class="title"><h1 class="left-underline">Hệ Thống</h1></div>
                         <div class="content-container">
-                            <div class="content">Quận 1: 123 Đường 456, Phường 7 Quận 1 TPHCM.</div>
-                            <div class="content">Quận 1: 123 Đường 456, Phường 7 Quận 1 TPHCM.</div>
+                            <?php foreach ($branches as $branch) : ?>
+                                <div class="content"><?= $branch->branch_address ?></div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -26,8 +27,11 @@
                     <div class="footer-item footer-phone-col">
                         <div class="title"><h1 class="left-underline">Liên Hệ</h1></div>
                         <div class="content-container">
-                            <div class="content">Quận 1 : 0909123456</div>
-                            <div class="content">Quận 2 : 0909123456</div>
+                            <div class="content">
+                                <?php foreach ($branches as $branch) : ?>
+                                    <div class="content"><?= $branch->branch_phonenumber ?></div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -9,10 +9,10 @@ use Cake\Validation\Validator;
 /**
  * Reservations Model
  *
- * @property |\Cake\ORM\Association\BelongsTo $Customers
- * @property |\Cake\ORM\Association\BelongsTo $Stylists
- * @property |\Cake\ORM\Association\BelongsTo $Branches
- * @property |\Cake\ORM\Association\BelongsTo $Services
+ * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
+ * @property \App\Model\Table\StylistsTable|\Cake\ORM\Association\BelongsTo $Stylists
+ * @property \App\Model\Table\BranchesTable|\Cake\ORM\Association\BelongsTo $Branches
+ * @property \App\Model\Table\ServicesTable|\Cake\ORM\Association\BelongsTo $Services
  *
  * @method \App\Model\Entity\Reservation get($primaryKey, $options = [])
  * @method \App\Model\Entity\Reservation newEntity($data = null, array $options = [])
@@ -39,6 +39,22 @@ class ReservationsTable extends Table
         $this->setDisplayField('reservation_id');
         $this->setPrimaryKey('reservation_id');
 
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Stylists', [
+            'foreignKey' => 'stylist_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Branches', [
+            'foreignKey' => 'branch_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Services', [
+            'foreignKey' => 'service_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -91,6 +107,11 @@ class ReservationsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['stylist_id'], 'Stylists'));
+        $rules->add($rules->existsIn(['branch_id'], 'Branches'));
+        $rules->add($rules->existsIn(['service_id'], 'Services'));
+
         return $rules;
     }
 }
