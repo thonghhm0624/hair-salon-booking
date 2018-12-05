@@ -20,12 +20,24 @@ class ReservationsController extends AppController
         $this->loadModel('Reservations');
         $this->loadModel('Stylists');
         $this->loadModel('Customers');
+        $this->loadModel('Services');
+        $this->loadModel('Branches');
+
         $this->reservation_status = Configure::read('reservation_status');
+        $this->service_time = Configure::read('service_time');
 
         $stylists =  $this->Stylists->find('list',['keyField'=>'stylist_id','valueField'=>'stylist_name'])->toArray();
+        $customers =  $this->Customers->find('list',['keyField'=>'customer_id','valueField'=>'customer_name'])->toArray();
+        $services =  $this->Services->find('list',['keyField'=>'service_id','valueField'=>'service_name'])->toArray();
+        $branches =  $this->Branches->find('list',['keyField'=>'branch_id','valueField'=>'branch_address'])->toArray();
+
         $this->set('reservation_status', $this->reservation_status);
+        $this->set('service_time', $this->service_time);
 
         $this->set(compact('stylists'));
+        $this->set(compact('customers'));
+        $this->set(compact('services'));
+        $this->set(compact('branches'));
         $this->set(compact('reservation_status'));
     }
     /**

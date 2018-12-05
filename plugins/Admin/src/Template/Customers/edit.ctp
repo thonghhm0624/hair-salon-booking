@@ -39,7 +39,10 @@
             <?php echo  $this->Form->create($customer); ?>
                              <div class="form-group"><?php echo $this->Form->input('customer_password',['class'=>'form-control','placeholder' => 'Customer Password']);  ?></div>
                                           <div class="form-group"><?php echo $this->Form->input('customer_name',['class'=>'form-control','placeholder' => 'Customer Name']);  ?></div>
-                                          <div class="form-group"><?php echo $this->Form->input('customer_status',['class'=>'form-control','placeholder' => 'Customer Status']);  ?></div>
+                                          <div class="form-group">
+                                              <label for="customer-status">Customer Status</label>
+                                              <?php echo $this->Form->select('customer_status',$customer_status,['class'=>'form-control','placeholder' => 'Customer Status', 'disabled' => 'disabled']);  ?>
+                                          </div>
                                  <div class="form-group">
                 <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 <?php echo $this->Html->link('Cancel', ['action' => 'index'], ['class' => 'btn btn-default'])?>

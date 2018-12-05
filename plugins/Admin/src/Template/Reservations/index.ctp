@@ -45,7 +45,6 @@
                                         <td><?= h($reservation->customer_id) ?></td>
                                         <td><?= $stylists[$reservation->stylist_id] ?></td>
                                         <td class="actions">
-                            <?= $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), ['action' => 'view', $reservation->reservation_id],['escape' => false]) ?>
                             <?= $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), ['action' => 'edit', $reservation->reservation_id],['escape' => false]) ?>
                             <?= $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), ['action' => 'delete', $reservation->reservation_id], ['escape' => false,'confirm' => __('Are you sure you want to delete # {0}?', $reservation->reservation_id)]) ?>
                         </td>

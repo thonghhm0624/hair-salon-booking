@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-sm-2 set-height">
                             <select name="store"  id="reservation-store" class="reservation-input" data-order="1" disabled>
-                                <option class="d-none" value="" disabled selected >Địa chỉ tiệm</option>
+                                <option class="d-none" value="not_selected" disabled selected >Địa chỉ tiệm</option>
                                 <?php foreach ($branches_select as $branch): ?>
                                     <option value="<?= $branch->branch_id ?>" ><?= $branch->branch_address ?></option>
                                 <?php endforeach;?>
@@ -27,9 +27,6 @@
                         <div class="col-sm-2 set-height">
                             <select name="stylist" id="reservation-stylist" class="reservation-input" data-order="2" disabled>
                                 <option class="d-none" value="" disabled selected >Tên stylist</option>
-                                <?php foreach ($stylists_select as $stylist): ?>
-                                    <option value="<?= $stylist->stylist_id ?>" ><?= $stylist->stylist_name ?></option>
-                                <?php endforeach;?>
                             </select>
                         </div>
                         <div class="col-sm-2 set-height">

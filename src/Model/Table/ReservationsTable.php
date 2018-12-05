@@ -38,23 +38,6 @@ class ReservationsTable extends Table
         $this->setTable('reservations');
         $this->setDisplayField('reservation_id');
         $this->setPrimaryKey('reservation_id');
-
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Stylists', [
-            'foreignKey' => 'stylist_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Branches', [
-            'foreignKey' => 'branch_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Services', [
-            'foreignKey' => 'service_id',
-            'joinType' => 'INNER'
-        ]);
     }
 
     /**
@@ -107,11 +90,6 @@ class ReservationsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['stylist_id'], 'Stylists'));
-        $rules->add($rules->existsIn(['branch_id'], 'Branches'));
-        $rules->add($rules->existsIn(['service_id'], 'Services'));
-
         return $rules;
     }
 }

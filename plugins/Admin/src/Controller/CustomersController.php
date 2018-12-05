@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 
 use Admin\Controller\AppController;
+use Cake\Core\Configure;
 
 /**
  * Customers Controller
@@ -11,9 +12,16 @@ use Admin\Controller\AppController;
  */
 class CustomersController extends AppController
 {
+    public $customer_status = [];
     public function initialize(){
         parent::initialize();
         $this->loadModel('Customers');
+
+        $this->customer_status = Configure::read('customer_status');
+
+        $this->set('customer_status', $this->customer_status);
+
+        $this->set(compact('customer_status'));
     }
     /**
      * Index method

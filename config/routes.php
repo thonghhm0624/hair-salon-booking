@@ -52,6 +52,9 @@ Router::scope('/', function ($routes) {
 
 	$routes->connect('/',['controller' => 'Frontend', 'action' => 'index']);
 
+	//SEARCHING
+	$routes->connect('/stylistsbybranch',['controller' => 'Frontend', 'action' => 'stylistsByBranch']);
+
 	//LOGIN & LOGOUT
     $routes->connect('/login',['controller' => 'Frontend', 'action' => 'login']);
     $routes->connect('/logout',['controller' => 'Frontend', 'action' => 'logout']);

@@ -294,6 +294,11 @@ Configure::write('reservation_status', [
     3 => 'Done'
 ]);
 
+Configure::write('customer_status', [
+    0 => 'Unverified',
+    1 => 'Verified',
+]);
+
 Configure::write('service_time', [
     '10:00' => '10:00',
     '11:00' => '11:00',

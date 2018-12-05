@@ -103,22 +103,45 @@ $('.reservation-input').keyup(function (e) {
         $('#submit-reservation').attr('disabled','disabled');
     }
 })
-$('.reservation-input').change(function (e) {
-    let _this = this;
-    if($(_this).val() != ''){
-        let order = $(_this).data('order');
-        if(order<5){
-            $('.reservation-input[data-order='+(order+1)+']').removeAttr('disabled');
-        }
-        if(order == 4){
-            $('#submit-reservation').removeAttr('disabled');
-        }
-    }
-})
+// $('.reservation-input').change(function (e) {
+//     let _this = this;
+//     if($(_this).val() != ''){
+//         let order = $(_this).data('order');
+//         if(order<5){
+//             $('.reservation-input[data-order='+(order+1)+']').removeAttr('disabled');
+//         }
+//         if(order == 4){
+//             $('#submit-reservation').removeAttr('disabled');
+//         }
+//     }
+// })
 function isValidPhonenumber(value) {
     return (/^\d{10,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
 }
 
+
+$('#reservation-store').change(function (){
+    // console.log("changed");
+    let store = $('#reservation-store').val();
+    $.ajax({
+        url: window_app.webroot + 'stylistsbybranch',
+        type: 'post',
+        data: {
+            store: store,
+        },
+        success: function (data) {
+            let real_data = JSON.parse(data);
+            if(real_data.status == 1){
+                $('#reservation-stylist').empty();
+                let stylists = real_data.data.stylists;
+                console.log(stylists);
+            } else {
+                console.log("fail");
+            }
+        }
+    });
+
+});
 // $('.js-goto').click(function(event){
 //     event.preventDefault();
 //     var goto = '#' + $(this).attr('goto');

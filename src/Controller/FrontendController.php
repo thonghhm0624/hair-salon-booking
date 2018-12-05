@@ -335,4 +335,35 @@ class FrontendController extends AppController {
             return  $this->response;
         }
     }
+
+    public function stylistsByBranch ()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Stylists');
+        $response = [
+            'status' => 0,
+            'message' => 'No stylist!',
+        ];
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $branch_id = $data['store'];
+            $stylists = $this->Stylists->find('all')->where([
+                'stylist_branch_id' => $branch_id
+            ])->select('stylist_id', 'stylist_name')->toArray();
+
+            if (!empty($stylists)) {
+                $response = [
+                    'status' => 1,
+                    'message' => 'Got stylist(s)',
+                    'data' => [
+                        'stylists' => $stylists
+                    ]
+                ];
+            }
+        }
+        $this->response->withType('json');
+        $this->response->body(json_encode($response));
+        return $this->response;
+    }
+
 }

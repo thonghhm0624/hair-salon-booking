@@ -20,13 +20,14 @@
 				</thead>
 				<tbody>
                 <?php foreach ($customers as $customer): ?>
-                    <tr>
+                    <tr >
                                         <td><?= h($customer->customer_id) ?></td>
                                         <td><?= h($customer->customer_password) ?></td>
                                         <td><?= h($customer->customer_name) ?></td>
                                         <td><?= $this->Number->format($customer->customer_status) ?></td>
                                         <td class="actions">
-                        </td>
+
+                                        </td>
                     </tr>
                 <?php endforeach; ?>        
 				</tbody>
