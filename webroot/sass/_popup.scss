@@ -115,6 +115,13 @@
 
         &:focus {
           outline: none;
+          border: 2px solid darkseagreen;
+          transition: .2s ease-out;
+        }
+
+        &.failed {
+          border: 2px solid $red;
+          transition: .2s ease-out;
         }
       }
 

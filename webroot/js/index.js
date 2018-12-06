@@ -7,12 +7,14 @@ import 'jquery-ui';
 import 'jquery-datepicker';
 import datepickerFactory from 'jquery-datepicker';
 
-
 require('./app/class.popup');
+require('./app/class.reservation');
+
 datepickerFactory($);
 $('#reservation-date').datepicker();
 
 SE.clsPopup.init();
+SE.clsReservation.init();
 
 $('#login-submit-btn').click(function(event){
     event.preventDefault();
@@ -57,91 +59,34 @@ $('#submit-reservation').click(function(event){
     let date = $('#reservation-date').val();
     let time = $('#reservation-time').val();
 
-    if(isValidPhonenumber(phonenumber)){
-        //Ajax reservation
-        $.ajax({
-            url: window_app.webroot + 'reserve',
-            type: 'post',
-            data: {
-                phonenumber: phonenumber,
-                store: store,
-                stylist: stylist,
-                service: service,
-                date: date,
-                time: time,
-            },
-            success: function (data) {
-                let real_data = JSON.parse(data);
-                if(real_data.status == 1){
-                    $('.result-success').removeClass('d-none');
-                    $('.result-fail').addClass('d-none');
-                    TweenMax.to(('.popup'), .2, { css:{display:'none',opacity:0}} );
-
-                } else {
-                    $('.result-fail').removeClass('d-none');
-                    $('.result-success').addClass('d-none');
-
-                }
-            }
-        });
-    } else {
-        alert('Xin nhap so dt');
-    }
-    //
-});
-$('.reservation-input').keyup(function (e) {
-    let _this = this;
-    if($(_this).val() != ''){
-        let order = $(_this).data('order');
-        if(order<5){
-            $('.reservation-input[data-order='+(order+1)+']').removeAttr('disabled');
-        }
-        if(order == 4){
-            $('#submit-reservation').removeAttr('disabled');
-        }
-    }else{
-        $('#submit-reservation').attr('disabled','disabled');
-    }
-})
-// $('.reservation-input').change(function (e) {
-//     let _this = this;
-//     if($(_this).val() != ''){
-//         let order = $(_this).data('order');
-//         if(order<5){
-//             $('.reservation-input[data-order='+(order+1)+']').removeAttr('disabled');
-//         }
-//         if(order == 4){
-//             $('#submit-reservation').removeAttr('disabled');
-//         }
-//     }
-// })
-function isValidPhonenumber(value) {
-    return (/^\d{10,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
-}
-
-
-$('#reservation-store').change(function (){
-    // console.log("changed");
-    let store = $('#reservation-store').val();
     $.ajax({
-        url: window_app.webroot + 'stylistsbybranch',
+        url: window_app.webroot + 'reserve',
         type: 'post',
         data: {
+            phonenumber: phonenumber,
             store: store,
+            stylist: stylist,
+            service: service,
+            date: date,
+            time: time,
         },
         success: function (data) {
             let real_data = JSON.parse(data);
             if(real_data.status == 1){
-                $('#reservation-stylist').empty();
-                let stylists = real_data.data.stylists;
-                console.log(stylists);
+                $('.result-success').removeClass('d-none');
+                $('.result-fail').addClass('d-none');
+                TweenMax.to(('.popup'), .2, { css:{display:'none',opacity:0}} );
+
             } else {
-                console.log("fail");
+                $('.result-fail').removeClass('d-none');
+                $('.result-success').addClass('d-none');
+
             }
         }
     });
-
+    //
 });
+
 // $('.js-goto').click(function(event){
 //     event.preventDefault();
 //     var goto = '#' + $(this).attr('goto');

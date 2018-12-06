@@ -349,7 +349,7 @@ class FrontendController extends AppController {
             $branch_id = $data['store'];
             $stylists = $this->Stylists->find('all')->where([
                 'stylist_branch_id' => $branch_id
-            ])->select('stylist_id', 'stylist_name')->toArray();
+            ])->select(['stylist_id', 'stylist_name'])->toArray();
 
             if (!empty($stylists)) {
                 $response = [

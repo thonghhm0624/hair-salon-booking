@@ -17,7 +17,15 @@
                             <?php endif; ?>
                         </div>
                         <div class="col-sm-2 set-height">
-                            <select name="store"  id="reservation-store" class="reservation-input" data-order="1" disabled>
+                            <select name="service" id="reservation-service" class="reservation-input" disabled>
+                                <option class="d-none" value="" disabled selected >Dịch vụ</option>
+                                <?php foreach ($services_select as $service): ?>
+                                    <option value="<?= $service->service_id ?>" ><?= $service->service_name ?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 set-height">
+                            <select name="store"  id="reservation-store" class="reservation-input" disabled>
                                 <option class="d-none" value="not_selected" disabled selected >Địa chỉ tiệm</option>
                                 <?php foreach ($branches_select as $branch): ?>
                                     <option value="<?= $branch->branch_id ?>" ><?= $branch->branch_address ?></option>
@@ -25,20 +33,12 @@
                             </select>
                         </div>
                         <div class="col-sm-2 set-height">
-                            <select name="stylist" id="reservation-stylist" class="reservation-input" data-order="2" disabled>
+                            <select name="stylist" id="reservation-stylist" class="reservation-input" disabled>
                                 <option class="d-none" value="" disabled selected >Tên stylist</option>
                             </select>
                         </div>
                         <div class="col-sm-2 set-height">
-                            <select name="service" id="reservation-service" class="reservation-input" data-order="3" disabled>
-                                <option class="d-none" value=""  disabled selected >Dịch vụ</option>
-                                <?php foreach ($services_select as $service): ?>
-                                    <option value="<?= $service->service_id ?>" ><?= $service->service_name ?></option>
-                                <?php endforeach;?>
-                            </select>
-                        </div>
-                        <div class="col-sm-2 set-height">
-                            <input type="text" placeholder="Chọn Ngày" class="reservation-input" data-order="4" name="reservation-date" id="reservation-date" disabled/>
+                            <input type="text" placeholder="Chọn Ngày" class="reservation-input" name="reservation-date" id="reservation-date" disabled/>
                         </div>
 
                         <div class="col-sm-2 set-height">
@@ -59,7 +59,7 @@
 
                     </div>
                     <div class="cta-cal">
-                        <input type="submit" id="submit-reservation" class="reservation-input cta"  data-order="6" disabled value="Đặt lịch ngay" />
+                        <input type="submit" id="submit-reservation" class="reservation-input cta" disabled value="Đặt lịch ngay" />
                         <a class="cta exit-reservation popup-close">Thoát</a>
                     </div>
                 </form>
