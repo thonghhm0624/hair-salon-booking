@@ -80,7 +80,11 @@ class AppController extends BaseController
             ],
             'Reservations' =>  [
                 'text' => 'Reservations', 'link' => Router::url(['controller' => 'Reservations','action' => 'index']), 'allow_access' => ['admin']
+            ],
+            'Services' =>  [
+                'text' => 'Services', 'link' => Router::url(['controller' => 'Services','action' => 'index']), 'allow_access' => ['admin']
             ]
+
         ]);
         $this->set('active_menu_item', $this->request->params['controller']);
         if (in_array($this->request->action, ['active_fields','publish_fields','slug_unique','update_status'])) {

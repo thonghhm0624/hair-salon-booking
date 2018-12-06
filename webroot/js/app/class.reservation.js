@@ -13,29 +13,22 @@ SE.clsReservation = (function() {
         date = $('#reservation-date'),
         time = $('#reservation-time'),
         submit = $('#submit-reservation');
-
+    var times_to_be_conflicted = null;
 
     //EVENTS
     function initEvent()
     {
         phonenumber.change(function () {
             if (isValidPhonenumber(phonenumber.val())) {
-                service.removeAttr('disabled');
                 phonenumber.removeClass("failed");
                 if (isInformationFilledAll()) {
                     submit.removeAttr('disabled');
                 }
             }
             else {
-                submit.attr('disabled','disable');
+                submit.attr('disabled','disabled');
                 phonenumber.addClass("failed");
                 phonenumber.focus();
-            }
-        });
-
-        service.change (function () {
-            if (service.val() != null) {
-                store.removeAttr('disabled');
             }
         });
 
@@ -59,6 +52,7 @@ SE.clsReservation = (function() {
                             }
                             stylist.append(option);
                             stylist.removeAttr("disabled");
+                            store.attr('disabled','disabled');
                         } else {
                             console.log("fail");
                         }
@@ -70,22 +64,81 @@ SE.clsReservation = (function() {
         stylist.change (function () {
             if (stylist.val() != null) {
                 date.removeAttr('disabled');
+                stylist.attr('disabled','disabled');
             }
         });
 
         date.change (function () {
-            if (date.val() != null) {
-                time.removeAttr('disabled');
+            service.removeAttr('disabled');
+            date.attr('disabled','disabled');
+        });
+
+        service.change (function () {
+            submit.attr('disabled','disabled');
+            if (service.val() != null) {
+                $.ajax({
+                    url: window_app.webroot + 'reservationtimehandler',
+                    type: 'post',
+                    data: {
+                        service: service.val(),
+                        store: store.val(),
+                        stylist: stylist.val(),
+                        date: date.val()
+                    },
+                    success: function (data) {
+                        let real_data = JSON.parse(data);
+
+                        if(real_data.status == 1){
+                            let option = "";
+                            time.empty();
+                            if (real_data.time_conflict == 0) {
+                                console.log('No time conflict');
+                                times_to_be_conflicted = null;
+                                for(let i = 10; i <= 20; i++) {
+                                    option += '<option value=' + i + '>' + i + ':00' + '</option>';
+                                }
+                            }
+                            else {
+                                times_to_be_conflicted = real_data.data.times_to_be_conflicted;
+                                console.log(times_to_be_conflicted);
+                                for(let i = 10; i <= 20; i++) {
+                                    if (checkTimeConflict(times_to_be_conflicted,i))
+                                        option += '<option style="color: red" disabled value=' + i + '>' + i + ':00' + '</option>';
+                                    else
+                                        option += '<option value=' + i + '>' + i + ':00' + '</option>';
+                                }
+                                time.append(option);
+                                time.removeAttr('disabled');
+                            }
+                        } else {
+                            console.log("fail");
+                        }
+                    }
+                });
             }
         });
 
         time.change (function () {
             if (time.val() != null) {
-                submit.removeAttr('disabled');
+                // submit.removeAttr('disabled');
+                let duration = $(service).find(":selected").attr('duration');
+                let new_time = parseInt(time.val())+ parseInt(duration);
+
+                if (times_to_be_conflicted != null) {
+                    if (checkTimeConflict(times_to_be_conflicted, new_time))
+                        alert('Thời gian chọn chưa phù hợp vì stylist này có thể sẽ có khách khác trong lúc này');
+                    else {
+                        submit.removeAttr('disabled');
+                    }
+                }
+                else {
+                    submit.removeAttr('disabled');
+                }
             }
         });
     }
 
+    //FUNCTIONS
     function isValidPhonenumber(value) {
         return (/^\d{10,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
     }
@@ -93,13 +146,20 @@ SE.clsReservation = (function() {
     function isInformationFilledAll () {
         return (service.val() != null && store.val() != null && stylist.val() != null && time.val() != null);
     }
-    //FUNCTIONS
 
+    function checkTimeConflict (times, time) {
+        for (let i = 0; i < times.length; i++) {
+            if (time == times[i])
+                return true;
+        }
+        return false;
+    }
     //RETURN
     return {
         init:init,
         isValidPhonenumber:isValidPhonenumber,
-        isInformationFilledAll:isInformationFilledAll
+        isInformationFilledAll:isInformationFilledAll,
+        checkTimeConflict:checkTimeConflict
     }
 })();
 

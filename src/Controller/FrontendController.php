@@ -8,12 +8,13 @@ use Cake\Routing\Router;
 use App\Controller\AppController;
 require_once(ROOT .DS. 'src'.DS. 'Lib' . DS .'image_load.php');
 use image_load;
+use function Sodium\add;
 
 
-
-class FrontendController extends AppController {
-	//public $layout = 'frontend';	
-	public $paginate = [
+class FrontendController extends AppController
+{
+    //public $layout = 'frontend';
+    public $paginate = [
         'limit' => 3,
     ];
 
@@ -23,75 +24,77 @@ class FrontendController extends AppController {
         $this->loadModel('Categories');
         $this->loadModel('Reservations');
         $categories = $this->Categories->find('all')->toArray();
-        $this->set('categories',$categories);
-		$this->viewBuilder()->layout('frontend');
+        $this->set('categories', $categories);
+        $this->viewBuilder()->layout('frontend');
         $this->response->disableCache();
-		$this->set('webroot_full', Router::url('/', true));
+        $this->set('webroot_full', Router::url('/', true));
     }
 
-	public function index() {
+    public function index()
+    {
         $this->render('home');
     }
 
     //FUNCTIONS ABOUT ARTICLES
-	public function articles($page = 1) {
+    public function articles($page = 1)
+    {
         $this->loadModel('Articles');
         if ($this->request->is('post')) {
             $search = $this->request->getData()['searchForArticles'];
             $articles = $this->paginate($this->Articles->find('all')->where(
                 [
-                    'OR'=>[
-                        'article_title LIKE'=> '%'.$search.'%',
-                        'article_content LIKE'=> '%'.$search.'%',
-                        'article_keyword LIKE'=> '%'.$search.'%',
+                    'OR' => [
+                        'article_title LIKE' => '%' . $search . '%',
+                        'article_content LIKE' => '%' . $search . '%',
+                        'article_keyword LIKE' => '%' . $search . '%',
                     ]
                 ]
-            ),['page'=>$page]);
+            ), ['page' => $page]);
+        } else {
+            $articles = $this->paginate($this->Articles, ['page' => $page]);
         }
 
-        else {
-            $articles = $this->paginate($this->Articles,['page'=>$page]);
-        }
 
-
-        $this->set('collapse_articles',true);
-        $this->set('collapse_products',false);
+        $this->set('collapse_articles', true);
+        $this->set('collapse_products', false);
 
         $this->set('article', null);
-        $this->set('articles',$articles);
-        $this->set('product',null);
-        $this->set('products',null);
+        $this->set('articles', $articles);
+        $this->set('product', null);
+        $this->set('products', null);
 
         $this->set('category', null);
         $this->render('explore');
 
     }
 
-    public function articles_by_category($category = null, $page = 1) {
+    public function articles_by_category($category = null, $page = 1)
+    {
         $this->loadModel('Articles');
         if ($category != null) {
             $articles = $this->paginate($this->Articles->find('all')->where(
                 [
                     'article_category_id = ' => $category
                 ]
-            ),['page'=>$page]);
+            ), ['page' => $page]);
         }
 
-        $this->set('collapse_products',true);
-        $this->set('collapse_articles',false);
+        $this->set('collapse_products', true);
+        $this->set('collapse_articles', false);
 
-        $this->set('articles',$articles);
+        $this->set('articles', $articles);
 
         $this->set('article', null);
-        $this->set('articles',$articles);
-        $this->set('product',null);
-        $this->set('products',null);
+        $this->set('articles', $articles);
+        $this->set('product', null);
+        $this->set('products', null);
 
         $this->set('category', $category);
         $this->render('explore');
     }
 
-    public function article_details($articleID = 0) {
+    public function article_details($articleID = 0)
+    {
         $this->loadModel('Articles');
         $article = $this->Articles->find('all')->where(
             [
@@ -99,8 +102,8 @@ class FrontendController extends AppController {
             ]
         )->first();
 
-        $this->set('collapse_products',true);
-        $this->set('collapse_articles',false);
+        $this->set('collapse_products', true);
+        $this->set('collapse_articles', false);
 
         $this->set('article', $article);
         $this->set('articles', null);
@@ -113,61 +116,62 @@ class FrontendController extends AppController {
 
 
     //FUNCTIONS ABOUT PRODUCTS
-    public function products($page = 1) {
+    public function products($page = 1)
+    {
         $this->loadModel('Products');
         if ($this->request->is('post')) {
             $search = $this->request->getData()['searchForProducts'];
             $products = $this->paginate($this->Products->find('all')->where(
                 [
-                    'OR'=>[
-                        'product_title LIKE'=> '%'.$search.'%',
-                        'product_content LIKE'=> '%'.$search.'%',
-                        'product_keyword LIKE'=> '%'.$search.'%',
+                    'OR' => [
+                        'product_title LIKE' => '%' . $search . '%',
+                        'product_content LIKE' => '%' . $search . '%',
+                        'product_keyword LIKE' => '%' . $search . '%',
                     ]
                 ]
-            ),['page'=>$page]);
+            ), ['page' => $page]);
+        } else {
+            $products = $this->paginate($this->Products, ['page' => $page]);
         }
 
-        else {
-            $products = $this->paginate($this->Products,['page'=>$page]);
-        }
-
-        $this->set('collapse_products',true);
-        $this->set('collapse_articles',false);
+        $this->set('collapse_products', true);
+        $this->set('collapse_articles', false);
 
 
         $this->set('article', null);
         $this->set('articles', null);
-        $this->set('product',null);
-        $this->set('products',$products);
+        $this->set('product', null);
+        $this->set('products', $products);
 
         $this->set('category', null);
         $this->render('explore');
     }
 
-    public function products_by_category($category = null, $page = 1) {
+    public function products_by_category($category = null, $page = 1)
+    {
         $this->loadModel('Products');
         if ($category != null) {
             $products = $this->paginate($this->Products->find('all')->where(
                 [
                     'product_category_id = ' => $category
                 ]
-            ),['page'=>$page]);
+            ), ['page' => $page]);
         }
 
-        $this->set('collapse_products',true);
-        $this->set('collapse_articles',false);
+        $this->set('collapse_products', true);
+        $this->set('collapse_articles', false);
 
         $this->set('article', null);
         $this->set('articles', null);
-        $this->set('product',null);
-        $this->set('products',$products);
+        $this->set('product', null);
+        $this->set('products', $products);
 
         $this->set('category', $category);
         $this->render('explore');
     }
 
-    public function product_details($productID = 0) {
+    public function product_details($productID = 0)
+    {
         $this->loadModel('Products');
         $product = $this->Products->find('all')->where(
             [
@@ -175,12 +179,12 @@ class FrontendController extends AppController {
             ]
         )->first();
 
-        $this->set('collapse_products',true);
-        $this->set('collapse_articles',false);
+        $this->set('collapse_products', true);
+        $this->set('collapse_articles', false);
 
         $this->set('article', null);
         $this->set('articles', null);
-        $this->set('product',$product);
+        $this->set('product', $product);
         $this->set('products', null);
 
         $this->set('category', null);
@@ -188,11 +192,13 @@ class FrontendController extends AppController {
     }
 
 
-    public function introduction() {
+    public function introduction()
+    {
         $this->render('about');
     }
 
-    public function logout(){
+    public function logout()
+    {
         $session = $this->request->getSession();
         $session->delete('login_type');
         $session->delete('login_user');
@@ -200,7 +206,8 @@ class FrontendController extends AppController {
         return $this->redirect(['action' => 'index']);
     }
 
-    public function reserve(){
+    public function reserve()
+    {
         $this->autoRender = false;
         $this->loadModel('Customers');
         if ($this->request->is('post')) {
@@ -214,23 +221,21 @@ class FrontendController extends AppController {
 
             $can_be_added = 0;
             $response = [
-                'status'=>0,
-                'message'=>'Fail',
+                'status' => 0,
+                'message' => 'Fail',
             ];
             $customer = $this->Customers->find('all')->where([
-                    'customer_id' => $phone
-                ])->select('customer_id')->first();
+                'customer_id' => $phone
+            ])->select('customer_id')->first();
             if (!empty($customer)) {
                 $can_be_added = 1;
-            }
-            else if (empty($customer)) {
+            } else if (empty($customer)) {
                 $new_customer = $this->Customers->newEntity();
                 $new_customer->customer_id = $phone;
                 if ($this->Customers->save($new_customer)) {
                     $can_be_added = 1;
                 }
-            }
-            else {
+            } else {
 
             }
 
@@ -243,22 +248,23 @@ class FrontendController extends AppController {
                 $reservation->branch_id = $store;
                 $reservation->customer_id = $phone;
                 $reservation->stylist_id = $stylist;
-                if ($this->Reservations->save($reservation)){
+                if ($this->Reservations->save($reservation)) {
                     $response = [
-                        'status'=>1,
-                        'message'=>'Success',
+                        'status' => 1,
+                        'message' => 'Success',
                     ];
                 }
             }
 
             $this->response->withType('json');
             $this->response->body(json_encode($response));
-            return  $this->response;
+            return $this->response;
 
         }
     }
 
-    public function login(){
+    public function login()
+    {
         $this->autoRender = false;
         $this->loadModel('Customers');
         $this->loadModel('Stylists');
@@ -268,77 +274,77 @@ class FrontendController extends AppController {
             $password = $data['password'];
             $login_type = $data['login_type'];
             $response = [
-                'status'=>0,
-                'message'=>'Dang nhap that bai!',
+                'status' => 0,
+                'message' => 'Dang nhap that bai!',
             ];
-            if($login_type == 'customer'){
+            if ($login_type == 'customer') {
                 $customer = $this->Customers->find('all')->where([
                     'customer_id' => $phone,
-                    'customer_password'=> $password
-                ])->select(['customer_id','customer_name','customer_status'])->first();
-                if(!empty($customer)){
+                    'customer_password' => $password
+                ])->select(['customer_id', 'customer_name', 'customer_status'])->first();
+                if (!empty($customer)) {
                     $session = $this->request->getSession();
-                    $session->write('login_type',$login_type);
-                    $session->write('login_user',$customer);
+                    $session->write('login_type', $login_type);
+                    $session->write('login_user', $customer);
                     $response = [
-                        'status'=> 1,
-                        'message'=>'Dang nhap thanh cong!',
-                        'data' =>[
-                            'login_user' =>[
-                                'name'=>$session->read('login_user')['customer_name'],
+                        'status' => 1,
+                        'message' => 'Dang nhap thanh cong!',
+                        'data' => [
+                            'login_user' => [
+                                'name' => $session->read('login_user')['customer_name'],
                                 'id' => $session->read('login_user')['customer_id'],
-                                'image'=> '',
+                                'image' => '',
                             ],
-                            'login_type' =>$session->read('login_type')
+                            'login_type' => $session->read('login_type')
                         ]
                     ];
-                    $session->write('response',$response);
-                }else{
+                    $session->write('response', $response);
+                } else {
                     $response = [
-                        'status'=>0,
-                        'message'=>'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
+                        'status' => 0,
+                        'message' => 'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
                     ];
                 }
-            } else if($login_type == 'stylist'){
+            } else if ($login_type == 'stylist') {
                 $stylist = $this->Stylists->find('all')->where([
                     'stylist_phone' => $phone,
-                    'stylist_password'=> $password
-                ])->select(['stylist_id','stylist_branch_id','stylist_name','stylist_image','stylist_status','stylist_phone'])->first();
-                if(!empty($stylist)){
+                    'stylist_password' => $password
+                ])->select(['stylist_id', 'stylist_branch_id', 'stylist_name', 'stylist_image', 'stylist_status', 'stylist_phone'])->first();
+                if (!empty($stylist)) {
                     $session = $this->request->getSession();
-                    $session->write('login_type',$login_type);
-                    $session->write('login_user',$stylist);
+                    $session->write('login_type', $login_type);
+                    $session->write('login_user', $stylist);
                     $response = [
-                        'status'=> 1,
-                        'message'=>'Dang nhap thanh cong!',
-                        'data' =>[
+                        'status' => 1,
+                        'message' => 'Dang nhap thanh cong!',
+                        'data' => [
                             'login_user' => [
-                                'name'=>$session->read('login_user')['stylist_name'],
+                                'name' => $session->read('login_user')['stylist_name'],
                                 'id' => $session->read('login_user')['stylist_phone'],
-                                'image'=> $session->read('login_user')['stylist_image'],
+                                'image' => $session->read('login_user')['stylist_image'],
                             ],
-                            'login_type' =>$session->read('login_type')
+                            'login_type' => $session->read('login_type')
                         ]
                     ];
 
-                    $session->write('response',$response);
+                    $session->write('response', $response);
 
 
-                }else{
+                } else {
                     $response = [
-                        'status'=>0,
-                        'message'=>'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
+                        'status' => 0,
+                        'message' => 'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
                     ];
                 }
             }
             $this->response->withType('json');
             $this->response->body(json_encode($response));
-            return  $this->response;
+            return $this->response;
         }
     }
 
     //stylists by branch
-    public function stylistsByBranch ()
+    public function stylistsByBranch()
     {
         $this->autoRender = false;
         $this->loadModel('Stylists');
@@ -369,55 +375,201 @@ class FrontendController extends AppController {
     }
 
     //user functions
-    public function user ($userfunction = 'changeinfo') {
-        $this->set('userfunction',$userfunction);
+    public function user($userfunction = 'changeinfo')
+    {
+        $this->set('userfunction', $userfunction);
+        if ($userfunction = 'history') {
+            $session = $this->request->session();
+            $sessionData = $session->read('response');
+            $customer_id = $sessionData['data']['login_user']['id'];
+            $this->loadModel("Reservations");
+            $this->loadModel("Branches");
+            $this->loadModel('Services');
+            $this->loadModel('Stylists');
+            $reservations = $this->Reservations->find('all')->where([
+                'customer_id' => $customer_id,
+            ])->toArray();
+            $stylists = $this->Stylists->find('list', ['keyField' => 'stylist_id', 'valueField' => 'stylist_name'])->toArray();
+            $services = $this->Services->find('list', ['keyField' => 'service_id', 'valueField' => 'service_name'])->toArray();
+            $branches = $this->Branches->find('list', ['keyField' => 'branch_id', 'valueField' => 'branch_address'])->toArray();
+            $this->set('reservations', $reservations);
+            $this->set('branches', $branches);
+            $this->set('stylists', $stylists);
+            $this->set('services', $services);
+        }
         $this->render('account_information');
     }
 
-    public function updateinfo () {
+    public function updateinformation($information = 'name')
+    {
         $this->autoRender = false;
+        $session = $this->request->session();
+        $sessionData = $session->read('response');
+        $phone = $sessionData['data']['login_user']['id'];
+        $type = $sessionData['data']['login_type'];
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-            $name = $data['name'];
-            $password= $data['password'];
-            $phone = $data['phone'];
-            $type = $data['type'];
             $response = [
-                'status'=>0,
-                'message'=>'Fail',
+                'status' => 0,
+                'message' => 'Fail',
             ];
-            if ($type == 'customer') {
-                $this->loadModel('Customers');
-                $this->Customers->read(null, $phone);
-                $this->Customers->set([
-                    'customer_name' => $name,
-                    'customer_password' => $password
-                ]);
-                $this->Customers->save();
-                $response = [
-                    'status'=>1,
-                    'message'=>'Success',
-                ];
+            if ($information == 'name') {
+                $name = $data['name'];
+                if ($type == 'customer') {
+                    $this->loadModel('Customers');
+                    $this->Customers->id = $phone;
+                    $customersTable = TableRegistry::get('Customers');
+                    $customer = $customersTable->get($phone); //
+                    $customer->customer_name = $name;
+                    if ($customersTable->save($customer)) {
+                        $session->write('login_user', $customer);
+                        $response = [
+                            'status' => 1,
+                            'message' => 'Update successfully!',
+                            'data' => [
+                                'login_user' => [
+                                    'name' => $session->read('login_user')['customer_name'],
+                                    'id' => $session->read('login_user')['customer_id'],
+                                    'image' => '',
+                                ],
+                                'login_type' => $session->read('login_type')
+                            ]
+                        ];
+                        $session->write('response', $response);
+                    }
+                } else if ($type == 'stylist') {
+                    $this->loadModel('Stylists');
+                    $stylist_id = $this->Stylists->find('all')->where([
+                        'stylist_phone' => $phone
+                    ])->select('stylist_id')->first();
+                    $this->Stylists->id = $stylist_id;
+                    $stylistsTable = TableRegistry::get('Stylists');
+                    $stylist = $stylistsTable->get($stylist_id); //
+                    $stylist->stylist_name = $name;
+                    if ($stylistsTable->save($stylist)) {
+                        $session->write('login_user', $stylist);
+                        $response = [
+                            'status' => 1,
+                            'message' => 'Update successfully!',
+                            'data' => [
+                                'login_user' => [
+                                    'name' => $session->read('login_user')['stylist_name'],
+                                    'id' => $session->read('login_user')['stylist_phone'],
+                                    'image' => $session->read('login_user')['stylist_image'],
+                                ],
+                                'login_type' => $session->read('login_type')
+                            ]
+                        ];
+                        $session->write('response', $response);
+                    }
+                }
+            } else if ($information == 'password') {
+                $password = $data['password'];
+                if ($type == 'customer') {
+                    $this->loadModel('Customers');
+                    $this->Customers->id = $phone;
+                    $customersTable = TableRegistry::get('Customers');
+                    $customer = $customersTable->get($phone); //
+                    $customer->customer_password = $password;
+                    if ($customersTable->save($customer)) {
+                        $response = [
+                            'status' => 1,
+                            'message' => 'Update successfully!',
+                        ];
+                    }
+                } else if ($type == 'stylist') {
+                    $this->loadModel('Stylists');
+                    $stylist_id = $this->Stylists->find('all')->where([
+                        'stylist_phone' => $phone
+                    ])->select('stylist_id')->first();
+                    $this->Stylists->id = $stylist_id;
+                    $stylistsTable = TableRegistry::get('Stylists');
+                    $stylist = $stylistsTable->get($stylist_id); //
+                    $stylist->stylist_password = $password;
+                    if ($stylistsTable->save($stylist)) {
+                        $response = [
+                            'status' => 1,
+                            'message' => 'Update successfully!',
+                        ];
+                    }
+                }
             }
-            else if ($type == 'stylist') {
-                $this->loadModel('Stylists');
-                $stylist_id = $this->Stylists->find('all')->where([
-                    'stylist_phone' => $phone
-                ])->select('stylist_id')->first();
-                $this->Stylists->read(null, $stylist_id);
-                $this->Stylists->set([
-                    'stylist_name' => $name,
-                    'stylist_password' => $password
-                ]);
-                $this->Stylists->save();
-                $response = [
-                    'status'=> 1,
-                    'message'=>'Success',
-                ];
+
+            $this->response->withType('json');
+            $this->response->body(json_encode($response));
+            return $this->response;
+        }
+    }
+
+    public function reservationtimehandler()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Reservations');
+        $response = [
+            'status' => 0,
+            'time_conflict' => 0,
+            'message' => 'Fail',
+        ];
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $stylist = $data['stylist'];
+            $branch = $data['store'];
+            $service = $data['service'];
+            $date = $data['date'];
+
+            $time_and_status = $this->Reservations->find('all')->where([
+                'stylist_id' => $stylist,
+                'branch_id' => $branch,
+                'reservation_date' => $date,
+            ])->toArray();
+
+            if (!empty($time_and_status)) {
+                $this->loadModel('Services');
+                $times_to_be_conflicted = [];
+                foreach ($time_and_status as $time) {
+                    if (($time['reservation_status'] != 3 || $time['reservation_status'] != 4)) {
+                        $service_duration = $this->Services->find('all')->where([
+                            'service_id' => $time['service_id']
+                        ])->first();
+                        $time_conflict = intval($time['reservation_time']);
+                        $time_service_duration = intval($service_duration['service_duration']);
+                        for ($i = 1; $i <= $time_service_duration; $i++) {
+                            $__time = $time_conflict + $i -1;
+                            if ($__time > 20)
+                                array_push($times_to_be_conflicted, 20);
+//                            else if ($__time == 19 && $time_service_duration == 3) {
+//                                array_push($times_to_be_conflicted, 19);
+//                                array_push($times_to_be_conflicted, 20);
+//                            }
+//                            else if ($__time == 20 && $time_service_duration >= 2) {
+//                                array_push($times_to_be_conflicted, 20);
+//                            }
+                            else
+                                array_push($times_to_be_conflicted, $__time);
+                        }
+                    }
+                }
+                if (!empty($times_to_be_conflicted)) {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'Successful!',
+                        'time_conflict' => 1,
+                        'data' => [
+                            'times_to_be_conflicted' => $times_to_be_conflicted
+                        ]
+                    ];
+                } else {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'Successfully',
+                        'time_conflict' => 0,
+                    ];
+                }
             }
             $this->response->withType('json');
             $this->response->body(json_encode($response));
-            return  $this->response;
+            return $this->response;
+
         }
     }
 }

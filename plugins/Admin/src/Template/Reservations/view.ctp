@@ -34,6 +34,10 @@
                             <td><?= $this->Number->format($reservation->reservation_status) ?></td>
                        </tr>
                                             <tr>
+                            <th><?= __('Reservation Time') ?></th>
+                            <td><?= $this->Number->format($reservation->reservation_time) ?></td>
+                       </tr>
+                                            <tr>
                             <th><?= __('Reservation Marks') ?></th>
                             <td><?= $this->Number->format($reservation->reservation_marks) ?></td>
                        </tr>
@@ -53,10 +57,6 @@
                                                                     <tr>
                             <th><?= __('Reservation Date') ?></th>
                             <td><?= h($reservation->reservation_date) ?></td>
-                        </tr>
-                                                                                            <tr>
-                            <th><?= __('Reservation Time') ?></th>
-                            <td><?= h($reservation->reservation_time) ?></td>
                         </tr>
                                                                                             <tr>
                             <th><?= __('Customer Id') ?></th>

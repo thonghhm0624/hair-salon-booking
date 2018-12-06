@@ -147,7 +147,7 @@ class AppController extends Controller
 		$this->Cookie->configKey('Name'); */
 		$stylists_select = $this->Stylists->find('all')->select(['stylist_id','stylist_name'])->toArray();
         $branches_select = $this->Branches->find('all')->select(['branch_id','branch_address'])->toArray();
-        $services_select = $this->Services->find('all')->select(['service_id','service_name'])->toArray();
+        $services_select = $this->Services->find('all')->select(['service_id','service_name','service_duration'])->toArray();
         $branches = $this->Branches->find('all')->toArray();
         $this->set('branches',$branches);
         $this->set(compact('services_select'));

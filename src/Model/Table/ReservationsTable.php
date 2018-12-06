@@ -9,10 +9,10 @@ use Cake\Validation\Validator;
 /**
  * Reservations Model
  *
- * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
- * @property \App\Model\Table\StylistsTable|\Cake\ORM\Association\BelongsTo $Stylists
- * @property \App\Model\Table\BranchesTable|\Cake\ORM\Association\BelongsTo $Branches
- * @property \App\Model\Table\ServicesTable|\Cake\ORM\Association\BelongsTo $Services
+ * @property |\Cake\ORM\Association\BelongsTo $Customers
+ * @property |\Cake\ORM\Association\BelongsTo $Stylists
+ * @property |\Cake\ORM\Association\BelongsTo $Branches
+ * @property |\Cake\ORM\Association\BelongsTo $Services
  *
  * @method \App\Model\Entity\Reservation get($primaryKey, $options = [])
  * @method \App\Model\Entity\Reservation newEntity($data = null, array $options = [])
@@ -38,6 +38,7 @@ class ReservationsTable extends Table
         $this->setTable('reservations');
         $this->setDisplayField('reservation_id');
         $this->setPrimaryKey('reservation_id');
+
     }
 
     /**
@@ -64,8 +65,7 @@ class ReservationsTable extends Table
             ->notEmpty('reservation_date');
 
         $validator
-            ->scalar('reservation_time')
-            ->maxLength('reservation_time', 11)
+            ->integer('reservation_time')
             ->requirePresence('reservation_time', 'create')
             ->notEmpty('reservation_time');
 

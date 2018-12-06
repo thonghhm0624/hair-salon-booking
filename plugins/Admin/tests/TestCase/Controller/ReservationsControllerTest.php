@@ -16,11 +16,7 @@ class ReservationsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'plugin.admin.reservations',
-        'plugin.admin.customers',
-        'plugin.admin.stylists',
-        'plugin.admin.branches',
-        'plugin.admin.services'
+        'plugin.admin.reservations'
     ];
 
     /**

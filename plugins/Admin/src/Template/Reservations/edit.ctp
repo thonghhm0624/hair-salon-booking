@@ -37,31 +37,38 @@
 		</div><!-- end col md 3 -->
 		<div class="col-md-9">
             <?php echo  $this->Form->create($reservation); ?>
-                             <div class="form-group">
-                                 <label for="customer-s-name"/>Reservation status</label>
-                                 <?php echo $this->Form->select('reservation_status',$reservation_status,['class'=>'form-control','placeholder' => 'Reservation Status']);  ?>
-                             </div>
-                          <div class="form-group"><?php echo $this->Form->input('reservation_date',['class'=>'form-control','placeholder' => 'Reservation Date']);  ?></div>
-                          <div class="form-group">
-                              <label for="customer-s-name"/>Reservation time</label>
-                              <?php echo $this->Form->select('reservation_time',$service_time,['class'=>'form-control','placeholder' => 'Reservation Time']);  ?>
-                          </div>
-                          <div class="form-group"><?php echo $this->Form->input('reservation_marks',['class'=>'form-control','placeholder' => 'Reservation Marks']);  ?></div>
-                          <div class="form-group"><?php echo $this->Form->input('reservation_remark',['class'=>'form-control','placeholder' => 'Reservation Remark']); ?></div>
-                         <div class="form-group">
-                             <label for="customer-s-name"/>Customer</label>
-                             <?php echo $this->Form->select('customer_id',$customers,['class'=>'form-control','placeholder' => 'Customer Id']);  ?>
-                         </div>
-                          <div class="form-group"><?php echo $this->Form->input('stylist_id',['class'=>'form-control','placeholder' => 'Stylist Id']);  ?></div>
-                          <div class="form-group">
-                              <label for="customer-s-name"/>Branch</label>
-                              <?php echo $this->Form->select('branch_id',$branches,['class'=>'form-control','placeholder' => 'Branch Id']);  ?>
-                          </div>
-                          <div class="form-group">
-                              <label for="customer-s-name"/>Service</label>
-                              <?php echo $this->Form->select('service_id',$services,['class'=>'form-control','placeholder' => 'Service Id']);  ?>
-                          </div>
-                                 <div class="form-group">
+            <div class="form-group">
+                <label for="reservation-status">Reservation Status</label>
+                <?php echo $this->Form->select('reservation_status',$reservation_status,['class'=>'form-control','placeholder' => 'Reservation Status']);  ?>
+            </div>
+            <div class="form-group">
+
+                <?php echo $this->Form->input('reservation_date',['class'=>'form-control','placeholder' => 'Reservation Date']);  ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('reservation_time',['class'=>'form-control','placeholder' => 'Reservation Time']);  ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('reservation_marks',['class'=>'form-control','placeholder' => 'Reservation Marks']);  ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('reservation_remark',['class'=>'form-control','placeholder' => 'Reservation Remark']); ?>
+            </div>
+            <div class="form-group">
+                <label for="reservation-status">Customer</label>
+                <?php echo $this->Form->select('customer_id',$customers,['class'=>'form-control','placeholder' => 'Customer Id','disabled' => 'disabled']);  ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('stylist_id',['class'=>'form-control','placeholder' => 'Stylist Id']);  ?>
+            </div>
+            <div class="form-group">
+                <label for="reservation-status">Branch</label>
+                <?php echo $this->Form->select('branch_id',$branches,['class'=>'form-control','placeholder' => 'Branch Id', 'disabled' => 'disabled']);  ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('service_id',['class'=>'form-control','placeholder' => 'Service Id']);  ?>
+            </div>
+            <div class="form-group">
                 <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 <?php echo $this->Html->link('Cancel', ['action' => 'index'], ['class' => 'btn btn-default'])?>
             </div>    

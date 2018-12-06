@@ -6,46 +6,57 @@ SE.clsUser = (function() {
     }
 
     //PARAMETERS
-    let login_type = $('#classify'),
-        phone = $('#update-info-phonenumber'),
-        name = $('#update-info-name'),
-        password = $('#update-info-password'),
-        submit = $('#submit-user-info'),
-        status = $('#update-status');
+    let name = $('#update-info-name'),
+        password_new = $('#update-info-password-new'),
+        password_retype = $('#update-info-password-retype'),
+        name_submit = $('#submit-user-name'),
+        password_submit = $('#submit-user-password'),
+        status = $('.update-status');
 
     //EVENTS
     function initEvent()
     {
-        password.change (function () {
-            let val = password.val();
-            if (val == "" || val == null || val.length < 6) {
-                let message = "Mật khẩu mới phải có ít nhất 6 ký tự!";
+        password_submit.click (function () {
+            event.preventDefault();
+            if (isSameString(password_new.val(),password_retype.val())) {
                 status.empty();
-                status.append(message);
-                submit.attr('disabled','disabled');
-                password.focus();
+                $.ajax({
+                    url: window_app.webroot + 'update/password',
+                    type: 'post',
+                    data: {
+                        password: password_new.val(),
+                    },
+                    success: function (data) {
+                        let real_data = JSON.parse(data);
+                        if(real_data.status == 1){
+                            status.append('Thay đổi mật khẩu thành công!');
+                            password_new.val("");
+                            password_retype.val("");
+                        } else {
+                            console.log('update failed!');
+                        }
+                    }
+                });
             }
             else {
-                submit.removeAttr('disabled');
+                status.empty();
+                status.append('Mật khẩu mới và nhập lại mật khẩu mới phải giống nhau');
             }
         });
 
-        submit.click (function (event) {
+        name_submit.click (function (event) {
             event.preventDefault();
-            console.log('update info submit clicked!');
             $.ajax({
-                url: window_app.webroot + 'updateinfo',
+                url: window_app.webroot + 'update/name',
                 type: 'post',
                 data: {
-                    phone: phone.val(),
                     name: name.val(),
-                    password: password.val(),
-                    type: login_type.val()
                 },
                 success: function (data) {
                     let real_data = JSON.parse(data);
                     if(real_data.status == 1){
-                        console.log('update successfully!');
+                        status.empty();
+                        status.append('Thay đổi thông tin thành công!');
                     } else {
                         console.log('update failed!');
                     }
@@ -55,7 +66,9 @@ SE.clsUser = (function() {
     }
 
     //FUNCTIONS
-
+    function isSameString (string1,string2) {
+        return (string1 === string2);
+    }
     //RETURN
     return {
         init:init,

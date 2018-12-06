@@ -24,11 +24,7 @@ class ReservationsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.reservations',
-        'app.customers',
-        'app.stylists',
-        'app.branches',
-        'app.services'
+        'app.reservations'
     ];
 
     /**

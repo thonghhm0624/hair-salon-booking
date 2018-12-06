@@ -39,7 +39,6 @@
                                         <td><?= $this->Number->format($service->service_duration) ?></td>
                                         <td><?= $this->Number->format($service->service_price) ?></td>
                                         <td class="actions">
-                            <?= $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), ['action' => 'view', $service->service_id],['escape' => false]) ?>
                             <?= $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), ['action' => 'edit', $service->service_id],['escape' => false]) ?>
                             <?= $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), ['action' => 'delete', $service->service_id], ['escape' => false,'confirm' => __('Are you sure you want to delete # {0}?', $service->service_id)]) ?>
                         </td>
