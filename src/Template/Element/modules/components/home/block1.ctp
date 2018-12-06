@@ -2,7 +2,6 @@
     <div class="block1 container-fluid">
 
         <div class="container">
-            <img class="stage-teaser" src="<?= $this->request->webroot.'images/banner.png' ?>"/>
             <p class="reservation">
                 Nếu bạn đã sẵn sàng<br />
                 thay đổi bản thân <br/>

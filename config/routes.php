@@ -59,6 +59,11 @@ Router::scope('/', function ($routes) {
     $routes->connect('/login',['controller' => 'Frontend', 'action' => 'login']);
     $routes->connect('/logout',['controller' => 'Frontend', 'action' => 'logout']);
 
+    //USER FUNCTIONS
+    $routes->connect('/user/',['controller' => 'Frontend', 'action' => 'user']);
+    $routes->connect('/user/:userfunction',['controller' => 'Frontend', 'action' => 'user'], ['pass'=>['userfunction']]);
+    $routes->connect('/updateinfo/',['controller' => 'Frontend', 'action' => 'updateinfo']);
+
     //RESERVATION
     $routes->connect('/reserve',['controller' => 'Frontend', 'action' => 'reserve']);
 

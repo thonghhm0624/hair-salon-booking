@@ -3,6 +3,11 @@
 }
 
 
+.not-logged-in {
+  @include FontQuickSandRegular(30px,1.4);
+  padding: 20px;
+}
+
 h1 {
   @include FontQuickSandBold(36px, 1.4);
   text-align: center;

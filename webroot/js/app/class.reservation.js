@@ -15,7 +15,7 @@ SE.clsReservation = (function() {
         submit = $('#submit-reservation');
 
 
-
+    //EVENTS
     function initEvent()
     {
         phonenumber.change(function () {

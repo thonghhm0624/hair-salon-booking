@@ -1,0 +1,68 @@
+.page.user {
+
+  .user-sídebar {
+
+
+
+    .user-sidebar-item {
+      border: 2px solid $dark-blue;
+      @include FontQuickSandBold(20px, 1.4);
+      margin-bottom: 15px;
+      border-radius: 15px;
+      padding: 20px 15px;
+      position: relative;
+
+      a {
+        color: darkblue;
+      }
+
+      &:after {
+        content: "";
+        width: 0;
+        height: 2px;
+        background: $dark_blue;
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+        -webkit-transition: ease-in .2s;
+        transition: ease-in .2s;
+      }
+
+      &:hover {
+
+        a:hover {
+          text-decoration: none;
+        }
+
+        &:after {
+          width: 70px;
+        }
+      }
+    }
+  }
+
+  .user-functions {
+
+    #classify {
+      @include FontQuickSandMedium(20px, 1.4);
+    }
+
+    .user-info-container {
+
+    }
+
+    .user-history-container {
+
+      .user-history {
+
+        .history-classify {
+          @include FontQuickSandMedium(18px, 1.4);
+        }
+
+        .history-data-row {
+          @include FontQuickSandRegular(14px, 1.4);
+        }
+      }
+    }
+  }
+}

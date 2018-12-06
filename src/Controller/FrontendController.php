@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use Cake\Mailer\Email;
+use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use App\Controller\AppController;
 require_once(ROOT .DS. 'src'.DS. 'Lib' . DS .'image_load.php');
@@ -336,6 +337,7 @@ class FrontendController extends AppController {
         }
     }
 
+    //stylists by branch
     public function stylistsByBranch ()
     {
         $this->autoRender = false;
@@ -366,4 +368,56 @@ class FrontendController extends AppController {
         return $this->response;
     }
 
+    //user functions
+    public function user ($userfunction = 'changeinfo') {
+        $this->set('userfunction',$userfunction);
+        $this->render('account_information');
+    }
+
+    public function updateinfo () {
+        $this->autoRender = false;
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $name = $data['name'];
+            $password= $data['password'];
+            $phone = $data['phone'];
+            $type = $data['type'];
+            $response = [
+                'status'=>0,
+                'message'=>'Fail',
+            ];
+            if ($type == 'customer') {
+                $this->loadModel('Customers');
+                $this->Customers->read(null, $phone);
+                $this->Customers->set([
+                    'customer_name' => $name,
+                    'customer_password' => $password
+                ]);
+                $this->Customers->save();
+                $response = [
+                    'status'=>1,
+                    'message'=>'Success',
+                ];
+            }
+            else if ($type == 'stylist') {
+                $this->loadModel('Stylists');
+                $stylist_id = $this->Stylists->find('all')->where([
+                    'stylist_phone' => $phone
+                ])->select('stylist_id')->first();
+                $this->Stylists->read(null, $stylist_id);
+                $this->Stylists->set([
+                    'stylist_name' => $name,
+                    'stylist_password' => $password
+                ]);
+                $this->Stylists->save();
+                $response = [
+                    'status'=> 1,
+                    'message'=>'Success',
+                ];
+            }
+            $this->response->withType('json');
+            $this->response->body(json_encode($response));
+            return  $this->response;
+        }
+    }
 }

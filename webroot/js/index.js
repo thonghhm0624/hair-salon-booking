@@ -9,12 +9,14 @@ import datepickerFactory from 'jquery-datepicker';
 
 require('./app/class.popup');
 require('./app/class.reservation');
+require('./app/class.user');
 
 datepickerFactory($);
 $('#reservation-date').datepicker();
 
 SE.clsPopup.init();
 SE.clsReservation.init();
+SE.clsUser.init();
 
 $('#login-submit-btn').click(function(event){
     event.preventDefault();
@@ -86,6 +88,10 @@ $('#submit-reservation').click(function(event){
     });
     //
 });
+
+function isValidPhonenumber(value) {
+    return (/^\d{10,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
+}
 
 // $('.js-goto').click(function(event){
 //     event.preventDefault();
