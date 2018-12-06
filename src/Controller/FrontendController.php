@@ -527,23 +527,16 @@ class FrontendController extends AppController
                 $this->loadModel('Services');
                 $times_to_be_conflicted = [];
                 foreach ($time_and_status as $time) {
-                    if (($time['reservation_status'] != 3 || $time['reservation_status'] != 4)) {
+                    if (($time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
                         $service_duration = $this->Services->find('all')->where([
                             'service_id' => $time['service_id']
                         ])->first();
                         $time_conflict = intval($time['reservation_time']);
                         $time_service_duration = intval($service_duration['service_duration']);
                         for ($i = 1; $i <= $time_service_duration; $i++) {
-                            $__time = $time_conflict + $i -1;
+                            $__time = $time_conflict + $i - 1;
                             if ($__time > 20)
                                 array_push($times_to_be_conflicted, 20);
-//                            else if ($__time == 19 && $time_service_duration == 3) {
-//                                array_push($times_to_be_conflicted, 19);
-//                                array_push($times_to_be_conflicted, 20);
-//                            }
-//                            else if ($__time == 20 && $time_service_duration >= 2) {
-//                                array_push($times_to_be_conflicted, 20);
-//                            }
                             else
                                 array_push($times_to_be_conflicted, $__time);
                         }
@@ -558,13 +551,14 @@ class FrontendController extends AppController
                             'times_to_be_conflicted' => $times_to_be_conflicted
                         ]
                     ];
-                } else {
-                    $response = [
-                        'status' => 1,
-                        'message' => 'Successfully',
-                        'time_conflict' => 0,
-                    ];
                 }
+            }
+            else {
+                $response = [
+                    'status' => 1,
+                    'message' => 'Successfully',
+                    'time_conflict' => 0,
+                ];
             }
             $this->response->withType('json');
             $this->response->body(json_encode($response));

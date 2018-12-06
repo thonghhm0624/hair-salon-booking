@@ -96,6 +96,8 @@ SE.clsReservation = (function() {
                                 times_to_be_conflicted = null;
                                 for(let i = 10; i <= 20; i++) {
                                     option += '<option value=' + i + '>' + i + ':00' + '</option>';
+                                    time.append(option);
+                                    time.removeAttr('disabled');
                                 }
                             }
                             else {
@@ -121,19 +123,22 @@ SE.clsReservation = (function() {
         time.change (function () {
             if (time.val() != null) {
                 // submit.removeAttr('disabled');
-                let duration = $(service).find(":selected").attr('duration');
-                let new_time = parseInt(time.val())+ parseInt(duration);
-
+                let duration = parseInt($(service).find(":selected").attr('duration'));
+                let new_time = parseInt(time.val())
+                let isAnyConflictTime= false;
                 if (times_to_be_conflicted != null) {
-                    if (checkTimeConflict(times_to_be_conflicted, new_time))
-                        alert('Thời gian chọn chưa phù hợp vì stylist này có thể sẽ có khách khác trong lúc này');
-                    else {
-                        submit.removeAttr('disabled');
+                    for (let i = 1; i <= duration; i++) {
+                        if (checkTimeConflict(times_to_be_conflicted, new_time + i - 1)) {
+                            isAnyConflictTime = true;
+                            alert('Thời gian chọn chưa phù hợp vì stylist này có thể sẽ có khách khác trong lúc này');
+                            break;
+                        }
                     }
                 }
-                else {
+                if (isAnyConflictTime)
+                    submit.attr('disabled','disabled');
+                else
                     submit.removeAttr('disabled');
-                }
             }
         });
     }
