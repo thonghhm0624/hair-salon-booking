@@ -67,6 +67,7 @@ Router::scope('/', function ($routes) {
     //RESERVATION
     $routes->connect('/reserve',['controller' => 'Frontend', 'action' => 'reserve']);
     $routes->connect('/reservationtimehandler/',['controller' => 'Frontend', 'action' => 'reservationtimehandler']);
+    $routes->connect('/reservationtimecheckconflict/',['controller' => 'Frontend', 'action' => 'reservationtimecheckconflict']);
 
     //articles
     $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);

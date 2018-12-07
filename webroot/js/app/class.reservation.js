@@ -124,21 +124,44 @@ SE.clsReservation = (function() {
             if (time.val() != null) {
                 // submit.removeAttr('disabled');
                 let duration = parseInt($(service).find(":selected").attr('duration'));
-                let new_time = parseInt(time.val())
-                let isAnyConflictTime= false;
-                if (times_to_be_conflicted != null) {
-                    for (let i = 1; i <= duration; i++) {
-                        if (checkTimeConflict(times_to_be_conflicted, new_time + i - 1)) {
-                            isAnyConflictTime = true;
-                            alert('Thời gian chọn chưa phù hợp vì stylist này có thể sẽ có khách khác trong lúc này');
-                            break;
+                let new_time = parseInt(time.val());
+                // let isAnyConflictTime= false;
+                // if (times_to_be_conflicted != null) {
+                //     for (let i = 1; i <= duration; i++) {
+                //         if (checkTimeConflict(times_to_be_conflicted, new_time + i - 1)) {
+                //             isAnyConflictTime = true;
+                //             alert('Thời gian chọn chưa phù hợp vì stylist này có thể sẽ có khách khác trong lúc này');
+                //             break;
+                //         }
+                //     }
+                // }
+                // if (isAnyConflictTime)
+                //     submit.attr('disabled','disabled');
+                // else
+                //     submit.removeAttr('disabled');
+                $.ajax({
+                    url: window_app.webroot + 'reservationtimecheckconflict',
+                    type: 'post',
+                    data: {
+                        stylist: stylist.val(),
+                        date: date.val(),
+                        duration: duration,
+                        new_time: new_time,
+                    },
+                    success: function (data) {
+                        let real_data = JSON.parse(data);
+
+                        if(real_data.status == 1){
+                            submit.removeAttr('disabled');
+                        }
+                        else if (real_data.status == 2) {
+                            alert('Thời gian chọn chưa phù hợp vì stylist này có thể đang có khách trong phạm vi thời gian của dịch vụ');
+                        }
+                        else {
+                            submit.removeAttr('disabled');
                         }
                     }
-                }
-                if (isAnyConflictTime)
-                    submit.attr('disabled','disabled');
-                else
-                    submit.removeAttr('disabled');
+                });
             }
         });
     }

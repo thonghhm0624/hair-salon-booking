@@ -16,6 +16,7 @@
                     <th><?= $this->Paginator->sort('stylist_id') ?></th>
                     <th><?= $this->Paginator->sort('reservation_date') ?></th>
                     <th><?= $this->Paginator->sort('reservation_time') ?></th>
+                    <th>Done expected time</th>
                     <th><?= $this->Paginator->sort('reservation_marks') ?></th>
                     <th><?= $this->Paginator->sort('customer_id') ?></th>
                     <th><?= $this->Paginator->sort('reservation_status') ?></th>
@@ -30,6 +31,7 @@
                         <td><?= $stylists[$reservation->stylist_id] ?></td>
                         <td><?= h($reservation->reservation_date) ?></td>
                         <td><?= $service_time[$reservation->reservation_time] ?></td>
+                        <td><?= ($reservation->reservation_time) + ($service_duration[$reservation->service_id])?>:00</td>
                         <td><?= $this->Number->format($reservation->reservation_marks) ?></td>
                         <td><?= $customers[$reservation->customer_id] ?></td>
                         <td><?= $reservation_status[$reservation->reservation_status] ?></td>

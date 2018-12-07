@@ -29,6 +29,7 @@ class ReservationsController extends AppController
         $stylists =  $this->Stylists->find('list',['keyField'=>'stylist_id','valueField'=>'stylist_name'])->toArray();
         $customers =  $this->Customers->find('list',['keyField'=>'customer_id','valueField'=>'customer_name'])->toArray();
         $services =  $this->Services->find('list',['keyField'=>'service_id','valueField'=>'service_name'])->toArray();
+        $service_duration =  $this->Services->find('list',['keyField'=>'service_id','valueField'=>'service_duration'])->toArray();
         $branches =  $this->Branches->find('list',['keyField'=>'branch_id','valueField'=>'branch_address'])->toArray();
 
         $this->set('reservation_status', $this->reservation_status);
@@ -37,6 +38,7 @@ class ReservationsController extends AppController
         $this->set(compact('stylists'));
         $this->set(compact('customers'));
         $this->set(compact('services'));
+        $this->set(compact('service_duration'));
         $this->set(compact('branches'));
         $this->set(compact('reservation_status'));
     }

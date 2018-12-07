@@ -322,6 +322,7 @@ class FrontendController extends AppController
                                 'name' => $session->read('login_user')['stylist_name'],
                                 'id' => $session->read('login_user')['stylist_phone'],
                                 'image' => $session->read('login_user')['stylist_image'],
+                                'stylist_primary_id' => $session->read('login_user')['stylist_id'],
                             ],
                             'login_type' => $session->read('login_type')
                         ]
@@ -378,24 +379,39 @@ class FrontendController extends AppController
     public function user($userfunction = 'changeinfo')
     {
         $this->set('userfunction', $userfunction);
+
         if ($userfunction = 'history') {
             $session = $this->request->session();
             $sessionData = $session->read('response');
-            $customer_id = $sessionData['data']['login_user']['id'];
             $this->loadModel("Reservations");
             $this->loadModel("Branches");
             $this->loadModel('Services');
-            $this->loadModel('Stylists');
-            $reservations = $this->Reservations->find('all')->where([
-                'customer_id' => $customer_id,
-            ])->toArray();
-            $stylists = $this->Stylists->find('list', ['keyField' => 'stylist_id', 'valueField' => 'stylist_name'])->toArray();
             $services = $this->Services->find('list', ['keyField' => 'service_id', 'valueField' => 'service_name'])->toArray();
             $branches = $this->Branches->find('list', ['keyField' => 'branch_id', 'valueField' => 'branch_address'])->toArray();
-            $this->set('reservations', $reservations);
-            $this->set('branches', $branches);
-            $this->set('stylists', $stylists);
-            $this->set('services', $services);
+            if ($sessionData['data']['login_type'] == 'customer') {
+                $user_id = $sessionData['data']['login_user']['id'];
+                $this->loadModel('Stylists');
+                $reservations = $this->Reservations->find('all')->where([
+                    'customer_id' => $user_id,
+                ])->toArray();
+                $stylists = $this->Stylists->find('list', ['keyField' => 'stylist_id', 'valueField' => 'stylist_name'])->toArray();
+                $this->set('reservations', $reservations);
+                $this->set('stylists', $stylists);
+                $this->set('services', $services);
+                $this->set('branches', $branches);
+            }
+            else if ($sessionData['data']['login_type'] = 'stylist') {
+                $user_id = $sessionData['data']['login_user']['stylist_primary_id'];
+                $this->loadModel('Customers');
+                $reservations = $this->Reservations->find('all')->where([
+                    'stylist_id' => $user_id,
+                ])->toArray();
+                $customers = $this->Customers->find('list', ['keyField' => 'customer_id', 'valueField' => 'customer_name'])->toArray();
+                $this->set('reservations', $reservations);
+                $this->set('customers', $customers);
+                $this->set('services', $services);
+                $this->set('branches', $branches);
+            }
         }
         $this->render('account_information');
     }
@@ -439,9 +455,9 @@ class FrontendController extends AppController
                     }
                 } else if ($type == 'stylist') {
                     $this->loadModel('Stylists');
-                    $stylist_id = $this->Stylists->find('all')->where([
+                    $stylist_id = ($this->Stylists->find('all')->where([
                         'stylist_phone' => $phone
-                    ])->select('stylist_id')->first();
+                    ])->first())['stylist_id'];
                     $this->Stylists->id = $stylist_id;
                     $stylistsTable = TableRegistry::get('Stylists');
                     $stylist = $stylistsTable->get($stylist_id); //
@@ -456,6 +472,7 @@ class FrontendController extends AppController
                                     'name' => $session->read('login_user')['stylist_name'],
                                     'id' => $session->read('login_user')['stylist_phone'],
                                     'image' => $session->read('login_user')['stylist_image'],
+                                    'stylist_primary_id' => $session->read('login_user')['stylist_id'],
                                 ],
                                 'login_type' => $session->read('login_type')
                             ]
@@ -479,9 +496,9 @@ class FrontendController extends AppController
                     }
                 } else if ($type == 'stylist') {
                     $this->loadModel('Stylists');
-                    $stylist_id = $this->Stylists->find('all')->where([
+                    $stylist_id = ($this->Stylists->find('all')->where([
                         'stylist_phone' => $phone
-                    ])->select('stylist_id')->first();
+                    ])->first())['stylist_id'];
                     $this->Stylists->id = $stylist_id;
                     $stylistsTable = TableRegistry::get('Stylists');
                     $stylist = $stylistsTable->get($stylist_id); //
@@ -513,13 +530,10 @@ class FrontendController extends AppController
         if ($this->request->is('post')) {
             $data = $this->request->getData();
             $stylist = $data['stylist'];
-            $branch = $data['store'];
-            $service = $data['service'];
             $date = $data['date'];
 
             $time_and_status = $this->Reservations->find('all')->where([
                 'stylist_id' => $stylist,
-                'branch_id' => $branch,
                 'reservation_date' => $date,
             ])->toArray();
 
@@ -552,18 +566,73 @@ class FrontendController extends AppController
                         ]
                     ];
                 }
-            }
-            else {
+            } else {
                 $response = [
                     'status' => 1,
                     'message' => 'Successfully',
                     'time_conflict' => 0,
                 ];
             }
-            $this->response->withType('json');
-            $this->response->body(json_encode($response));
-            return $this->response;
-
         }
+        $this->response->withType('json');
+        $this->response->body(json_encode($response));
+        return $this->response;
+    }
+
+    public function reservationtimecheckconflict()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Reservations');
+        $response = [
+            'status' => 0,
+            'message' => 'Failed to retrieve information',
+        ];
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $stylist = $data['stylist'];
+            $date = $data['date'];
+            $duration = intval($data['duration']);
+            $new_time = intval($data['new_time']);
+            $time_and_status = $this->Reservations->find('all')->where([
+                'stylist_id' => $stylist,
+                'reservation_date' => $date,
+            ])->toArray();
+            if (!empty($time_and_status)) {
+                $any_time_conflict = false;
+                foreach ($time_and_status as $time) {
+                    if (($time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
+//                        $time_conflict = intval($time['reservation_time']);
+                        for ($i = 1; $i <= $duration; $i++) {
+                            $__time = $new_time + $i - 1;
+                            if ($__time == intval($time['reservation_time'])) {
+                                $any_time_conflict = true;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+                if ($any_time_conflict) {
+                    $response = [
+                        'status' => 2,
+                        'message' => 'There is/are time conflict(s)',
+                    ];
+                } else {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'No time conflict',
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => 1,
+                    'message' => 'No time conflict',
+                ];
+            }
+        }
+
+        $this->response->withType('json');
+        $this->response->body(json_encode($response));
+        return $this->response;
     }
 }
+

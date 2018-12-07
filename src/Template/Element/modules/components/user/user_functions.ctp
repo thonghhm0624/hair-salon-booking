@@ -59,24 +59,48 @@
     <div id="user-history-container-function" class="user-history-container">
         <h2>Lịch sử</h2>
         <div class="user-history">
-            <div class="row border history-classify">
-                <div class="col-1 border">Mã</div>
-                <div class="col-3 border">Chi nhánh</div>
-                <div class="col-2 border">Dịch vụ</div>
-                <div class="col-2 border">Stylist</div>
-                <div class="col-2 border">Ngày</div>
-                <div class="col-2 border">Thời gian</div>
-            </div>
-            <?php foreach ($reservations as $reservation) : ?>
+            <?php if ($session['data']['login_type'] == 'customer') : ?>
+                <div class="row border history-classify">
+                    <div class="col-1 border">Mã</div>
+                    <div class="col-3 border">Chi nhánh</div>
+                    <div class="col-2 border">Dịch vụ</div>
+                    <div class="col-2 border">Stylist</div>
+                    <div class="col-2 border">Ngày</div>
+                    <div class="col-2 border">Thời gian</div>
+                </div>
+                <?php foreach ($reservations as $reservation) : ?>
                 <div class="row history-data-row">
                     <div class="col-1 border border-top-0"><?= $reservation->reservation_id ?></div>
-                    <div class="col-3 border border-top-0"><?= $branches[$reservation->reservation_id] ?></div>
-                    <div class="col-2 border border-top-0"><<?= $services[$reservation->service_id] ?>/div>
+                    <div class="col-3 border border-top-0"><?= $branches[$reservation->branch_id] ?></div>
+                    <div class="col-2 border border-top-0"><?= $services[$reservation->service_id]?></div>
                     <div class="col-2 border border-top-0"><?= $stylists[$reservation->stylist_id] ?></div>
                     <div class="col-2 border border-top-0"><?= $reservation->reservation_date ?></div>
-                    <div class="col-2 border border-top-0"><?= $reservation->reservation_time ?></div>
+                    <div class="col-2 border border-top-0"><?= $reservation->reservation_time ?>:00</div>
                 </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php elseif ($session['data']['login_type'] == 'stylist') : ?>
+                <div class="row border history-classify">
+                    <div class="col-2 border">Chi nhánh</div>
+                    <div class="col-2 border">Khách</div>
+                    <div class="col-2 border">Dịch vụ</div>
+                    <div class="col-2 border">Ngày</div>
+                    <div class="col-1 border">Thời gian</div>
+                    <div class="col-1 border">Điểm</div>
+                    <div class="col-2 border">Đánh giá</div>
+                </div>
+                <?php foreach ($reservations as $reservation) : ?>
+                    <div class="row history-data-row">
+                        <div class="col-2 border border-top-0"><?= $branches[$reservation->branch_id] ?></div>
+                        <div class="col-2 border border-top-0"><?= $customers[$reservation->customer_id]?></div>
+                        <div class="col-2 border border-top-0"><?= $services[$reservation->service_id] ?></div>
+                        <div class="col-2 border border-top-0"><?= $reservation->reservation_date ?></div>
+                        <div class="col-1 border border-top-0"><?= $reservation->reservation_time ?>:00</div>
+                        <div class="col-1 border border-top-0"><?= $reservation->reservation_marks ?></div>
+                        <div class="col-2 border border-top-0"><?= $reservation->reservation_remark ?></div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+            <?php endif; ?>
         </div>
         <hr />
     </div>

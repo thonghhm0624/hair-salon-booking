@@ -135,16 +135,7 @@ class AppController extends Controller
 		$this->set('captchaKey', Configure::read('captchaKey'));
 		$this->share_message = $share_message;
 		$this->set('share_message',$this->share_message); 
-		
-		/*$this->loadComponent('Cookie');
-		$this->Cookie->config([
-			'expires' => '+365 days',
-			'encryption' => 'aes',
-			'key' => 'BLISS\BLISS_HBPTOJECT_05102016'
-			//'httpOnly' => true
-		]);
-		$this->Cookie->config('path', '/');
-		$this->Cookie->configKey('Name'); */
+
 		$stylists_select = $this->Stylists->find('all')->select(['stylist_id','stylist_name'])->toArray();
         $branches_select = $this->Branches->find('all')->select(['branch_id','branch_address'])->toArray();
         $services_select = $this->Services->find('all')->select(['service_id','service_name','service_duration'])->toArray();
