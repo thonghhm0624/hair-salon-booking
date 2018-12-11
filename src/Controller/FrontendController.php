@@ -393,6 +393,7 @@ class FrontendController extends AppController
                 $this->loadModel('Stylists');
                 $reservations = $this->Reservations->find('all')->where([
                     'customer_id' => $user_id,
+                    'reservation_status' => 3
                 ])->toArray();
                 $stylists = $this->Stylists->find('list', ['keyField' => 'stylist_id', 'valueField' => 'stylist_name'])->toArray();
                 $this->set('reservations', $reservations);
@@ -405,6 +406,7 @@ class FrontendController extends AppController
                 $this->loadModel('Customers');
                 $reservations = $this->Reservations->find('all')->where([
                     'stylist_id' => $user_id,
+                    'reservation_status' => 3
                 ])->toArray();
                 $customers = $this->Customers->find('list', ['keyField' => 'customer_id', 'valueField' => 'customer_name'])->toArray();
                 $this->set('reservations', $reservations);

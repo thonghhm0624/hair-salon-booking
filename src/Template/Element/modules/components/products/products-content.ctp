@@ -25,7 +25,7 @@ $params_pagination = $this->Paginator->params();
                         </div>
                         <div>&nbsp;</div>
                         <div class="product-img">
-                            <img src="<?= $this->request->webroot.$product->product_image ?>"/>
+                            <img sty src="<?= $this->request->webroot.$product->product_image ?>"/>
                         </div>
                         <div>&nbsp;</div>
                         <div class="product-description">

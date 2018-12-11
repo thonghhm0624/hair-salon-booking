@@ -88,6 +88,7 @@
                     <div class="col-1 border">Điểm</div>
                     <div class="col-2 border">Đánh giá</div>
                 </div>
+                <?php $sum_stylist_marks = 0 ?>
                 <?php foreach ($reservations as $reservation) : ?>
                     <div class="row history-data-row">
                         <div class="col-2 border border-top-0"><?= $branches[$reservation->branch_id] ?></div>
@@ -98,9 +99,12 @@
                         <div class="col-1 border border-top-0"><?= $reservation->reservation_marks ?></div>
                         <div class="col-2 border border-top-0"><?= $reservation->reservation_remark ?></div>
                     </div>
+                    <?php $sum_stylist_marks +=  intval($reservation->reservation_marks) ?>
                 <?php endforeach; ?>
             <?php else: ?>
             <?php endif; ?>
+            <div>&nbsp;</div>
+            <div>Điểm trung bình: <?= $sum_stylist_marks/sizeof($reservations) ?> </div>
         </div>
         <hr />
     </div>

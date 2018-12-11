@@ -17,7 +17,7 @@
                     <div class="footer-item footer-system-col">
                         <div class="title"><h1 class="left-underline">Hệ Thống</h1></div>
                         <div class="content-container">
-                            <?php foreach ($branches as $branch) : ?>
+                            <?php foreach ($branches_for_site as $branch) : ?>
                                 <div class="content"><?= $branch->branch_address ?></div>
                             <?php endforeach; ?>
                         </div>
@@ -28,7 +28,7 @@
                         <div class="title"><h1 class="left-underline">Liên Hệ</h1></div>
                         <div class="content-container">
                             <div class="content">
-                                <?php foreach ($branches as $branch) : ?>
+                                <?php foreach ($branches_for_site as $branch) : ?>
                                     <div class="content"><?= $branch->branch_phonenumber ?></div>
                                 <?php endforeach; ?>
                             </div>
