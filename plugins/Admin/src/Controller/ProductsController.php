@@ -100,7 +100,6 @@ class ProductsController extends AppController
             if ($this->Products->save($product)) {
                 // Image handler
                 if(file_exists($product->product_image) && $original_image != $product->product_image){
-                    $this->imageSavingHandler($product);
                     $this->Products->save($product);
                 }
                 // Image handler
@@ -137,28 +136,5 @@ class ProductsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    function imageSavingHandler($product){
-        $image_path = 'files/upload/products/' . $product->id;
-        $dir_image = new Folder(WWW_ROOT . $image_path, true, 0777);
-        $product->product_image =  $this->moveResizeImage(
-            $product->product_image,
-            str_replace('files/upload/temp/', '', $product->product_image),
-            $image_path);
-        $folder = new Folder(WWW_ROOT . 'files/upload/temp');
-        $folder->delete();
-        $folder = new Folder(WWW_ROOT . 'files/upload/temp', true, 0777);
-
-    }
-    function moveResizeImage($image_path = null, $file_name= null, $thumb_path = null){
-        if(file_exists($image_path))
-        {
-            $img = new image_load();
-            $img->load($image_path);
-//            $img->resize_to_width(600);
-            $img->save($thumb_path.'/'.$file_name,100);
-            return $thumb_path.'/'.$file_name;
-        }
     }
 }
