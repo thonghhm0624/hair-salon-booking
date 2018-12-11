@@ -26,23 +26,26 @@
                                 							</ul>
 						</div>
 					</div>
-				</div>			
+				</div>
 		</div><!-- end col md 3 -->
 		<div class="col-md-9">
             <?php echo  $this->Form->create($stylist); ?>
             <div class="form-group">
-                <label for="stylist-branch">Time</label>
+                <label for="stylist-branch">Stylist Branch</label>
                 <?php echo $this->Form->select('stylist_branch_id',$branches,['class'=>'form-control','placeholder' => 'Stylist Branch Id']);  ?>
             </div>
-                                          <div class="form-group"><?php echo $this->Form->input('stylist_name',['class'=>'form-control','placeholder' => 'Stylist Name']);  ?></div>
-                                          <div class="form-group"><?php echo $this->Form->input('stylist_password',['class'=>'form-control','placeholder' => 'Stylist Password']);  ?></div>
-                                          <div class="form-group"><?php echo $this->Form->input('stylist_image',['class'=>'form-control','placeholder' => 'Stylist Image']); ?></div>
-                                         <div class="form-group"><?php echo $this->Form->input('stylist_status',['class'=>'form-control','placeholder' => 'Stylist Status']);  ?></div>
-                                          <div class="form-group"><?php echo $this->Form->input('stylist_phone',['class'=>'form-control','placeholder' => 'Stylist Phone']);  ?></div>
-                                 <div class="form-group">
+          <div class="form-group"><?php echo $this->Form->input('stylist_name',['class'=>'form-control','placeholder' => 'Stylist Name']);  ?></div>
+          <div class="form-group"><?php echo $this->Form->input('stylist_password',['class'=>'form-control','placeholder' => 'Stylist Password']);  ?></div>
+          <div class="form-group"><?php echo $this->Form->input('stylist_image',['class'=>'form-control','placeholder' => 'Stylist Image']); ?></div>
+             <div class="form-group">
+                 <label for="stylist-branch">Stylist Status</label>
+                 <?php echo $this->Form->select('stylist_status',$stylist_status,['class'=>'form-control','placeholder' => 'Stylist Status']);  ?>
+             </div>
+            <div class="form-group"><?php echo $this->Form->input('stylist_phone',['class'=>'form-control','placeholder' => 'Stylist Phone']);  ?></div>
+            <div class="form-group">
                 <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 <?php echo $this->Html->link('Cancel', ['action' => 'index'], ['class' => 'btn btn-default'])?>
-            </div>    
+            </div>
             <?php echo $this->Form->end() ?>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->

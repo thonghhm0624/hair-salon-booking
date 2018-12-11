@@ -11,8 +11,11 @@ require('./app/class.popup');
 require('./app/class.reservation');
 require('./app/class.user');
 
+var today = new Date();
 datepickerFactory($);
-$('#reservation-date').datepicker();
+$('#reservation-date').datepicker({
+    minDate: today
+});
 
 SE.clsPopup.init();
 SE.clsReservation.init();

@@ -45,6 +45,7 @@
                 <div class="form-group"><?php echo $this->Form->input('article_description',['class'=>'form-control','placeholder' => 'Article Description']); ?></div>
                 <div class="form-group"><?php echo $this->Form->input('article_keyword',['class'=>'form-control','placeholder' => 'Article Keyword']); ?></div>
             <div class="form-group">
+                <label for="content">Product content</label>
                 <?php echo $this->Form->textarea('article_content',['id'=>'article_content','class'=>'form-control','placeholder' => 'Article Content']); ?>
             </div>
             <div class="form-group">

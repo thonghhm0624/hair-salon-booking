@@ -288,16 +288,16 @@ if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "localh
 }
 //admin: admin@mail.com / Admin@1234
 Configure::write('reservation_status', [
-    0 => 'Unverified',
-    1 => 'Verified',
-    2 => 'Pending',
-    3 => 'Done',
-    4 => 'Cancelled'
+    0 => 'Chưa xác nhận',
+    1 => 'Đã xác nhận',
+    2 => 'Đang chờ phục vụ',
+    3 => 'Hoàn tất',
+    4 => 'Hủy'
 ]);
 
 Configure::write('customer_status', [
-    0 => 'Unverified',
-    1 => 'Verified',
+    0 => 'Khách chưa xác nhận',
+    1 => 'Khách đã xác nhận',
 ]);
 
 Configure::write('service_time', [
@@ -312,4 +312,9 @@ Configure::write('service_time', [
     18 => '18:00',
     19 => '19:00',
     20 => '20:00',
+]);
+
+Configure::write('stylist_status', [
+    0 => 'Đã nghỉ việc',
+    1 => 'Đang làm việc',
 ]);

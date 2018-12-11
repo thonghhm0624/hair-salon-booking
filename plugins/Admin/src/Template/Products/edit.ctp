@@ -42,9 +42,12 @@
                 <?php echo $this->Form->select('product_category_id',$categories,['class'=>'form-control','placeholder' => 'Product Category Id']);  ?>
             </div>
             <div class="form-group"><?php echo $this->Form->input('product_title',['class'=>'form-control','placeholder' => 'Product Title']);  ?></div>
-            <div class="form-group"><?php echo $this->Form->textarea('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
+            <div class="form-group"><?php echo $this->Form->input('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
             <div class="form-group"><?php echo $this->Form->input('product_keyword',['class'=>'form-control','placeholder' => 'Product Keyword']);  ?></div>
-            <div class="form-group"><?php echo $this->Form->textarea('product_content',['id'=>'product_content','class'=>'form-control','placeholder' => 'Product Content']); ?></div>
+            <div class="form-group">
+                <label for="content">Product content</label>
+                <?php echo $this->Form->textarea('product_content',['id'=>'product_content','class'=>'form-control','placeholder' => 'Product Content']); ?>
+            </div>
             <div class="form-group">
                 <?php echo $this->Form->input('product_image',['class'=>'form-control','placeholder' => 'Product Image']); ?>
             </div>

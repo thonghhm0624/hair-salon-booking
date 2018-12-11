@@ -15,7 +15,7 @@ class FrontendController extends AppController
 {
     //public $layout = 'frontend';
     public $paginate = [
-        'limit' => 3,
+        'limit' => 12,
     ];
 
     public function initialize()
@@ -357,7 +357,8 @@ class FrontendController extends AppController
             $data = $this->request->getData();
             $branch_id = $data['store'];
             $stylists = $this->Stylists->find('all')->where([
-                'stylist_branch_id' => $branch_id
+                'stylist_branch_id' => $branch_id,
+                'stylist_status' => 1
             ])->select(['stylist_id', 'stylist_name'])->toArray();
 
             if (!empty($stylists)) {

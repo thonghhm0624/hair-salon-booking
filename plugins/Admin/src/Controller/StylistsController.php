@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 
 use Admin\Controller\AppController;
+use Cake\Core\Configure;
 
 /**
  * Stylists Controller
@@ -11,12 +12,16 @@ use Admin\Controller\AppController;
  */
 class StylistsController extends AppController
 {
+    public $stylist_status = [];
     public function initialize(){
         parent::initialize();
         $this->loadModel('Stylists');
         $this->loadModel('Branches');
-        $branches =  $this->Branches->find('list',['keyField'=>'branch_id','valueField'=>'branch_address'])->toArray();
+        $this->stylist_status = Configure::read('stylist_status');
+        $branches = $this->Branches->find('list',['keyField'=>'branch_id','valueField'=>'branch_address'])->toArray();
+        $this->set('stylist_status', $this->stylist_status);
         $this->set(compact('branches'));
+        $this->set(compact('stylist_status'));
     }
     /**
      * Index method
