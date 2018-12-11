@@ -44,12 +44,11 @@
                 <div class="form-group"><?php echo $this->Form->input('article_title',['class'=>'form-control','placeholder' => 'Article Title']);  ?></div>
                 <div class="form-group"><?php echo $this->Form->input('article_description',['class'=>'form-control','placeholder' => 'Article Description']); ?></div>
                 <div class="form-group"><?php echo $this->Form->input('article_keyword',['class'=>'form-control','placeholder' => 'Article Keyword']); ?></div>
-                <div class="form-group"><?php echo $this->Form->input('article_content',['class'=>'form-control','placeholder' => 'Article Content']); ?></div>
             <div class="form-group">
-                <div class="form-group" id="group-image">
-                    <label for="image">Image (600x600)</label>
-                    <?php echo $this->JqueryUpload->upload('product_image', 'upload',$article->article_image); ?>
-                </div>
+                <?php echo $this->Form->textarea('article_content',['id'=>'article_content','class'=>'form-control','placeholder' => 'Article Content']); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('article_image',['class'=>'form-control','placeholder' => 'Article Image']); ?>
             </div>
                 <div class="form-group">
                     <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
@@ -58,4 +57,40 @@
             <?php echo $this->Form->end() ?>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
+    <script>
+        $(document).ready(function() {
+            tinymce.init({
+                selector: "#article_content",
+                theme: "modern",
+                paste_data_images: true,
+                paste_as_text: true,
+                height : "500",
+                menubar: false,
+                plugins: [
+                    "advlist lists link image media ",
+                    "paste textcolor colorpicker"
+                ],
+                toolbar1: "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media ",
+                block_formats: 'Header=h4;Paragraph=p;',
+                image_advtab: true,
+//            file_picker_callback: function(callback, value, meta) {
+//                if (meta.filetype == 'image') {
+//
+//                    $('#upload').trigger('click');
+//                    $('#upload').on('change', function() {
+//                        var file = this.files[0];
+//                        var reader = new FileReader();
+//                        reader.onload = function(e) {
+//                            callback(e.target.result, {
+//                                alt: ''
+//                            });
+//                        };
+//                        reader.readAsDataURL(file);
+//                    });
+//                }
+//            }
+            });
+        });
+    </script>
+
 </div>

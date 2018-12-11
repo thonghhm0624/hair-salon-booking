@@ -24,8 +24,8 @@
             <table cellpadding="0" cellspacing="0" class="table table-striped">
                 <thead>
                 <tr>
+                    <th><?= $this->Paginator->sort('product_category_id') ?></th>
                     <th><?= $this->Paginator->sort('product_id') ?></th>
-                    <th><?= $this->Paginator->sort('product_image') ?></th>
                     <th><?= $this->Paginator->sort('product_title') ?></th>
                     <th><?= $this->Paginator->sort('product_description') ?></th>
                     <th class="actions"></th>
@@ -34,19 +34,10 @@
                 <tbody>
                 <?php foreach ($products as $product): $product_id = $product->product_id ?>
                     <tr>
-                        <td><?= $this->Number->format($product->product_id) ?></td>
-                        <td>
-                            <a href="<?= $this->request->webroot.$product->product_image ?>" class="fancybox"><img height="60" src="<?= $this->request->webroot.$product->product_image ?>"></a>
-                        </td>
+                        <td><?= $categories[$product->product_category_id] ?></td>
+                        <td><?= $product->product_id ?></td>
                         <td><?= $product->product_title ?></td>
-                        <td>
-                            <a id="various" href="#inline-<?php echo $product_id?>" title=""><?= $this->Text->truncate(h($product->product_description, 60)) ?></a>
-                            <div style="display: none;">
-                                <div id="inline-<?php echo $product_id?>" style="width:700px;overflow:auto;">
-                                    <?php echo $product->product_content ?>
-                                </div>
-                            </div>
-                        </td>
+                        <td><?= $product->product_description ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), ['action' => 'edit', $product->product_id],['escape' => false]) ?>
                             <?= $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), ['action' => 'delete', $product->product_id], ['escape' => false,'confirm' => __('Are you sure you want to delete # {0}?', $product->product_id)]) ?>

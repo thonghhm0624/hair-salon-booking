@@ -45,16 +45,9 @@
             <div class="form-group"><?php echo $this->Form->textarea('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
             <div class="form-group"><?php echo $this->Form->input('product_keyword',['class'=>'form-control','placeholder' => 'Product Keyword']);  ?></div>
             <div class="form-group"><?php echo $this->Form->textarea('product_content',['id'=>'product_content','class'=>'form-control','placeholder' => 'Product Content']); ?></div>
-            <!--            edit image-->
-
             <div class="form-group">
-                <div class="form-group" id="group-image">
-                    <label for="image">Image (600x600)</label>
-                    <?php echo $this->JqueryUpload->upload('product_image', 'upload',$product->product_image); ?>
-                </div>
+                <?php echo $this->Form->input('product_image',['class'=>'form-control','placeholder' => 'Product Image']); ?>
             </div>
-            <!--            edit image-->
-
             <div class="form-group">
                 <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 <?php echo $this->Html->link('Cancel', ['action' => 'index'], ['class' => 'btn btn-default'])?>
