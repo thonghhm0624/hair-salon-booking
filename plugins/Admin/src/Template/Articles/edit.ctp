@@ -72,8 +72,13 @@
                     "paste textcolor colorpicker"
                 ],
                 toolbar1: "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media ",
-                block_formats: 'Header=h4;Paragraph=p;',
+                block_formats: 'Header1=h1;Header2=h2;Header3=h3;Header4=h4;Paragraph=p;',
                 image_advtab: true,
+                image_class_list: [
+                    {title: 'None', value: ''},
+                    {title: 'Fullwidth', value: 'img-fullwidth'},
+                    {title: 'MiddleSmallSquare', value: 'img-middlesquare'},
+                ]
 //            file_picker_callback: function(callback, value, meta) {
 //                if (meta.filetype == 'image') {
 //

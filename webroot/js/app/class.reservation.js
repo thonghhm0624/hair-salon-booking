@@ -90,21 +90,26 @@ SE.clsReservation = (function() {
 
                         if(real_data.status == 1){
                             let option = "";
+                            let hour = new Date().getHours();
                             time.empty();
                             if (real_data.time_conflict == 0) {
-                                console.log('No time conflict');
+                                // console.log('No time conflict');
                                 times_to_be_conflicted = null;
                                 for(let i = 10; i <= 20; i++) {
-                                    option += '<option value=' + i + '>' + i + ':00' + '</option>';
-                                    time.append(option);
-                                    time.removeAttr('disabled');
+                                    if (i <= hour)
+                                        option += '<option style="color: red" disabled value=' + i + '>' + i + ':00' + '</option>';
+                                    else
+                                        option += '<option value=' + i + '>' + i + ':00' + '</option>';
                                 }
+                                time.append(option);
+                                time.removeAttr('disabled');
                             }
                             else {
                                 times_to_be_conflicted = real_data.data.times_to_be_conflicted;
-                                console.log(times_to_be_conflicted);
+                                // console.log(times_to_be_conflicted);
+                                //|| (i == time.getHours())
                                 for(let i = 10; i <= 20; i++) {
-                                    if (checkTimeConflict(times_to_be_conflicted,i))
+                                    if (i <= hour || checkTimeConflict(times_to_be_conflicted,i))
                                         option += '<option style="color: red" disabled value=' + i + '>' + i + ':00' + '</option>';
                                     else
                                         option += '<option value=' + i + '>' + i + ':00' + '</option>';

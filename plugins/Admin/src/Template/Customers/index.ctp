@@ -24,7 +24,7 @@
                                         <td><?= h($customer->customer_id) ?></td>
                                         <td><?= h($customer->customer_password) ?></td>
                                         <td><?= h($customer->customer_name) ?></td>
-                                        <td><?= $this->Number->format($customer->customer_status) ?></td>
+                                        <td><?= $customer_status[$customer->customer_status] ?></td>
                                         <td class="actions">
 
                                         </td>

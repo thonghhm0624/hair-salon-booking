@@ -544,7 +544,7 @@ class FrontendController extends AppController
                 $this->loadModel('Services');
                 $times_to_be_conflicted = [];
                 foreach ($time_and_status as $time) {
-                    if (($time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
+                    if ($time['reservation_status'] < 3) {
                         $service_duration = $this->Services->find('all')->where([
                             'service_id' => $time['service_id']
                         ])->first();
@@ -569,7 +569,15 @@ class FrontendController extends AppController
                         ]
                     ];
                 }
-            } else {
+                else {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'Successfully',
+                        'time_conflict' => 0,
+                    ];
+                }
+            }
+            else {
                 $response = [
                     'status' => 1,
                     'message' => 'Successfully',

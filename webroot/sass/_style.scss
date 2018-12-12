@@ -96,4 +96,16 @@ h2 {
   h1, h2 {
     text-align: left;
   }
+
+  .img-fullwidth {
+    width: 100%;
+    height: auto;
+  }
+
+  .img-middlesquare {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+  }
 }
