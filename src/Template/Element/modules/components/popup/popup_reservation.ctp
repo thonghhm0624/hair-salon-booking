@@ -63,18 +63,23 @@
                     </div>
                 </form>
             </div>
-
+        </div>
+    </div>
+    <div class="popup-reservation-ui d-none">
+        <div class="result-success">
+            <p>
+                Thao tác thành công!<br/>
+                Anh vui lòng đợi nhân viên liên lạc để xác nhận thông tin nhé. Trân trọng
+            </p>
+        </div>
+    </div>
+    <div class="popup-reservation-ui d-none">
+        <div class="result-fail">
+            <p>
+                Có lỗi trong quá trình xử lý. Mong anh thông cảm và đặt lịch lại giúp em nha.
+            </p>
         </div>
     </div>
 </div>
-<div class="result-success d-none">
-    <p>
-        Thao tác thành công!<br/>
-        Anh vui lòng đợi nhân viên liên lạc để xác nhận thông tin nhé. Trân trọng
-    </p>
-</div>
-<div class="result-fail d-none">
-    <p>
-        Có lỗi trong quá trình xử lý. Mong anh thông cảm và đặt lịch lại giúp em nha.
-    </p>
-</div>
+
+

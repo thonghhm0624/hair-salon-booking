@@ -90,13 +90,16 @@ SE.clsReservation = (function() {
 
                         if(real_data.status == 1){
                             let option = "";
-                            let hour = new Date().getHours();
+                            let getTime = new Date();
+                            let getHour = getTime.getHours();
+                            let splitstring = date.val().split('/');
+                            let getDate = parseInt(splitstring[1]);
                             time.empty();
                             if (real_data.time_conflict == 0) {
                                 // console.log('No time conflict');
                                 times_to_be_conflicted = null;
                                 for(let i = 10; i <= 20; i++) {
-                                    if (i <= hour)
+                                    if (getDate == getTime.getDate() && i <= getHour)
                                         option += '<option style="color: red" disabled value=' + i + '>' + i + ':00' + '</option>';
                                     else
                                         option += '<option value=' + i + '>' + i + ':00' + '</option>';
@@ -109,8 +112,9 @@ SE.clsReservation = (function() {
                                 // console.log(times_to_be_conflicted);
                                 //|| (i == time.getHours())
                                 for(let i = 10; i <= 20; i++) {
-                                    if (i <= hour || checkTimeConflict(times_to_be_conflicted,i))
+                                    if ((getDate == getTime.getDate() && i <= getHour) || (getDate == getTime.getDate() && checkTimeConflict(times_to_be_conflicted,i))) {
                                         option += '<option style="color: red" disabled value=' + i + '>' + i + ':00' + '</option>';
+                                    }
                                     else
                                         option += '<option value=' + i + '>' + i + ':00' + '</option>';
                                 }

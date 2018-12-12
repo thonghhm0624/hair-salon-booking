@@ -101,10 +101,16 @@
                     </div>
                     <?php $sum_stylist_marks +=  intval($reservation->reservation_marks) ?>
                 <?php endforeach; ?>
+                <div>&nbsp;</div>
+                <div>
+                    <?php if (sizeof($reservations) == 0) : ?>
+                    <?= "Chưa có đánh giá nào" ?>
+                    <?php else : ?>
+                        Điểm trung bình: <?= $sum_stylist_marks/sizeof($reservations) ?>
+                    <?php endif; ?>
+                </div>
             <?php else: ?>
             <?php endif; ?>
-            <div>&nbsp;</div>
-            <div>Điểm trung bình: <?= $sum_stylist_marks/sizeof($reservations) ?> </div>
         </div>
         <hr />
     </div>
