@@ -65,21 +65,24 @@
             </div>
         </div>
     </div>
-    <div class="popup-reservation-ui d-none">
-        <div class="result-success">
-            <p>
-                Thao tác thành công!<br/>
-                Anh vui lòng đợi nhân viên liên lạc để xác nhận thông tin nhé. Trân trọng
-            </p>
-        </div>
-    </div>
-    <div class="popup-reservation-ui d-none">
-        <div class="result-fail">
-            <p>
-                Có lỗi trong quá trình xử lý. Mong anh thông cảm và đặt lịch lại giúp em nha.
-            </p>
-        </div>
+</div>
+<div class="popup result-success d-none">
+    <div class="popup-reservation-ui">
+        <p>
+            Thao tác thành công!<br/>
+            Anh vui lòng đợi nhân viên liên lạc để xác nhận thông tin nhé. Trân trọng
+        </p>
+        <a class="cta exit-reservation popup-close">Thoát</a>
     </div>
 </div>
+<div class="popup result-fail d-none">
+    <div class="popup-reservation-ui">
+        <p>
+            Có lỗi trong quá trình xử lý. Mong anh thông cảm và đặt lịch lại giúp em nha.
+        </p>
+        <a class="cta exit-reservation popup-close">Thoát</a>
+    </div>
+</div>
+
 
 

@@ -78,14 +78,17 @@ $('#submit-reservation').click(function(event){
         success: function (data) {
             let real_data = JSON.parse(data);
             if(real_data.status == 1){
+                $('.popup-reservation').addClass('d-none');
                 $('.result-success').removeClass('d-none');
+                $('.result-success').css('display','block');
+                $('.result-success').css('opacity','1');
                 $('.result-fail').addClass('d-none');
-                TweenMax.to(('.popup'), .2, { css:{display:'none',opacity:0}} );
-
             } else {
+                $('.popup-reservation').addClass('d-none');
                 $('.result-fail').removeClass('d-none');
+                $('.result-fail').css('display','block');
+                $('.result-fail').css('opacity','1');
                 $('.result-success').addClass('d-none');
-
             }
         }
     });

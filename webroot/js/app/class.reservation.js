@@ -112,7 +112,7 @@ SE.clsReservation = (function() {
                                 // console.log(times_to_be_conflicted);
                                 //|| (i == time.getHours())
                                 for(let i = 10; i <= 20; i++) {
-                                    if ((getDate == getTime.getDate() && i <= getHour) || (getDate == getTime.getDate() && checkTimeConflict(times_to_be_conflicted,i))) {
+                                    if (checkTimeConflict(times_to_be_conflicted,i) || (getDate == getTime.getDate() && i <= getHour) ) {
                                         option += '<option style="color: red" disabled value=' + i + '>' + i + ':00' + '</option>';
                                     }
                                     else
@@ -165,6 +165,9 @@ SE.clsReservation = (function() {
                         }
                         else if (real_data.status == 2) {
                             alert('Thời gian chọn chưa phù hợp vì stylist này có thể đang có khách trong phạm vi thời gian của dịch vụ');
+                        }
+                        else if (real_data.status == 3) {
+                            alert('Thời gian cho dịch vụ của bạn và thời gian đặt lịch có thể quá giờ hoạt động của tiệm');
                         }
                         else {
                             submit.removeAttr('disabled');

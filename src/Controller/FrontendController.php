@@ -15,7 +15,7 @@ class FrontendController extends AppController
 {
     //public $layout = 'frontend';
     public $paginate = [
-        'limit' => 12,
+        'limit' => 3,
     ];
 
     public function initialize()
@@ -39,57 +39,52 @@ class FrontendController extends AppController
     public function articles($page = 1)
     {
         $this->loadModel('Articles');
-        if ($this->request->is('post')) {
-            $search = $this->request->getData()['searchForArticles'];
-            $articles = $this->paginate($this->Articles->find('all')->where(
-                [
-                    'OR' => [
-                        'article_title LIKE' => '%' . $search . '%',
-                        'article_content LIKE' => '%' . $search . '%',
-                        'article_keyword LIKE' => '%' . $search . '%',
-                    ]
-                ]
-            ), ['page' => $page]);
-        } else {
-            $articles = $this->paginate($this->Articles, ['page' => $page]);
-        }
-
-
-        $this->set('collapse_articles', true);
         $this->set('collapse_products', false);
-
-        $this->set('article', null);
+        $this->set('collapse_articles', true);
+        $articles = $this->paginate($this->Articles, ['page' => $page]);
+        $filter = "articles_all";
+        $this->set('filter', $filter);
         $this->set('articles', $articles);
-        $this->set('product', null);
-        $this->set('products', null);
-
-        $this->set('category', null);
         $this->render('explore');
-
     }
 
-    public function articles_by_category($category = null, $page = 1)
+    public function searchArticles ($args = "", $page = 1) {
+        $this->loadModel('Articles');
+        $this->set('collapse_products', false);
+        $this->set('collapse_articles', true);
+        if ($this->request->is('post')) {
+            $args = $this->request->getData()['search'];
+        }
+        $articles = $this->paginate($this->Articles->find('all')->where(
+            [
+                'OR' => [
+                    'article_title LIKE' => '%' . $args  . '%',
+                    'article_keyword LIKE' => '%' . $args  . '%',
+                    'article_content LIKE' => '%' . $args . '%',
+                ]
+            ]
+        ), ['page' => $page]);
+        $this->set('articles', $articles);
+        $this->set('args', $args);
+        $filter = "articles_search";
+        $this->set('filter', $filter);
+        $this->render('explore');
+    }
+
+    public function articles_by_category($category = 1, $page = 1)
     {
         $this->loadModel('Articles');
-        if ($category != null) {
-            $articles = $this->paginate($this->Articles->find('all')->where(
-                [
-                    'article_category_id = ' => $category
-                ]
-            ), ['page' => $page]);
-        }
-
-        $this->set('collapse_products', true);
-        $this->set('collapse_articles', false);
-
+        $articles = $this->paginate($this->Articles->find('all')->where(
+            [
+                'article_category_id = ' => $category
+            ]
+        ), ['page' => $page]);
+        $this->set('collapse_products', false);
+        $this->set('collapse_articles', true);
         $this->set('articles', $articles);
-
-        $this->set('article', null);
-        $this->set('articles', $articles);
-        $this->set('product', null);
-        $this->set('products', null);
-
         $this->set('category', $category);
+        $filter = "articles_category";
+        $this->set('filter', $filter);
         $this->render('explore');
     }
 
@@ -102,15 +97,11 @@ class FrontendController extends AppController
             ]
         )->first();
 
-        $this->set('collapse_products', true);
-        $this->set('collapse_articles', false);
-
+        $this->set('collapse_products', false);
+        $this->set('collapse_articles', true);
         $this->set('article', $article);
-        $this->set('articles', null);
-        $this->set('product', null);
-        $this->set('products', null);
-
-        $this->set('category', null);
+        $filter = "article_details";
+        $this->set('filter', $filter);
         $this->render('explore');
     }
 
@@ -119,54 +110,53 @@ class FrontendController extends AppController
     public function products($page = 1)
     {
         $this->loadModel('Products');
-        if ($this->request->is('post')) {
-            $search = $this->request->getData()['searchForProducts'];
-            $products = $this->paginate($this->Products->find('all')->where(
-                [
-                    'OR' => [
-                        'product_title LIKE' => '%' . $search . '%',
-                        'product_content LIKE' => '%' . $search . '%',
-                        'product_keyword LIKE' => '%' . $search . '%',
-                    ]
-                ]
-            ), ['page' => $page]);
-        } else {
-            $products = $this->paginate($this->Products, ['page' => $page]);
-        }
-
+        $products = $this->paginate($this->Products, ['page' => $page]);
         $this->set('collapse_products', true);
         $this->set('collapse_articles', false);
-
-
-        $this->set('article', null);
-        $this->set('articles', null);
-        $this->set('product', null);
         $this->set('products', $products);
-
-        $this->set('category', null);
+        $filter = "products_all";
+        $this->set('filter', $filter);
         $this->render('explore');
     }
 
-    public function products_by_category($category = null, $page = 1)
+    public function searchProducts ($args = "", $page = 1) {
+        $this->loadModel('Products');
+        $this->set('collapse_products', true);
+        $this->set('collapse_articles', false);
+        if ($this->request->is('post')) {
+            $args = $this->request->getData()['search'];
+        }
+        $products = $this->paginate($this->Products->find('all')->where(
+            [
+                'OR' => [
+                    'product_title LIKE' => '%' . $args  . '%',
+                    'product_keyword LIKE' => '%' . $args  . '%',
+                    'product_content LIKE' => '%' . $args . '%',
+                ]
+            ]
+        ), ['page' => $page]);
+        $this->set('products', $products);
+        $this->set('args', $args);
+        $filter = "products_search";
+        $this->set('filter', $filter);
+        $this->render('explore');
+    }
+
+    public function products_by_category($category = 1, $page = 1)
     {
         $this->loadModel('Products');
-        if ($category != null) {
-            $products = $this->paginate($this->Products->find('all')->where(
-                [
-                    'product_category_id = ' => $category
-                ]
-            ), ['page' => $page]);
-        }
+        $products = $this->paginate($this->Products->find('all')->where(
+            [
+                'product_category_id = ' => $category
+            ]
+        ), ['page' => $page]);
 
         $this->set('collapse_products', true);
         $this->set('collapse_articles', false);
-
-        $this->set('article', null);
-        $this->set('articles', null);
-        $this->set('product', null);
         $this->set('products', $products);
-
         $this->set('category', $category);
+        $filter = "products_category";
+        $this->set('filter', $filter);
         $this->render('explore');
     }
 
@@ -178,25 +168,22 @@ class FrontendController extends AppController
                 'product_id = ' => $productID
             ]
         )->first();
-
         $this->set('collapse_products', true);
         $this->set('collapse_articles', false);
-
-        $this->set('article', null);
-        $this->set('articles', null);
         $this->set('product', $product);
-        $this->set('products', null);
-
-        $this->set('category', null);
+        $filter = "product_details";
+        $this->set('filter', $filter);
         $this->render('explore');
     }
 
 
+    //INTRODUCTION PAGE
     public function introduction()
     {
         $this->render('about');
     }
 
+    //LOGIN & LOGOUT
     public function logout()
     {
         $session = $this->request->getSession();
@@ -204,63 +191,6 @@ class FrontendController extends AppController
         $session->delete('login_user');
         $session->delete('response');
         return $this->redirect(['action' => 'index']);
-    }
-
-    public function reserve()
-    {
-        $this->autoRender = false;
-        $this->loadModel('Customers');
-        if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            $phone = $data['phonenumber'];
-            $store = $data['store'];
-            $stylist = $data['stylist'];
-            $service = $data['service'];
-            $date = $data['date'];
-            $time = $data['time'];
-
-            $can_be_added = 0;
-            $response = [
-                'status' => 0,
-                'message' => 'Fail',
-            ];
-            $customer = $this->Customers->find('all')->where([
-                'customer_id' => $phone
-            ])->select('customer_id')->first();
-            if (!empty($customer)) {
-                $can_be_added = 1;
-            } else if (empty($customer)) {
-                $new_customer = $this->Customers->newEntity();
-                $new_customer->customer_id = $phone;
-                if ($this->Customers->save($new_customer)) {
-                    $can_be_added = 1;
-                }
-            } else {
-
-            }
-
-            if ($can_be_added != 0) {
-                $reservation = $this->Reservations->newEntity();
-                $reservation->reservation_status = 0;
-                $reservation->reservation_date = $date;
-                $reservation->reservation_time = $time;
-                $reservation->service_id = $service;
-                $reservation->branch_id = $store;
-                $reservation->customer_id = $phone;
-                $reservation->stylist_id = $stylist;
-                if ($this->Reservations->save($reservation)) {
-                    $response = [
-                        'status' => 1,
-                        'message' => 'Success',
-                    ];
-                }
-            }
-
-            $this->response->withType('json');
-            $this->response->body(json_encode($response));
-            return $this->response;
-
-        }
     }
 
     public function login()
@@ -342,6 +272,209 @@ class FrontendController extends AppController
             $this->response->body(json_encode($response));
             return $this->response;
         }
+    }
+
+    //RESERVATION
+    public function reserve()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Customers');
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $phone = $data['phonenumber'];
+            $store = $data['store'];
+            $stylist = $data['stylist'];
+            $service = $data['service'];
+            $date = $data['date'];
+            $time = $data['time'];
+
+            $can_be_added = 0;
+            $response = [
+                'status' => 0,
+                'message' => 'Fail',
+            ];
+            $customer = $this->Customers->find('all')->where([
+                'customer_id' => $phone
+            ])->select('customer_id')->first();
+            if (!empty($customer)) {
+                $can_be_added = 1;
+            } else if (empty($customer)) {
+                $new_customer = $this->Customers->newEntity();
+                $new_customer->customer_id = $phone;
+                if ($this->Customers->save($new_customer)) {
+                    $can_be_added = 1;
+                }
+            } else {
+
+            }
+
+            if ($can_be_added != 0) {
+                $reservation = $this->Reservations->newEntity();
+                $reservation->reservation_status = 0;
+                $reservation->reservation_date = $date;
+                $reservation->reservation_time = $time;
+                $reservation->service_id = $service;
+                $reservation->branch_id = $store;
+                $reservation->customer_id = $phone;
+                $reservation->stylist_id = $stylist;
+                if ($this->Reservations->save($reservation)) {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'Success',
+                    ];
+                }
+            }
+
+            $this->response->withType('json');
+            $this->response->body(json_encode($response));
+            return $this->response;
+
+        }
+    }
+
+    public function reservationtimehandler()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Reservations');
+        $response = [
+            'status' => 0,
+            'time_conflict' => 0,
+            'message' => 'Fail',
+        ];
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $stylist = $data['stylist'];
+            $date = $data['date'];
+
+            $time_and_status = $this->Reservations->find('all')->where([
+                'stylist_id' => $stylist,
+                'reservation_date' => $date,
+            ])->toArray();
+
+            if (!empty($time_and_status)) {
+                $this->loadModel('Services');
+                $times_to_be_conflicted = [];
+                foreach ($time_and_status as $time) {
+                    if ($time['reservation_status'] < 3) {
+                        $service_duration = $this->Services->find('all')->where([
+                            'service_id' => $time['service_id']
+                        ])->first();
+                        $time_conflict = intval($time['reservation_time']);
+                        $time_service_duration = intval($service_duration['service_duration']);
+                        for ($i = 1; $i <= $time_service_duration; $i++) {
+                            $__time = $time_conflict + $i - 1;
+                            if ($__time > 20)
+                                array_push($times_to_be_conflicted, 20);
+                            else
+                                array_push($times_to_be_conflicted, $__time);
+                        }
+                    }
+                }
+                if (!empty($times_to_be_conflicted)) {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'Successful!',
+                        'time_conflict' => 1,
+                        'data' => [
+                            'times_to_be_conflicted' => $times_to_be_conflicted
+                        ]
+                    ];
+                }
+                else {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'Successfully',
+                        'time_conflict' => 0,
+                    ];
+                }
+            }
+            else {
+                $response = [
+                    'status' => 1,
+                    'message' => 'Successfully',
+                    'time_conflict' => 0,
+                ];
+            }
+        }
+        $this->response->withType('json');
+        $this->response->body(json_encode($response));
+        return $this->response;
+    }
+
+    public function reservationtimecheckconflict()
+    {
+        $this->autoRender = false;
+        $this->loadModel('Reservations');
+        $response = [
+            'status' => 0,
+            'message' => 'Failed to retrieve information',
+        ];
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $stylist = $data['stylist'];
+            $date = $data['date'];
+            $duration = intval($data['duration']);
+            $new_time = intval($data['new_time']);
+            $time_and_status = $this->Reservations->find('all')->where([
+                'stylist_id' => $stylist,
+                'reservation_date' => $date,
+            ])->toArray();
+            if (!empty($time_and_status)) {
+                $any_time_conflict = false;
+                $exceed_maxium_time = false;
+                foreach ($time_and_status as $time) {
+                    if (($time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
+//                        $time_conflict = intval($time['reservation_time']);
+                        for ($i = 1; $i <= $duration; $i++) {
+                            $__time = $new_time + $i - 1;
+                            if ($__time == intval($time['reservation_time'])) {
+                                $any_time_conflict = true;
+                                break 2;
+                            }
+                            if ($__time == 21) {
+                                $exceed_maxium_time = true;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+                if ($any_time_conflict) {
+                    $response = [
+                        'status' => 2,
+                        'message' => 'There is/are time conflict(s)',
+                    ];
+                }
+                else if ($exceed_maxium_time) {
+                    $response = [
+                        'status' => 3,
+                        'message' => 'Exceeds maximum time serving',
+                    ];
+                }
+                else {
+                    $response = [
+                        'status' => 1,
+                        'message' => 'No time conflict',
+                    ];
+                }
+            }
+            else {
+                if (($duration + $new_time) > 21) {
+                    $response = [
+                        'status' => 3,
+                        'message' => 'Exceeds maximum time serving',
+                    ];
+                }
+                else
+                    $response = [
+                        'status' => 1,
+                        'message' => 'No time conflict',
+                    ];
+            }
+        }
+
+        $this->response->withType('json');
+        $this->response->body(json_encode($response));
+        return $this->response;
     }
 
     //stylists by branch
@@ -521,129 +654,5 @@ class FrontendController extends AppController
         }
     }
 
-    public function reservationtimehandler()
-    {
-        $this->autoRender = false;
-        $this->loadModel('Reservations');
-        $response = [
-            'status' => 0,
-            'time_conflict' => 0,
-            'message' => 'Fail',
-        ];
-        if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            $stylist = $data['stylist'];
-            $date = $data['date'];
-
-            $time_and_status = $this->Reservations->find('all')->where([
-                'stylist_id' => $stylist,
-                'reservation_date' => $date,
-            ])->toArray();
-
-            if (!empty($time_and_status)) {
-                $this->loadModel('Services');
-                $times_to_be_conflicted = [];
-                foreach ($time_and_status as $time) {
-                    if ($time['reservation_status'] < 3) {
-                        $service_duration = $this->Services->find('all')->where([
-                            'service_id' => $time['service_id']
-                        ])->first();
-                        $time_conflict = intval($time['reservation_time']);
-                        $time_service_duration = intval($service_duration['service_duration']);
-                        for ($i = 1; $i <= $time_service_duration; $i++) {
-                            $__time = $time_conflict + $i - 1;
-                            if ($__time > 20)
-                                array_push($times_to_be_conflicted, 20);
-                            else
-                                array_push($times_to_be_conflicted, $__time);
-                        }
-                    }
-                }
-                if (!empty($times_to_be_conflicted)) {
-                    $response = [
-                        'status' => 1,
-                        'message' => 'Successful!',
-                        'time_conflict' => 1,
-                        'data' => [
-                            'times_to_be_conflicted' => $times_to_be_conflicted
-                        ]
-                    ];
-                }
-                else {
-                    $response = [
-                        'status' => 1,
-                        'message' => 'Successfully',
-                        'time_conflict' => 0,
-                    ];
-                }
-            }
-            else {
-                $response = [
-                    'status' => 1,
-                    'message' => 'Successfully',
-                    'time_conflict' => 0,
-                ];
-            }
-        }
-        $this->response->withType('json');
-        $this->response->body(json_encode($response));
-        return $this->response;
-    }
-
-    public function reservationtimecheckconflict()
-    {
-        $this->autoRender = false;
-        $this->loadModel('Reservations');
-        $response = [
-            'status' => 0,
-            'message' => 'Failed to retrieve information',
-        ];
-        if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            $stylist = $data['stylist'];
-            $date = $data['date'];
-            $duration = intval($data['duration']);
-            $new_time = intval($data['new_time']);
-            $time_and_status = $this->Reservations->find('all')->where([
-                'stylist_id' => $stylist,
-                'reservation_date' => $date,
-            ])->toArray();
-            if (!empty($time_and_status)) {
-                $any_time_conflict = false;
-                foreach ($time_and_status as $time) {
-                    if (($time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
-//                        $time_conflict = intval($time['reservation_time']);
-                        for ($i = 1; $i <= $duration; $i++) {
-                            $__time = $new_time + $i - 1;
-                            if ($__time == intval($time['reservation_time'])) {
-                                $any_time_conflict = true;
-                                break 2;
-                            }
-                        }
-                    }
-                }
-                if ($any_time_conflict) {
-                    $response = [
-                        'status' => 2,
-                        'message' => 'There is/are time conflict(s)',
-                    ];
-                } else {
-                    $response = [
-                        'status' => 1,
-                        'message' => 'No time conflict',
-                    ];
-                }
-            } else {
-                $response = [
-                    'status' => 1,
-                    'message' => 'No time conflict',
-                ];
-            }
-        }
-
-        $this->response->withType('json');
-        $this->response->body(json_encode($response));
-        return $this->response;
-    }
 }
 

@@ -33,7 +33,7 @@
   }
 }
 
-.popup.popup-reservation {
+.popup {
   width: 100vw;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0);
@@ -43,6 +43,36 @@
   z-index: 9999;
   display: none;
   opacity: 0;
+
+  &.result-success, &.result-fail {
+    text-align: center;
+
+    .cta {
+      @include FontQuickSandBold(20px, 1.4);
+      background: $dark-blue;
+      padding: 15px 25px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      display: inline-block;
+      color: $white;
+      text-decoration: none;
+      width: auto !important;
+      cursor: pointer;
+      border: 2px solid $white;
+
+      &:disabled {
+        background: $red;
+        color: $white;
+        border: 2px solid $dark-blue;
+      }
+
+      &:hover {
+        color: $dark-blue;
+        background: $white;
+        border: 2px solid $dark-blue;
+      }
+    }
+  }
 
   .popup-reservation-ui {
     width: 85%;

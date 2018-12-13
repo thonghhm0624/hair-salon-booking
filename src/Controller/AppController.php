@@ -149,6 +149,9 @@ class AppController extends Controller
         /*GLOBAL SESSION*/
         $session = $this->request->session()->read('response');
         $this->set(compact('session'));
+
+        $filter = "";
+        $this->set(compact('filter'));
     }
     protected function url($options, $full = true) {
         if (!Configure::check('isLanguageByDomain')) {
