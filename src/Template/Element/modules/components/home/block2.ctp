@@ -9,27 +9,27 @@
             </div>
             <div class="col col-4">
                 <div class="thumbnail hvr-shutter-in-vertical">
-                    <img src="<?= $this->request->webroot ?>images/hairman.png">
+                    <img src="<?= $this->request->webroot ?>images/hairman2.png">
                 </div>
             </div>
             <div class="col col-4">
                 <div class="thumbnail hvr-shutter-in-vertical">
-                    <img src="<?= $this->request->webroot ?>images/hairman.png">
+                    <img src="<?= $this->request->webroot ?>images/hairman3.png">
                 </div>
             </div>
             <div class="col col-4">
                 <div class="thumbnail hvr-shutter-in-vertical">
-                    <img src="<?= $this->request->webroot ?>images/hairman.png">
+                    <img src="<?= $this->request->webroot ?>images/hairman4.png">
                 </div>
             </div>
             <div class="col col-4">
                 <div class="thumbnail hvr-shutter-in-vertical">
-                    <img src="<?= $this->request->webroot ?>images/hairman.png">
+                    <img src="<?= $this->request->webroot ?>images/hairman5.png">
                 </div>
             </div>
             <div class="col col-4">
                 <div class="thumbnail hvr-shutter-in-vertical">
-                    <img src="<?= $this->request->webroot ?>images/hairman.png">
+                    <img src="<?= $this->request->webroot ?>images/hairman6.png">
                 </div>
             </div>
         </div>

@@ -205,12 +205,13 @@ class FrontendController extends AppController
             $login_type = $data['login_type'];
             $response = [
                 'status' => 0,
-                'message' => 'Dang nhap that bai!',
+                'message' => 'Đăng nhập thất bại',
             ];
             if ($login_type == 'customer') {
                 $customer = $this->Customers->find('all')->where([
                     'customer_id' => $phone,
-                    'customer_password' => $password
+                    'customer_password' => $password,
+                    'customer_status' => 1
                 ])->select(['customer_id', 'customer_name', 'customer_status'])->first();
                 if (!empty($customer)) {
                     $session = $this->request->getSession();
@@ -218,7 +219,7 @@ class FrontendController extends AppController
                     $session->write('login_user', $customer);
                     $response = [
                         'status' => 1,
-                        'message' => 'Dang nhap thanh cong!',
+                        'message' => 'Đăng nhập thành công',
                         'data' => [
                             'login_user' => [
                                 'name' => $session->read('login_user')['customer_name'],
@@ -232,7 +233,7 @@ class FrontendController extends AppController
                 } else {
                     $response = [
                         'status' => 0,
-                        'message' => 'So dien thoai hoac mat khau khong dung, vui long nhap lai!'
+                        'message' => 'Sai thông tin đăng nhập hoặc khách chưa được xác nhận.'
                     ];
                 }
             } else if ($login_type == 'stylist') {
