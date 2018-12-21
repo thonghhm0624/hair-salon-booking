@@ -93,7 +93,7 @@ SE.clsReservation = (function() {
                             let getTime = new Date();
                             let getHour = getTime.getHours();
                             let splitstring = date.val().split('/');
-                            let getDate = parseInt(splitstring[1]);
+                            let getDate = parseInt(splitstring[0]);
                             time.empty();
                             if (real_data.time_conflict == 0) {
                                 // console.log('No time conflict');
