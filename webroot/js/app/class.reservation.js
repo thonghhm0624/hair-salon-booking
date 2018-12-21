@@ -35,6 +35,12 @@ SE.clsReservation = (function() {
         store.change (function () {
             if (store.val() != null) {
                 stylist.attr('disabled','disabled');
+                date.attr('disabled','disabled');
+                time.attr('disabled','disabled');
+                service.attr('disabled','disabled');
+                stylist.empty();
+                time.empty();
+
                 $.ajax({
                     url: window_app.webroot + 'stylistsbybranch',
                     type: 'post',
@@ -46,13 +52,12 @@ SE.clsReservation = (function() {
                         if(real_data.status == 1){
                             stylist.empty();
                             let stylists = real_data.data.stylists;
-                            let option = '';
+                            let option = '<option class="d-none" value="-1">Chọn stylist</option>';
                             for(let i = 0; i < stylists.length; i++) {
                                 option += '<option value="' + stylists[i].stylist_id + '">' + stylists[i].stylist_name + '</option>';
                             }
                             stylist.append(option);
                             stylist.removeAttr("disabled");
-                            store.attr('disabled','disabled');
                         } else {
                             console.log("fail");
                         }
@@ -63,14 +68,17 @@ SE.clsReservation = (function() {
 
         stylist.change (function () {
             if (stylist.val() != null) {
+                date.attr('disabled','disabled');
+                time.attr('disabled','disabled');
+                service.attr('disabled','disabled');
+                date.empty();
+                time.empty();
                 date.removeAttr('disabled');
-                stylist.attr('disabled','disabled');
             }
         });
 
         date.change (function () {
             service.removeAttr('disabled');
-            date.attr('disabled','disabled');
         });
 
         service.change (function () {
@@ -89,7 +97,7 @@ SE.clsReservation = (function() {
                         let real_data = JSON.parse(data);
 
                         if(real_data.status == 1){
-                            let option = "";
+                            let option = '<option class="d-none" value="-1">Chọn giờ hẹn</option>';
                             let getTime = new Date();
                             let getHour = getTime.getHours();
                             let splitstring = date.val().split('/');
