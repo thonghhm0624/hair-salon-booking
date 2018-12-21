@@ -65,8 +65,7 @@ class ReservationsTable extends Table
             ->notEmpty('reservation_date');
 
         $validator
-            ->scalar('reservation_time')
-            ->maxLength('reservation_time', 11)
+            ->integer('reservation_time')
             ->requirePresence('reservation_time', 'create')
             ->notEmpty('reservation_time');
 

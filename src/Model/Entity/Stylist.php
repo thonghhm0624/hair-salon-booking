@@ -12,9 +12,7 @@ use Cake\ORM\Entity;
  * @property string $stylist_password
  * @property string $stylist_image
  * @property int $stylist_status
- * @property int $stylist_phone
- *
- * @property \App\Model\Entity\Branch $branch
+ * @property string $stylist_phone
  */
 class Stylist extends Entity
 {
@@ -34,7 +32,6 @@ class Stylist extends Entity
         'stylist_password' => true,
         'stylist_image' => true,
         'stylist_status' => true,
-        'stylist_phone' => true,
-        'branch' => true
+        'stylist_phone' => true
     ];
 }

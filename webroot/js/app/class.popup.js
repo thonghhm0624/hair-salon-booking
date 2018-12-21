@@ -6,9 +6,10 @@ SE.clsPopup = (function() {
   }
 
     //PARAMETERS
-    var popup_login = ".popup.popup-login",
+    let popup_login = ".popup.popup-login",
         popup_reservation = ".popup.popup-reservation";
 
+  //EVENTS
   function initEvent()
   {
 

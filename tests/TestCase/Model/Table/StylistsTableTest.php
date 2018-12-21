@@ -24,8 +24,7 @@ class StylistsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.stylists',
-        'app.branch'
+        'app.stylists'
     ];
 
     /**

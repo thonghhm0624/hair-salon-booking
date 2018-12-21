@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Articles Model
  *
- * @property \App\Model\Table\CategoriesTable|\Cake\ORM\Association\BelongsTo $Categories
+ * @property |\Cake\ORM\Association\BelongsTo $ArticleCategories
  *
  * @method \App\Model\Entity\Article get($primaryKey, $options = [])
  * @method \App\Model\Entity\Article newEntity($data = null, array $options = [])
@@ -35,11 +35,6 @@ class ArticlesTable extends Table
         $this->setTable('articles');
         $this->setDisplayField('article_id');
         $this->setPrimaryKey('article_id');
-
-//        $this->belongsTo('Categories', [
-//            'foreignKey' => 'article_category_id',
-//            'joinType' => 'INNER'
-//        ]);
     }
 
     /**
@@ -87,7 +82,6 @@ class ArticlesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-//        $rules->add($rules->existsIn(['article_category_id'], 'Categories'));
 
         return $rules;
     }

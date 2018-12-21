@@ -1,26 +1,23 @@
-<form>
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-5 col-form-label">Tên</label>
-        <div class="col-sm-3">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Tên">
+<?php if (!empty($session)) : ?>
+    <section class="page user container-fluid">
+        <div class="container">
+            <div class="row" id="body-row">
+                <div class="col-md-3 col-sm-12">
+                    <?php
+                        echo $this->element('modules/components/user/user_sidebar');
+                    ?>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <?php
+                    echo $this->element('modules/components/user/user_functions');
+                    ?>
+                </div>
+            </div>
         </div>
+    </section>
+<?php else : ?>
+    <div class="container not-logged-in">
+        Bạn chưa đăng nhập vào hệ thống. Mời đăng nhập trước.
     </div>
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-5 col-form-label">Tuổi</label>
-        <div class="col-sm-3">
-            <input type="text" class="form-control" id="inputPassword3" placeholder="Tuổi">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-5 col-form-label">Mật khẩu mới</label>
-        <div class="col-sm-3">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Mật khẩu mới">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-5 col-form-label">Nhập lại mật khẩu mới</label>
-        <div class="col-sm-3">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Nhập lại mật khẩu mới">
-        </div>
-    </div>
-</form>
+<?php endif; ?>
+

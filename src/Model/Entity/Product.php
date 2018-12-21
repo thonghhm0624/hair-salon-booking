@@ -13,8 +13,6 @@ use Cake\ORM\Entity;
  * @property string $product_image
  * @property string $product_keyword
  * @property string $product_content
- *
- * @property \App\Model\Entity\Category $category
  */
 class Product extends Entity
 {
@@ -34,7 +32,6 @@ class Product extends Entity
         'product_description' => true,
         'product_image' => true,
         'product_keyword' => true,
-        'product_content' => true,
-        'category' => true
+        'product_content' => true
     ];
 }

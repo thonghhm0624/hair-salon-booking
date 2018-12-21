@@ -48,6 +48,7 @@ class AppController extends Controller
         $this->loadModel('Branches');
         $this->loadModel('Services');
 
+
         $this->response->header(
 			array(
 				'X-Frame-Options' => 'DENY',
@@ -134,23 +135,23 @@ class AppController extends Controller
 		$this->set('captchaKey', Configure::read('captchaKey'));
 		$this->share_message = $share_message;
 		$this->set('share_message',$this->share_message); 
-		
-		/*$this->loadComponent('Cookie');
-		$this->Cookie->config([
-			'expires' => '+365 days',
-			'encryption' => 'aes',
-			'key' => 'BLISS\BLISS_HBPTOJECT_05102016'
-			//'httpOnly' => true
-		]);
-		$this->Cookie->config('path', '/');
-		$this->Cookie->configKey('Name'); */
+
 		$stylists_select = $this->Stylists->find('all')->select(['stylist_id','stylist_name'])->toArray();
         $branches_select = $this->Branches->find('all')->select(['branch_id','branch_address'])->toArray();
-        $services_select = $this->Services->find('all')->select(['service_id','service_name'])->toArray();
+        $services_select = $this->Services->find('all')->select(['service_id','service_name','service_duration'])->toArray();
+        $branches_for_site = $this->Branches->find('all')->toArray();
+
+        $this->set(compact('branches_for_site'));
         $this->set(compact('services_select'));
         $this->set(compact('branches_select'));
         $this->set(compact('stylists_select'));
 
+        /*GLOBAL SESSION*/
+        $session = $this->request->session()->read('response');
+        $this->set(compact('session'));
+
+        $filter = "";
+        $this->set(compact('filter'));
     }
     protected function url($options, $full = true) {
         if (!Configure::check('isLanguageByDomain')) {

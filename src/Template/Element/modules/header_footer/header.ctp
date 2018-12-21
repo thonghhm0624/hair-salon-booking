@@ -8,10 +8,9 @@
         <div class="time-work">
             Thời gian làm việc : 10h - 20h
         </div>
-        <?php $login_user =  $this->request->session()->read('login_user_data'); ?>
-        <?php if(!empty($login_user)):?>
+        <?php if(!empty($session)):?>
             <div class="login" >
-                Chào <?= $login_user['name'] ?>
+                Chào <a href="<?= $this->request->webroot.'user'?>"><?= $session['data']['login_user']['name'] ?></a>
                 <br/>
                 <a href="<?= $this->request->webroot ?>logout">Đăng Xuất</a>
             </div>

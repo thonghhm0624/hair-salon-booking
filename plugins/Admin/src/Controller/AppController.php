@@ -60,12 +60,31 @@ class AppController extends BaseController
             'Users' =>  [
                 'text' => 'Users', 'link' => Router::url(['controller' => 'users','action' => 'index']), 'allow_access' => ['admin']
             ],
+            'Branches' =>  [
+                'text' => 'Branches', 'link' => Router::url(['controller' => 'Branches','action' => 'index']), 'allow_access' => ['admin']
+            ],
+            'Articles' =>  [
+                'text' => 'Articles', 'link' => Router::url(['controller' => 'Articles','action' => 'index']), 'allow_access' => ['admin']
+            ],
+            'Categories' =>  [
+                'text' => 'Categories', 'link' => Router::url(['controller' => 'Categories','action' => 'index']), 'allow_access' => ['admin']
+            ],
             'Products' =>  [
                 'text' => 'Products', 'link' => Router::url(['controller' => 'Products','action' => 'index']), 'allow_access' => ['admin']
             ],
+            'Stylists' =>  [
+                'text' => 'Stylists', 'link' => Router::url(['controller' => 'Stylists','action' => 'index']), 'allow_access' => ['admin']
+            ],
+            'Customers' =>  [
+                'text' => 'Customers', 'link' => Router::url(['controller' => 'Customers','action' => 'index']), 'allow_access' => ['admin']
+            ],
             'Reservations' =>  [
                 'text' => 'Reservations', 'link' => Router::url(['controller' => 'Reservations','action' => 'index']), 'allow_access' => ['admin']
+            ],
+            'Services' =>  [
+                'text' => 'Services', 'link' => Router::url(['controller' => 'Services','action' => 'index']), 'allow_access' => ['admin']
             ]
+
         ]);
         $this->set('active_menu_item', $this->request->params['controller']);
         if (in_array($this->request->action, ['active_fields','publish_fields','slug_unique','update_status'])) {

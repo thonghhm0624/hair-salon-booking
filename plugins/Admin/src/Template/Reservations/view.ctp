@@ -55,14 +55,14 @@
                        </tr>
                                                     
                                                                     <tr>
+                            <th><?= __('Reservation Date') ?></th>
+                            <td><?= h($reservation->reservation_date) ?></td>
+                        </tr>
+                                                                                            <tr>
                             <th><?= __('Customer Id') ?></th>
                             <td><?= h($reservation->customer_id) ?></td>
                         </tr>
-                                                                                                            <tr>
-                            <th><?= __('Reservation Date') ?></th>
-                            <td><?= h($reservation->reservation_date) ?></td>
-                       </tr>
-                                                                                                                            <tr>
+                                                                                                                                                    <tr>
                             <th><?= __('Reservation Remark') ?></th>
                             <td><?= $this->Text->autoParagraph(h($reservation->reservation_remark)) ?></td>
                        </tr>

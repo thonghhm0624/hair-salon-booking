@@ -30,19 +30,20 @@
         </div><!-- end col md 3 -->
         <div class="col-md-9">
             <?php echo  $this->Form->create($product); ?>
-            <div class="form-group"><?php echo $this->Form->input('product_title',['class'=>'form-control','placeholder' => 'Product Title']);  ?></div>
-            <div class="form-group"><?php echo $this->Form->textarea('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
-            <div class="form-group"><?php echo $this->Form->input('product_keyword',['class'=>'form-control','placeholder' => 'Product Keyword']);  ?></div>
-            <div class="form-group"><?php echo $this->Form->textarea('product_content',['id'=>'product_content','class'=>'form-control','placeholder' => 'Product Content']); ?></div>
-            <!--            ADD image-->
             <div class="form-group">
-                <div class="form-group" id="group-image">
-                    <label for="image">Image (600x600)</label>
-                    <?php echo $this->JqueryUpload->upload('product_image', 'upload'); ?>
-                </div>
+                <label for="categories">Categories</label>
+                <?php echo $this->Form->select('product_category_id',$categories,['class'=>'form-control','placeholder' => 'Product Category Id']);  ?>
             </div>
-            <!--            ADD image-->
-
+            <div class="form-group"><?php echo $this->Form->input('product_title',['class'=>'form-control','placeholder' => 'Product Title']);  ?></div>
+            <div class="form-group"><?php echo $this->Form->input('product_description',['class'=>'form-control','placeholder' => 'Product Description']); ?></div>
+            <div class="form-group"><?php echo $this->Form->input('product_keyword',['class'=>'form-control','placeholder' => 'Product Keyword']);  ?></div>
+            <div class="form-group">
+                <label for="content">Product content</label>
+                <?php echo $this->Form->textarea('product_content',['id'=>'product_content','class'=>'form-control','placeholder' => 'Product Content']); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('product_image',['class'=>'form-control','placeholder' => 'Product Image']); ?>
+            </div>
             <div class="form-group">
                 <?php echo $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 <?php echo $this->Html->link('Cancel', ['action' => 'index'], ['class' => 'btn btn-default'])?>

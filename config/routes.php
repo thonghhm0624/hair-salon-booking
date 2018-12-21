@@ -51,25 +51,44 @@ Router::scope('/', function ($routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
 	$routes->connect('/',['controller' => 'Frontend', 'action' => 'index']);
+
+	//SEARCHING
+	$routes->connect('/stylistsbybranch',['controller' => 'Frontend', 'action' => 'stylistsByBranch']);
+
+	//LOGIN & LOGOUT
     $routes->connect('/login',['controller' => 'Frontend', 'action' => 'login']);
     $routes->connect('/logout',['controller' => 'Frontend', 'action' => 'logout']);
+
+    //USER FUNCTIONS
+    $routes->connect('/user/',['controller' => 'Frontend', 'action' => 'user']);
+    $routes->connect('/user/:userfunction',['controller' => 'Frontend', 'action' => 'user'], ['pass'=>['userfunction']]);
+    $routes->connect('/update/:information/',['controller' => 'Frontend', 'action' => 'updateinformation'], ['pass'=>['information']]);
+
+    //RESERVATION
     $routes->connect('/reserve',['controller' => 'Frontend', 'action' => 'reserve']);
+    $routes->connect('/reservationtimehandler/',['controller' => 'Frontend', 'action' => 'reservationtimehandler']);
+    $routes->connect('/reservationtimecheckconflict/',['controller' => 'Frontend', 'action' => 'reservationtimecheckconflict']);
 
     //articles
     $routes->connect('/articles',['controller' => 'Frontend', 'action' => 'articles']);
     $routes->connect('/articles/:page',['controller' => 'Frontend', 'action' => 'articles'],['pass'=>['page']]);
+    $routes->connect('/searchArticles',['controller' => 'Frontend', 'action' => 'searchArticles']);
+    $routes->connect('/searchArticles/:args/:page',['controller' => 'Frontend', 'action' => 'searchArticles'],['pass'=>['args','page']]);
     $routes->connect('/articles/category/:category/:page',['controller' => 'Frontend', 'action' => 'articles_by_category'],['pass'=>['category','page']]);
     $routes->connect('/articles/details/:articleID',['controller' => 'Frontend', 'action' => 'article_details'],['pass'=>['articleID']]);
 
     //products
     $routes->connect('/products',['controller' => 'Frontend', 'action' => 'products']);
     $routes->connect('/products/:page',['controller' => 'Frontend', 'action' => 'products'],['pass'=>['page']]);
+    $routes->connect('/searchProducts',['controller' => 'Frontend', 'action' => 'searchProducts']);
+    $routes->connect('/searchProducts/:args/:page',['controller' => 'Frontend', 'action' => 'searchProducts'],['pass'=>['args','page']]);
+    $routes->connect('/products/category/',['controller' => 'Frontend', 'action' => 'products_by_category']);
     $routes->connect('/products/category/:category/:page',['controller' => 'Frontend', 'action' => 'products_by_category'],['pass'=>['category','page']]);
+    $routes->connect('/products/details/',['controller' => 'Frontend', 'action' => 'product_details']);
     $routes->connect('/products/details/:productID',['controller' => 'Frontend', 'action' => 'product_details'],['pass'=>['productID']]);
 
     //introduction
     $routes->connect('/introduction',['controller' => 'Frontend', 'action' => 'introduction']);
-
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

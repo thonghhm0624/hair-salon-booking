@@ -2,12 +2,6 @@
 $params_pagination = $this->Paginator->params();
 ?>
 <div class="explore-content">
-    <div class="search">
-        <form action="<?= $this->request->webroot ?>articles" name="SearchForm" method="post">
-            <input type="text" name="searchForArticles" maxlength="64" id="SearchForm" placeholder="Tìm kiếm . . ."/>
-        </form>
-        <div class="srch_btn" style="cursor: pointer;" onclick="SearchForm.submit()"><img src="<?= $this->request->webroot ?>images/icon-search.png"></div>
-    </div>
     <?php if ($params_pagination['count'] == 0 ) : ?>
         <div class="search-results">
             <h2>Không có kết quả tìm kiếm.</h2>
@@ -32,21 +26,28 @@ $params_pagination = $this->Paginator->params();
 
         <!-- Pagination -->
         <div class="row explore-pagination">
-            <?php if ($category == null) : ?>
+            <?php if ($filter == "articles_all") : ?>
                 <?php if($params_pagination['prevPage']) : ?>
                     <a class="results-pagination previous-results-pagination" href="<?= $this->request->webroot.'articles/'.($params_pagination['page'] - 1) ?>">&lt;&lt; Trang trước</a>
                 <?php endif; ?>
                 <?php if($params_pagination['nextPage']) : ?>
                     <a class="results-pagination next-results-pagination" href="<?= $this->request->webroot.'articles/'.($params_pagination['page'] + 1) ?>">Trang kế &gt;&gt;</a>
                 <?php endif; ?>
-            <?php else : ?>
+            <?php elseif ($filter == "articles_search") : ?>
                 <?php if($params_pagination['prevPage']) : ?>
-                    <a class="results-pagination previous-results-pagination" href="<?= $this->request->webroot.'articles/category/'.($params_pagination['page'] - 1) ?>">&lt;&lt; Trang trước</a>
+                    <a class="results-pagination previous-results-pagination" href="<?= $this->request->webroot.'searchArticles/'.$args.'/'.($params_pagination['page'] - 1) ?>">&lt;&lt; Trang trước</a>
                 <?php endif; ?>
                 <?php if($params_pagination['nextPage']) : ?>
-                    <a class="results-pagination next-results-pagination" href="<?= $this->request->webroot.'articles/category/'.($params_pagination['page'] + 1) ?>">Trang kế &gt;&gt;</a>
+                    <a class="results-pagination next-results-pagination" href="<?= $this->request->webroot.'searchArticles/'.$args.'/'.($params_pagination['page'] + 1) ?>">Trang kế &gt;&gt;</a>
                 <?php endif; ?>
-            <?php endif; ?>
+            <?php elseif ($filter == "articles_category") : ?>
+                <?php if($params_pagination['prevPage']) : ?>
+                    <a class="results-pagination previous-results-pagination" href="<?= $this->request->webroot.'articles/category/'.$category.'/'.($params_pagination['page'] - 1) ?>">&lt;&lt; Trang trước</a>
+                <?php endif; ?>
+                <?php if($params_pagination['nextPage']) : ?>
+                    <a class="results-pagination next-results-pagination" href="<?= $this->request->webroot.'articles/category/'.$category.'/'.($params_pagination['page'] + 1) ?>">Trang kế &gt;&gt;</a>
+                <?php endif; ?>
+            <?php endif ?>
         </div>
     <?php endif; ?>
 </div>

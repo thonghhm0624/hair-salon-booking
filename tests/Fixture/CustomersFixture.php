@@ -38,7 +38,7 @@ class CustomersFixture extends TestFixture
      */
     public $records = [
         [
-            'customer_id' => 'a1e5b9cd-3c8f-43b4-870c-722ee3c5e3a5',
+            'customer_id' => 'b8711c23-f2f9-41e4-9c85-62bead4a51a8',
             'customer_password' => 'Lorem ipsu',
             'customer_name' => 'Lorem ipsum dolor sit amet',
             'customer_status' => 1

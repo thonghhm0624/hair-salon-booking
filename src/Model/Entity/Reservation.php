@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $reservation_id
  * @property int $reservation_status
  * @property string $reservation_date
- * @property string $reservation_time
+ * @property int $reservation_time
  * @property int $reservation_marks
  * @property string $reservation_remark
  * @property string $customer_id

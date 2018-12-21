@@ -227,7 +227,7 @@ $domain_name =  !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
 if ($domain_name == '' && !empty($_SERVER['HTTP_HOST'])) $domain_name = stristr($_SERVER['HTTP_HOST'], ':', true);
 Configure::write('domainName', $domain_name);
 
-if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsalon.local" || strpos($domain_name, "192.168.1") !== FALSE) {
+if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "localhost.com" || $domain_name == "hairsalon.local" || strpos($domain_name, "192.168.1") !== FALSE) {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     Configure::write('debug',1);
     if (Configure::read('debug')) {
@@ -268,9 +268,9 @@ if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsa
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => '2018_innovative_nail_design',
+        'username' => 'id8161155_admin',
+        'password' => '1a36cff0c8da8fb25e15a585dc6c3014',
+        'database' => 'id8161155_gent_hairsalon',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
@@ -288,12 +288,33 @@ if ($domain_name == "" || $domain_name == "localhost" || $domain_name == "hairsa
 }
 //admin: admin@mail.com / Admin@1234
 Configure::write('reservation_status', [
-    0 => 'Unverified',
-    1 => 'Verified',
-    2 => 'Pending',
-    3 => 'Done'
+    0 => 'Chưa xác nhận',
+    1 => 'Đã xác nhận',
+    2 => 'Đang chờ phục vụ',
+    3 => 'Hoàn tất',
+    4 => 'Hủy'
 ]);
+
+Configure::write('customer_status', [
+    0 => 'Khách chưa xác nhận',
+    1 => 'Khách đã xác nhận',
+]);
+
 Configure::write('service_time', [
-    '10:00' => '10:00',
-    '11:00' => '11:00',
+    10 => '10:00',
+    11 => '11:00',
+    12 => '12:00',
+    13 => '13:00',
+    14 => '14:00',
+    15 => '15:00',
+    16 => '16:00',
+    17 => '17:00',
+    18 => '18:00',
+    19 => '19:00',
+    20 => '20:00',
+]);
+
+Configure::write('stylist_status', [
+    0 => 'Đã nghỉ việc',
+    1 => 'Đang làm việc',
 ]);

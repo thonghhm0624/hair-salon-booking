@@ -44,7 +44,6 @@
 
 <body class="<?= $action ?> <?php echo $device_info ?> <?php echo $device_info_type ?> <?php echo 'language_'.$language ?>">
 <div class="super_container">
-
 <?php echo $this->element('modules/header_footer/header');?>
 <?php echo $this->element('modules/components/navbar');?>
 <?php echo $this->element('modules/components/home/block1');?>
