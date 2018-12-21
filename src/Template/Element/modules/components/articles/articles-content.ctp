@@ -12,10 +12,10 @@ $params_pagination = $this->Paginator->params();
         </div>
         <?php foreach ($articles as $article): ?>
         <a class="row articles-explore article-item" href="<?= $this->request->webroot.'articles/details/' .$article->article_id ?>">
-            <div class="col col-md-4 col-xs-12 article-explore-img">
+            <div class="col-md-4 col-sm-12 article-explore-img">
                 <img src="<?= $this->request->webroot.$article->article_image ?>"/>
             </div>
-            <div class="col col-md-8 col-xs-12 article-explore-content">
+            <div class="col-md-8 col-sm-12 article-explore-content">
                 <h2><?= $article->article_title ?></h2>
                 <p>
                     <?= $article->article_description ?>
@@ -25,7 +25,7 @@ $params_pagination = $this->Paginator->params();
         <?php endforeach; ?>
 
         <!-- Pagination -->
-        <div class="row explore-pagination">
+        <div class="explore-pagination">
             <?php if ($filter == "articles_all") : ?>
                 <?php if($params_pagination['prevPage']) : ?>
                     <a class="results-pagination previous-results-pagination" href="<?= $this->request->webroot.'articles/'.($params_pagination['page'] - 1) ?>">&lt;&lt; Trang trước</a>

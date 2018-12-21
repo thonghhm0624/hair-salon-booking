@@ -2,8 +2,6 @@
 
   .user-sídebar {
 
-
-
     .user-sidebar-item {
       border: 2px solid $dark-blue;
       @include FontQuickSandBold(20px, 1.4);
@@ -43,14 +41,6 @@
 
   .user-functions {
 
-    #classify {
-      @include FontQuickSandMedium(20px, 1.4);
-    }
-
-    .user-info-container {
-
-    }
-
     .user-history-container {
 
       .user-history {
@@ -61,6 +51,28 @@
 
         .history-data-row {
           @include FontQuickSandRegular(14px, 1.4);
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint(xs) {
+  .page.user {
+
+    .user-functions {
+
+      .user-history-container {
+
+        .user-history {
+
+          .history-classify {
+            font-size: 2.3vw;
+          }
+
+          .history-data-row {
+            font-size: 2vw;
+          }
         }
       }
     }

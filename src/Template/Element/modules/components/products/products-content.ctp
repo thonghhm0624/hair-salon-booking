@@ -32,7 +32,7 @@ $params_pagination = $this->Paginator->params();
             <?php endforeach;?>
         </div>
         <!-- Pagination -->
-        <div class="row explore-pagination">
+        <div class="explore-pagination">
             <?php if ($filter == "products_all") : ?>
                 <?php if($params_pagination['prevPage']) : ?>
                     <a class="results-pagination previous-results-pagination" href="<?= $this->request->webroot.'products/'.($params_pagination['page'] - 1) ?>">&lt;&lt; Trang trước</a>

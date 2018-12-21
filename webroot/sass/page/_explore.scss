@@ -202,3 +202,21 @@
     }
   }
 }
+
+@include breakpoint(xs) {
+
+  .page.explore {
+
+    .explore-content {
+      padding-left: 0;
+
+      .articles-explore {
+
+        .article-explore-content {
+          padding-left: 15px;
+          text-align: justify;
+        }
+      }
+    }
+  }
+}

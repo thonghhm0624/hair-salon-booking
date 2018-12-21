@@ -1,57 +1,20 @@
-nav {
-  height: 60px;
+.navigation {
   background-color: $dark-blue;
+  @include FontQuickSandBold(24px ,1.4);
 
   .container {
-    padding: 0;
+    text-align: center;
 
-    #navbarNav {
-      justify-content: space-between;
+    a {
+      color: $white;
 
-      .navbar-nav {
-        margin-left: -15px ;
-
-        .nav-link {
-          padding: 0 20px;
-          color: $white;
-          @include FontQuickSandBold(24px ,1.4);
-          text-decoration: none;
-          cursor: pointer;
-        }
-      }
-
-      
-    }
-  }
-}
-@include breakpoint(mmd) {
-
-  nav {
-
-    .container {
-
-      #navbarNav {
-
-
-        .navbar-nav {
-
-
-          .nav-link {
-
-          }
-        }
-
-        .search {
-          
-        }
-
-        .srch_btn{
-
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
 }
+
 .search {
   background-color: $dark-blue;
   width: 300px;
