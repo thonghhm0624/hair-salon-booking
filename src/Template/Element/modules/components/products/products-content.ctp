@@ -19,7 +19,7 @@ $params_pagination = $this->Paginator->params();
                         </div>
                         <div>&nbsp;</div>
                         <div class="product-img">
-                            <img sty src="<?= $this->request->webroot.$product->product_image ?>"/>
+                            <img src="<?= $this->request->webroot.$product->product_image ?>"/>
                         </div>
                         <div>&nbsp;</div>
                         <div class="product-description">
@@ -32,6 +32,37 @@ $params_pagination = $this->Paginator->params();
             <?php endforeach;?>
         </div>
         <!-- Pagination -->
+<!--        <div class="explore-pagination">-->
+<!--            --><?php
+//            for ($i =1 ; $i<=$params_pagination['pageCount'] ; $i++) {
+//                if ($i == $params_pagination['page'])
+//                {
+//                    echo $i. '&nbsp;&nbsp;';
+//                }
+//                else {
+//                    if ($filter == "products_all") {
+//                        $webroot = $this->request->webroot;
+//                        $link = $webroot."products/";
+//                        $path = "<a href=\"$link$i\">$i</a>&nbsp;&nbsp;";
+//                        echo $path;
+//                    }
+//                    else if ($filter == "products_search" ) {
+//                        $webroot = $this->request->webroot;
+//                        $link = $webroot."searchProducts/$args/";
+//                        $path = "<a href=\"$link$i\">$i</a>&nbsp;&nbsp;";
+//                        echo $path;
+//                    }
+//                    else if ($filter == "products_category") {
+//                        $webroot = $this->request->webroot;
+//                        $link = $webroot."products/category/$category/";
+//                        $path = "<a href=\"$link$i\">$i</a>&nbsp;&nbsp;";
+//                        echo $path;
+//                    }
+//                }
+//            }
+//            ?>
+<!--        </div>-->
+
         <div class="row explore-pagination">
             <?php if ($filter == "products_all") : ?>
                 <?php if($params_pagination['prevPage']) : ?>
