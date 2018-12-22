@@ -356,7 +356,7 @@ class FrontendController extends AppController
                 $this->loadModel('Services');
                 $times_to_be_conflicted = [];
                 foreach ($time_and_status as $time) {
-                    if ($time['reservation_status'] < 3) {
+                    if ($time['reservation_status'] == 1 || $time['reservation_status'] == 2) {
                         $service_duration = $this->Services->find('all')->where([
                             'service_id' => $time['service_id']
                         ])->first();
@@ -424,7 +424,7 @@ class FrontendController extends AppController
                 $any_time_conflict = false;
                 $exceed_maxium_time = false;
                 foreach ($time_and_status as $time) {
-                    if (($time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
+                    if (( $time['reservation_status'] != 0 && $time['reservation_status'] != 3 && $time['reservation_status'] != 4)) {
 //                        $time_conflict = intval($time['reservation_time']);
                         for ($i = 1; $i <= $duration; $i++) {
                             $__time = $new_time + $i - 1;

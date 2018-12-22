@@ -33,7 +33,7 @@
                             <input type="text" placeholder="Chọn Ngày" class="reservation-input" name="reservation-date" id="reservation-date" disabled/>
                         </div>
                         <div class="col-sm-2 set-height">
-                            <select name="service" id="reservation-service" class="reservation-input">
+                            <select name="service" id="reservation-service" class="reservation-input" disabled>
                                 <option class="d-none" value="" disabled selected >Dịch vụ</option>
                                 <?php foreach ($services_select as $service): ?>
                                     <option value="<?= $service->service_id ?>" duration="<?= $service->service_duration ?>" ><?= $service->service_name ?></option>
